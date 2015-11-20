@@ -15,7 +15,7 @@ public class Schedule {
     private int id_subject;
     private int year;
     private int day;
-    private int schedule;
+    private int hour;
     private String quarter;
     
     /**
@@ -28,13 +28,13 @@ public class Schedule {
      * @param schedule
      * @param quarter 
      */
-    public Schedule(int id_shedule, int id_classroom, int id_subject, int year, int day, int schedule, String quarter) {
+    public Schedule(int id_shedule, int id_classroom, int id_subject, int year, int day, int hour, String quarter) {
         this.id_shedule = id_shedule;
         this.id_classroom = id_classroom;
         this.id_subject = id_subject;
         this.year = year;
         this.day = day;
-        this.schedule = schedule;
+        this.hour = hour;
         this.quarter = quarter;
     }
     
@@ -44,8 +44,36 @@ public class Schedule {
      */
     @Override
     public String toString() {
-        return "Schedule{" + "id_shedule=" + id_shedule + ", id_classroom=" + id_classroom + ", id_subject=" + id_subject + ", year=" + year + ", day=" + day + ", schedule=" + schedule + ", quarter=" + quarter + '}';
+        return "Schedule{" + "id_shedule=" + id_shedule + ", id_classroom=" + id_classroom + ", id_subject=" + id_subject + ", year=" + year + ", day=" + day + ", schedule=" + hour + ", quarter=" + quarter + '}';
     }
+    
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Schedule other = (Schedule) obj;
+        if (this.id_shedule != other.id_shedule) {
+            return false;
+        }
+        if (this.id_classroom != other.id_classroom) {
+            return false;
+        }
+        if (this.id_subject != other.id_subject) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
     
     /**
@@ -129,18 +157,18 @@ public class Schedule {
     }
     
     /**
-     * Method wich gets Schedules.
+     * Method wich gets Schedule's hour.
      * @return schedule
      */
-    public int getSchedule() {
-        return schedule;
+    public int getHour() {
+        return hour;
     }
     /**
-     * Method wich sets Schedules.
+     * Method wich sets Schedule's hour.
      * @param schedule 
      */
-    public void setSchedule(int schedule) {
-        this.schedule = schedule;
+    public void setHour(int hour) {
+        this.hour = hour;
     }
     
     /**
