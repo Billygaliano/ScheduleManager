@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author macbookpro
  */
-public class Aula {
+public class Classroom {
     private int id_classroom;
     private String name;
     private String type;
@@ -28,7 +28,7 @@ public class Aula {
      * @param building
      * @param schedules 
      */
-    public Aula(int id_classroom, String name, String type, int capacity, String building, List<Schedule> schedules) {
+    public Classroom(int id_classroom, String name, String type, int capacity, String building, List<Schedule> schedules) {
         this.id_classroom = id_classroom;
         this.name = name;
         this.type = type;
@@ -38,7 +38,7 @@ public class Aula {
     }
     
     /**
-     * Method wich returns a Aula object in String format.
+     * Method wich returns a Classroom object in String format.
      * @return String
      */
     @Override
@@ -64,7 +64,7 @@ public class Aula {
     }
     
     /**
-     * Method wich gets Aula's name.
+     * Method wich gets Classroom's name.
      * @return name
      */
     public String getName() {
@@ -72,7 +72,7 @@ public class Aula {
     }
     
     /**
-     * Method wich sets Aula's name.
+     * Method wich sets Classroom's name.
      * @param name 
      */
     public void setName(String name) {
@@ -80,7 +80,7 @@ public class Aula {
     }
     
     /**
-     * Method wich gets Aula's type.
+     * Method wich gets Classroom's type.
      * @return type
      */
     public String getType() {
@@ -88,7 +88,7 @@ public class Aula {
     }
     
     /**
-     * Method wich sets Aula's type.
+     * Method wich sets Classroom's type.
      * @param type 
      */
     public void setType(String type) {
@@ -96,7 +96,7 @@ public class Aula {
     }
     
     /**
-     * Method wich gets Aula's capacity.
+     * Method wich gets Classroom's capacity.
      * @return capacity
      */
     public int getCapacity() {
@@ -104,7 +104,7 @@ public class Aula {
     }
     
     /**
-     * Method wich sets Aula's capacity.
+     * Method wich sets Classroom's capacity.
      * @param capacity 
      */
     public void setCapacity(int capacity) {
@@ -112,7 +112,7 @@ public class Aula {
     }
     
     /**
-     * Method wich gets Aula's building.
+     * Method wich gets Classroom's building.
      * @return building
      */
     public String getBuilding() {
@@ -120,7 +120,7 @@ public class Aula {
     }
     
     /**
-     * Method wich sets Aula's building.
+     * Method wich sets Classroom's building.
      * @param building 
      */
     public void setBuilding(String building) {
