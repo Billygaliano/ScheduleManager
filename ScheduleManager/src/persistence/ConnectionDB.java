@@ -52,11 +52,7 @@ public class ConnectionDB {
                 String pass = rs.getString("PASS");
                 if(pass.equals(passw)){
                     String idUsuario = rs.getString("idUsuario");
-                    String usuario = rs.getString("usuario");
-                    String email = rs.getString("email");
-                    String nombre = rs.getString("nombre");
-                    int tiempoLanzamiento = rs.getInt("tiempoLanzamiento");
-                    int tiempoEspera = rs.getInt("tiempoEspera");
+
                      
                     //Cargamos los datos en la sesion actual
                     cargarDatos(idUsuario, usuario, email, nombre, pass);

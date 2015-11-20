@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class Subject {
     private int id_subject;
-    private int id_titulation;
+    private Titulation titulation;
     private String name;
     private int course;
     private List<User> users;
@@ -26,8 +26,8 @@ public class Subject {
      * Method wich returns titulation's id.
      * @return id_titulation
      */
-    public int getId_titulation() {
-        return id_titulation;
+    public Titulation getId_titulation() {
+        return titulation;
     }
 
     /**
@@ -72,10 +72,10 @@ public class Subject {
 
     /**
      * Method wich sets titulation's id.
-     * @param id_titulation of Titulation
+     * @param titulation of Titulation
      */
-    public void setId_titulation(int id_titulation) {
-        this.id_titulation = id_titulation;
+    public void setId_titulation(Titulation titulation) {
+        this.titulation = titulation;
     }
 
     /**
@@ -116,7 +116,7 @@ public class Subject {
      */
     @Override
     public String toString() {
-        return "Subject{" + "id_subject=" + id_subject + ", id_titulation=" + id_titulation + ", name=" + name + ", course=" + course + ", users=" + users + ", schedules=" + schedules + '}';
+        return "Subject{" + "id_subject=" + id_subject + ", id_titulation=" + titulation + ", name=" + name + ", course=" + course + ", users=" + users + ", schedules=" + schedules + '}';
     }
 
     /**
@@ -130,7 +130,7 @@ public class Subject {
      */
     public Subject(int id_subject, int id_titulation, String name, int course, List<User> users, List<Schedule> schedules) {
         this.id_subject = id_subject;
-        this.id_titulation = id_titulation;
+        this.titulation = titulation;
         this.name = name;
         this.course = course;
         this.users = users;

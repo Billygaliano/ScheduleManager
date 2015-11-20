@@ -10,9 +10,8 @@ package model;
  * @author inftel10
  */
 public class Schedule {
-    private int id_shedule;
-    private int id_classroom;
-    private int id_subject;
+    private Classroom classroom;
+    private Subject subject;
     private int year;
     private int day;
     private int hour;
@@ -20,16 +19,15 @@ public class Schedule {
     
     /**
      * Method constructor
-     * @param id_shedule
-     * @param id_classroom
-     * @param id_subject
+     * @param id_schedule
+     * @param classroom
+     * @param subject
      * @param year
      * @param day
      * @param schedule
      * @param quarter 
      */
-    public Schedule(int id_shedule, int id_classroom, int id_subject, int year, int day, int hour, String quarter) {
-        this.id_shedule = id_shedule;
+    public Schedule( int id_classroom, int id_subject, int year, int day, int hour, String quarter) {
         this.id_classroom = id_classroom;
         this.id_subject = id_subject;
         this.year = year;
@@ -44,7 +42,11 @@ public class Schedule {
      */
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "Schedule{" + "id_shedule=" + id_shedule + ", id_classroom=" + id_classroom + ", id_subject=" + id_subject + ", year=" + year + ", day=" + day + ", schedule=" + hour + ", quarter=" + quarter + '}';
+=======
+        return "Schedule{" + "id_shedule=" + id_schedule + ", id_classroom=" + classroom + ", id_subject=" + subject + ", year=" + year + ", day=" + day + ", schedule=" + schedule + ", quarter=" + quarter + '}';
+>>>>>>> origin/master
     }
     
     /**
@@ -80,48 +82,48 @@ public class Schedule {
      * Method wich gets shedule's id.
      * @return id_shedule
      */
-    public int getId_shedule() {
-        return id_shedule;
+    public int getId_schedule() {
+        return id_schedule;
     }
     
     /**
      * Method wich sets shedule's id.
-     * @param id_shedule 
+     * @param id_schedule 
      */
-    public void setId_shedule(int id_shedule) {
-        this.id_shedule = id_shedule;
+    public void setId_schedule(int id_schedule) {
+        this.id_schedule = id_schedule;
     }
     
     /**
      * Method wich gets classroom's id.
      * @return id_classroom
      */
-    public int getId_classroom() {
-        return id_classroom;
+    public Classroom getId_classroom() {
+        return classroom;
     }
     
     /**
      * Method wich sets classroom's id.
-     * @param id_classroom 
+     * @param classroom 
      */
-    public void setId_classroom(int id_classroom) {
-        this.id_classroom = id_classroom;
+    public void setId_classroom(Classroom classroom) {
+        this.classroom = classroom;
     }
     
     /**
      * Method wich gets subject's id.
      * @return id_subject
      */
-    public int getId_subject() {
-        return id_subject;
+    public Subject getId_subject() {
+        return subject;
     }
     
     /**
      * Method wich sets subject's id.
-     * @param id_subject 
+     * @param subject 
      */
-    public void setId_subject(int id_subject) {
-        this.id_subject = id_subject;
+    public void setId_subject(Subject subject) {
+        this.subject = subject;
     }
     
     /**
