@@ -19,7 +19,7 @@ public class ConnectionDB {
        Connection con = null;
        try{
            Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
-           con = DriverManager.getConnection("jdbc:oracle:thin:INFTEL15_05/INFTEL@olimpia.lcc.uma.es:1521:edgar");
+           con = DriverManager.getConnection("jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar");
        }catch(SQLException ex){
        }catch(Exception e){
        }
