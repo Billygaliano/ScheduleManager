@@ -162,7 +162,7 @@ public class User {
     }
 
     /**
-     * Method wich retus a user object in String format.
+     * Method wich return a user object in String format.
      * @return String
      */
     @Override

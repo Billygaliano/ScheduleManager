@@ -39,7 +39,7 @@ public class Schedule {
     }
 
     /**
-     * Method wich returns a Aula object in String format.
+     * Method wich returns a Shedule object in String format.
      *
      * @return String
      */
@@ -49,9 +49,9 @@ public class Schedule {
     }
 
     /**
-     *
+     * Method wich compare Shedules object 
      * @param obj
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object obj) {
