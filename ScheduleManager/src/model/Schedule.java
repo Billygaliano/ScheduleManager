@@ -5,29 +5,31 @@
  */
 package model;
 
+import java.util.Objects;
 /**
  *
  * @author inftel10
  */
 public class Schedule {
-    private Classroom classroom;
-    private Subject subject;
+
+    private int id_classroom;
+    private int id_subject;
     private int year;
     private int day;
     private int hour;
     private String quarter;
-    
+
     /**
      * Method constructor
-     * @param id_schedule
-     * @param classroom
-     * @param subject
+     *
+     * @param id_classroom
+     * @param id_subject
      * @param year
      * @param day
-     * @param schedule
-     * @param quarter 
+     * @param hour
+     * @param quarter
      */
-    public Schedule( int id_classroom, int id_subject, int year, int day, int hour, String quarter) {
+    public Schedule(int id_classroom, int id_subject, int year, int day, int hour, String quarter) {
         this.id_classroom = id_classroom;
         this.id_subject = id_subject;
         this.year = year;
@@ -35,27 +37,27 @@ public class Schedule {
         this.hour = hour;
         this.quarter = quarter;
     }
-    
+
     /**
      * Method wich returns a Aula object in String format.
+     *
      * @return String
      */
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return "Schedule{" + "id_shedule=" + id_shedule + ", id_classroom=" + id_classroom + ", id_subject=" + id_subject + ", year=" + year + ", day=" + day + ", schedule=" + hour + ", quarter=" + quarter + '}';
-=======
-        return "Schedule{" + "id_shedule=" + id_schedule + ", id_classroom=" + classroom + ", id_subject=" + subject + ", year=" + year + ", day=" + day + ", schedule=" + schedule + ", quarter=" + quarter + '}';
->>>>>>> origin/master
+        return "Schedule{" + "id_classroom=" + id_classroom + ", id_subject=" + id_subject + ", year=" + year + ", day=" + day + ", hour=" + hour + ", quarter=" + quarter + '}';
     }
-    
+
     /**
-     * 
+     *
      * @param obj
-     * @return 
+     * @return
      */
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -63,9 +65,6 @@ public class Schedule {
             return false;
         }
         final Schedule other = (Schedule) obj;
-        if (this.id_shedule != other.id_shedule) {
-            return false;
-        }
         if (this.id_classroom != other.id_classroom) {
             return false;
         }
@@ -74,120 +73,113 @@ public class Schedule {
         }
         return true;
     }
-    
-    
-    
-    
-    /**
-     * Method wich gets shedule's id.
-     * @return id_shedule
-     */
-    public int getId_schedule() {
-        return id_schedule;
-    }
-    
-    /**
-     * Method wich sets shedule's id.
-     * @param id_schedule 
-     */
-    public void setId_schedule(int id_schedule) {
-        this.id_schedule = id_schedule;
-    }
-    
+
     /**
      * Method wich gets classroom's id.
+     *
      * @return id_classroom
      */
-    public Classroom getId_classroom() {
-        return classroom;
+    public int getId_classroom() {
+        return id_classroom;
     }
-    
+
     /**
      * Method wich sets classroom's id.
-     * @param classroom 
+     *
+     * @param id_classroom
      */
-    public void setId_classroom(Classroom classroom) {
-        this.classroom = classroom;
+    public void setId_classroom(int id_classroom) {
+        this.id_classroom = id_classroom;
     }
-    
+
     /**
      * Method wich gets subject's id.
+     *
      * @return id_subject
      */
-    public Subject getId_subject() {
-        return subject;
+    public int getId_subject() {
+        return id_subject;
     }
-    
+
     /**
      * Method wich sets subject's id.
-     * @param subject 
+     *
+     * @param id_subject
      */
-    public void setId_subject(Subject subject) {
-        this.subject = subject;
+    public void setId_subject(int id_subject) {
+        this.id_subject = id_subject;
     }
-    
+
     /**
      * Method wich gets Schedule's year.
+     *
      * @return year
      */
     public int getYear() {
         return year;
     }
-    
+
     /**
      * Method wich sets Schedule's year.
-     * @param year 
+     *
+     * @param year
      */
     public void setYear(int year) {
         this.year = year;
     }
-    
+
     /**
      * Method wich gets Schedule's day.
+     *
      * @return day
      */
     public int getDay() {
         return day;
     }
-    
+
     /**
      * Method wich sets Schedule's day.
-     * @param day 
+     *
+     * @param day
      */
     public void setDay(int day) {
         this.day = day;
     }
-    
+
     /**
      * Method wich gets Schedule's hour.
-     * @return schedule
+     *
+     * @return hour
      */
     public int getHour() {
         return hour;
     }
+
     /**
      * Method wich sets Schedule's hour.
-     * @param schedule 
+     *
+     * @param hour
      */
     public void setHour(int hour) {
         this.hour = hour;
     }
-    
+
     /**
      * Method wich gets Schedule's quarter
+     *
      * @return quarter
      */
     public String getQuarter() {
         return quarter;
     }
-    
+
     /**
      * Method wich sets Schedule's quarter.
-     * @param quarter 
+     *
+     * @param quarter
      */
     public void setQuarter(String quarter) {
         this.quarter = quarter;
     }
-    
-    
+
 }
