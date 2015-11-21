@@ -65,10 +65,10 @@ public class Schedule {
             return false;
         }
         final Schedule other = (Schedule) obj;
-        if (this.classroom != other.classroom) {
+        if (!this.classroom.equals(other.classroom)) {
             return false;
         }
-        if (this.subject != other.subject) {
+        if (!this.subject.equals(other.subject)) {
             return false;
         }
         return true;

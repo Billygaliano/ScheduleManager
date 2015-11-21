@@ -122,19 +122,32 @@ public class Subject {
     /**
      * Class constructor.
      * @param id_subject
-     * @param id_titulation
+     * @param titulation
      * @param name
      * @param course
      * @param users
      * @param schedules 
      */
-    public Subject(int id_subject, int id_titulation, String name, int course, List<User> users, List<Schedule> schedules) {
+    public Subject(int id_subject, Titulation titulation, String name, int course, List<User> users, List<Schedule> schedules) {
         this.id_subject = id_subject;
         this.titulation = titulation;
         this.name = name;
         this.course = course;
         this.users = users;
         this.schedules = schedules;
+    }
+    
+    /**
+     * Method which compares two Subjects
+     * return false if both id's are not equal
+     * @param sub
+     * @return 
+     */
+    
+    public boolean equals(Subject sub){
+        boolean a;
+        a = (this.id_subject != sub.getId_subject()) ? false :  true;
+        return a;
     }
     
     

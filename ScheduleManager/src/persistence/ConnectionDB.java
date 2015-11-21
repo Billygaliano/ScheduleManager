@@ -64,9 +64,13 @@ public class ConnectionDB {
                     sesion.cargaTiempos();                    
                      
                     inciciado = true;                                                            
+                }else{
+                    System.out.print("Password incorrecto");
                 }
             }
-        }        
+        } else{
+            System.out.print("Usuario no encontrado");
+        }       
         return inciciado;
     } 
 }

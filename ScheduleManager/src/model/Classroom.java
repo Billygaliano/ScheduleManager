@@ -128,7 +128,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich gets a list of schedules.
+     * Method which gets a list of schedules.
      * @return schedules
      */
     public List<Schedule> getSchedules() {
@@ -136,11 +136,27 @@ public class Classroom {
     }
     
     /**
-     * Method wich sets a list of schedules.
+     * Method which sets a list of schedules.
      * @param schedules 
      */
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
+    
+    /**
+     * Method which compares two classrooms
+     * return true if both id's are equal
+     * @param clas
+     * @return 
+     */
+    
+    public boolean equals(Classroom clas){
+        if(this.id_classroom != clas.getId_classroom()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
        
 }
