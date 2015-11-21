@@ -12,8 +12,8 @@ import java.util.Objects;
  */
 public class Schedule {
 
-    private int id_classroom;
-    private int id_subject;
+    private Classroom classroom;
+    private Subject subject;
     private int year;
     private int day;
     private int hour;
@@ -22,16 +22,16 @@ public class Schedule {
     /**
      * Method constructor
      *
-     * @param id_classroom
-     * @param id_subject
+     * @param classroom
+     * @param subject
      * @param year
      * @param day
      * @param hour
      * @param quarter
      */
-    public Schedule(int id_classroom, int id_subject, int year, int day, int hour, String quarter) {
-        this.id_classroom = id_classroom;
-        this.id_subject = id_subject;
+    public Schedule(Classroom classroom, Subject subject, int year, int day, int hour, String quarter) {
+        this.classroom = classroom;
+        this.subject = subject;
         this.year = year;
         this.day = day;
         this.hour = hour;
@@ -45,7 +45,7 @@ public class Schedule {
      */
     @Override
     public String toString() {
-        return "Schedule{" + "id_classroom=" + id_classroom + ", id_subject=" + id_subject + ", year=" + year + ", day=" + day + ", hour=" + hour + ", quarter=" + quarter + '}';
+        return "Schedule{" + "classroom=" + classroom + ", subject=" + subject + ", year=" + year + ", day=" + day + ", hour=" + hour + ", quarter=" + quarter + '}';
     }
 
     /**
@@ -65,10 +65,10 @@ public class Schedule {
             return false;
         }
         final Schedule other = (Schedule) obj;
-        if (this.id_classroom != other.id_classroom) {
+        if (this.classroom != other.classroom) {
             return false;
         }
-        if (this.id_subject != other.id_subject) {
+        if (this.subject != other.subject) {
             return false;
         }
         return true;
@@ -79,17 +79,17 @@ public class Schedule {
      *
      * @return id_classroom
      */
-    public int getId_classroom() {
-        return id_classroom;
+    public Classroom getId_classroom() {
+        return classroom;
     }
 
     /**
      * Method wich sets classroom's id.
      *
-     * @param id_classroom
+     * @param classroom
      */
-    public void setId_classroom(int id_classroom) {
-        this.id_classroom = id_classroom;
+    public void setId_classroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 
     /**
@@ -97,17 +97,17 @@ public class Schedule {
      *
      * @return id_subject
      */
-    public int getId_subject() {
-        return id_subject;
+    public Subject getId_subject() {
+        return subject;
     }
 
     /**
      * Method wich sets subject's id.
      *
-     * @param id_subject
+     * @param subject
      */
-    public void setId_subject(int id_subject) {
-        this.id_subject = id_subject;
+    public void setId_subject(Subject id_subject) {
+        this.subject = subject;
     }
 
     /**
