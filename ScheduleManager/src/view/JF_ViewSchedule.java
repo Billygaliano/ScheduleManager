@@ -135,7 +135,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 {"20:30", null, null, null, null, null}
             },
             new String [] {
-                "Hora\Día", "Lunes", "Martes", "miércoles", "Jueves", "Viernes"
+                "Hora/Día", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"
             }
         ));
         jTableSchedule.setMinimumSize(new java.awt.Dimension(90, 300));
