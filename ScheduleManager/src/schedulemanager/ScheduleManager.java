@@ -5,6 +5,8 @@
  */
 package schedulemanager;
 
+import view.JF_Login;
+
 /**
  *
  * @author Guillermo Galiano
@@ -16,6 +18,14 @@ public class ScheduleManager {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+     java.awt.EventQueue.invokeLater(new Runnable() {
+            
+            JF_Login view= new JF_Login();
+            public void run() {
+                view.setVisible(true);
+            }
+            
+        });
     }
     
 }
