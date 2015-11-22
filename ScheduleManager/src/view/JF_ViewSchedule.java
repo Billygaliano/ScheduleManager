@@ -5,6 +5,12 @@
  */
 package view;
 
+import controller.Controller;
+
+import java.awt.event.KeyEvent;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
+
 /**
  *
  * @author inftel12
@@ -15,7 +21,14 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
      * Creates new form JF_ViewSchedule
      */
     public JF_ViewSchedule() {
-        initComponents();
+        InputMap map = new InputMap();
+
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released");    
+        
+        initComponents();       
+        
+        jButtonLogout.setToolTipText("Cerrar sesión");
     }
 
     /**
@@ -30,10 +43,13 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jPanelLeft = new javax.swing.JPanel();
         jSeparatorLeftPanel = new javax.swing.JSeparator();
         jPanelMenu = new javax.swing.JPanel();
+        jScrollPaneLeftPanel = new javax.swing.JScrollPane();
+        jTreeLeftPanel = new javax.swing.JTree();
         jLabelLogoImg = new javax.swing.JLabel();
         jPanelRight = new javax.swing.JPanel();
         jPanelRTop = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelWelcomeTitle = new javax.swing.JLabel();
+        jButtonLogout = new javax.swing.JButton();
         jPanelRTab = new javax.swing.JPanel();
         jTabbedPane = new javax.swing.JTabbedPane();
         jScrollPaneViewSchedule = new javax.swing.JScrollPane();
@@ -57,15 +73,25 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
         jPanelMenu.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTreeLeftPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTreeLeftPanel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTreeLeftPanel.setCellRenderer(null);
+        jScrollPaneLeftPanel.setViewportView(jTreeLeftPanel);
+
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
         jPanelMenu.setLayout(jPanelMenuLayout);
         jPanelMenuLayout.setHorizontalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanelMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPaneLeftPanel)
+                .addContainerGap())
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanelMenuLayout.createSequentialGroup()
+                .addComponent(jScrollPaneLeftPanel)
+                .addContainerGap())
         );
 
         jLabelLogoImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -97,28 +123,50 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jPanelRight.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanelRTop.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelRTop.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/cerrarSesion_logo.jpg"))); // NOI18N
+        jLabelWelcomeTitle.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
+        jLabelWelcomeTitle.setText("GESTOR DE HORARIOS UMA - BIENVENIDO/A (Usuario)");
+
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logout2.jpg"))); // NOI18N
+        jButtonLogout.setBorderPainted(false);
+        jButtonLogout.setMaximumSize(new java.awt.Dimension(31, 31));
+        jButtonLogout.setMinimumSize(new java.awt.Dimension(31, 31));
+        jButtonLogout.setPreferredSize(new java.awt.Dimension(31, 31));
+        jButtonLogout.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logout.jpg"))); // NOI18N
+        jButtonLogout.setRequestFocusEnabled(false);
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelRTopLayout = new javax.swing.GroupLayout(jPanelRTop);
         jPanelRTop.setLayout(jPanelRTopLayout);
         jPanelRTopLayout.setHorizontalGroup(
             jPanelRTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRTopLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jLabelWelcomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         jPanelRTopLayout.setVerticalGroup(
             jPanelRTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRTopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanelRTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelWelcomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanelRTab.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTabbedPane.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+
+        jTableSchedule.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTableSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"8:30", null, null, null, null, null},
@@ -139,7 +187,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             }
         ));
         jTableSchedule.setMinimumSize(new java.awt.Dimension(90, 300));
-        jTableSchedule.setPreferredSize(new java.awt.Dimension(450, 192));
+        jTableSchedule.setRowHeight(40);
         jScrollPaneViewSchedule.setViewportView(jTableSchedule);
 
         jTabbedPane.addTab("Horario", jScrollPaneViewSchedule);
@@ -152,7 +200,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         );
         jPanelMakeScheduleLayout.setVerticalGroup(
             jPanelMakeScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
 
         jTabbedPane.addTab("Crear Horario", jPanelMakeSchedule);
@@ -165,7 +213,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         );
         jPanelUpdateScheduleLayout.setVerticalGroup(
             jPanelUpdateScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
 
         jTabbedPane.addTab("Modificar Horario", jPanelUpdateSchedule);
@@ -178,7 +226,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         );
         jPanelSendRequestLayout.setVerticalGroup(
             jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
 
         jTabbedPane.addTab("Enviar solicitud", jPanelSendRequest);
@@ -209,7 +257,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         );
         jPanelViewRequestLayout.setVerticalGroup(
             jPanelViewRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+            .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
             .addComponent(jScrollPaneViewRequestDetail)
         );
 
@@ -261,6 +309,10 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        Controller controller = new Controller();
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,8 +351,9 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonLogout;
     private javax.swing.JLabel jLabelLogoImg;
+    private javax.swing.JLabel jLabelWelcomeTitle;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelMakeSchedule;
     private javax.swing.JPanel jPanelMenu;
@@ -310,6 +363,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSendRequest;
     private javax.swing.JPanel jPanelUpdateSchedule;
     private javax.swing.JPanel jPanelViewRequest;
+    private javax.swing.JScrollPane jScrollPaneLeftPanel;
     private javax.swing.JScrollPane jScrollPaneViewRequestDetail;
     private javax.swing.JScrollPane jScrollPaneViewSchedule;
     private javax.swing.JScrollPane jScrollPanelViewRequest;
@@ -318,5 +372,6 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JTable jTableRequests;
     private javax.swing.JTable jTableSchedule;
     private javax.swing.JTextPane jTextPaneViewRequest;
+    private javax.swing.JTree jTreeLeftPanel;
     // End of variables declaration//GEN-END:variables
 }
