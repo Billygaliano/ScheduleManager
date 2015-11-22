@@ -33,25 +33,25 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jLabelLogoImg = new javax.swing.JLabel();
         jPanelRight = new javax.swing.JPanel();
         jPanelRTop = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanelRTab = new javax.swing.JPanel();
         jTabbedPane = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPaneViewSchedule = new javax.swing.JScrollPane();
+        jTableSchedule = new javax.swing.JTable();
+        jPanelMakeSchedule = new javax.swing.JPanel();
+        jPanelUpdateSchedule = new javax.swing.JPanel();
+        jPanelSendRequest = new javax.swing.JPanel();
+        jPanelViewRequest = new javax.swing.JPanel();
+        jScrollPanelViewRequest = new javax.swing.JScrollPane();
+        jTableRequests = new javax.swing.JTable();
+        jScrollPaneViewRequestDetail = new javax.swing.JScrollPane();
+        jTextPaneViewRequest = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1280, 800));
         setName("jf_view_schedule"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1280, 800));
 
         jPanelLeft.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -98,87 +98,92 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
         jPanelRTop.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/cerrarSesion_logo.jpg"))); // NOI18N
+
         javax.swing.GroupLayout jPanelRTopLayout = new javax.swing.GroupLayout(jPanelRTop);
         jPanelRTop.setLayout(jPanelRTopLayout);
         jPanelRTopLayout.setHorizontalGroup(
             jPanelRTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRTopLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
         jPanelRTopLayout.setVerticalGroup(
             jPanelRTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 92, Short.MAX_VALUE)
+            .addGroup(jPanelRTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanelRTab.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jTableSchedule.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"8:30", null, null, null, null, null},
+                {"9:30", null, null, null, null, null},
+                {"10:30", null, null, null, null, null},
+                {"11:30", null, null, null, null, null},
+                {"12:30", null, null, null, null, null},
+                {"13:30", null, null, null, null, null},
+                {"15:30", null, null, null, null, null},
+                {"16:30", null, null, null, null, null},
+                {"17:30", null, null, null, null, null},
+                {"18:30", null, null, null, null, null},
+                {"19:30", null, null, null, null, null},
+                {"20:30", null, null, null, null, null}
+            },
+            new String [] {
+                "Hora\Día", "Lunes", "Martes", "miércoles", "Jueves", "Viernes"
+            }
+        ));
+        jTableSchedule.setMinimumSize(new java.awt.Dimension(90, 300));
+        jTableSchedule.setPreferredSize(new java.awt.Dimension(450, 192));
+        jScrollPaneViewSchedule.setViewportView(jTableSchedule);
+
+        jTabbedPane.addTab("Horario", jScrollPaneViewSchedule);
+
+        javax.swing.GroupLayout jPanelMakeScheduleLayout = new javax.swing.GroupLayout(jPanelMakeSchedule);
+        jPanelMakeSchedule.setLayout(jPanelMakeScheduleLayout);
+        jPanelMakeScheduleLayout.setHorizontalGroup(
+            jPanelMakeScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 961, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelMakeScheduleLayout.setVerticalGroup(
+            jPanelMakeScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 674, Short.MAX_VALUE)
         );
 
-        jTabbedPane.addTab("Horarios", jPanel1);
+        jTabbedPane.addTab("Crear Horario", jPanelMakeSchedule);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelUpdateScheduleLayout = new javax.swing.GroupLayout(jPanelUpdateSchedule);
+        jPanelUpdateSchedule.setLayout(jPanelUpdateScheduleLayout);
+        jPanelUpdateScheduleLayout.setHorizontalGroup(
+            jPanelUpdateScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 961, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelUpdateScheduleLayout.setVerticalGroup(
+            jPanelUpdateScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 674, Short.MAX_VALUE)
         );
 
-        jTabbedPane.addTab("Crear Horario", jPanel2);
+        jTabbedPane.addTab("Modificar Horario", jPanelUpdateSchedule);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelSendRequestLayout = new javax.swing.GroupLayout(jPanelSendRequest);
+        jPanelSendRequest.setLayout(jPanelSendRequestLayout);
+        jPanelSendRequestLayout.setHorizontalGroup(
+            jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 961, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelSendRequestLayout.setVerticalGroup(
+            jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 674, Short.MAX_VALUE)
         );
 
-        jTabbedPane.addTab("Modificar Horario", jPanel3);
+        jTabbedPane.addTab("Enviar solicitud", jPanelSendRequest);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 961, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
-        );
-
-        jTabbedPane.addTab("Enviar solicitud", jPanel4);
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        jScrollPane2.setViewportView(jTextPane1);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-        );
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -189,24 +194,26 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 "Asunto", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPanelViewRequest.setViewportView(jTableRequests);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jScrollPaneViewRequestDetail.setViewportView(jTextPaneViewRequest);
+
+        javax.swing.GroupLayout jPanelViewRequestLayout = new javax.swing.GroupLayout(jPanelViewRequest);
+        jPanelViewRequest.setLayout(jPanelViewRequestLayout);
+        jPanelViewRequestLayout.setHorizontalGroup(
+            jPanelViewRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelViewRequestLayout.createSequentialGroup()
+                .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPaneViewRequestDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanelViewRequestLayout.setVerticalGroup(
+            jPanelViewRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+            .addComponent(jScrollPaneViewRequestDetail)
         );
 
-        jTabbedPane.addTab("Ver solicitudes", jPanel5);
+        jTabbedPane.addTab("Ver solicitudes", jPanelViewRequest);
 
         javax.swing.GroupLayout jPanelRTabLayout = new javax.swing.GroupLayout(jPanelRTab);
         jPanelRTab.setLayout(jPanelRTabLayout);
@@ -292,23 +299,24 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelLogoImg;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelLeft;
+    private javax.swing.JPanel jPanelMakeSchedule;
     private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelRTab;
     private javax.swing.JPanel jPanelRTop;
     private javax.swing.JPanel jPanelRight;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanelSendRequest;
+    private javax.swing.JPanel jPanelUpdateSchedule;
+    private javax.swing.JPanel jPanelViewRequest;
+    private javax.swing.JScrollPane jScrollPaneViewRequestDetail;
+    private javax.swing.JScrollPane jScrollPaneViewSchedule;
+    private javax.swing.JScrollPane jScrollPanelViewRequest;
     private javax.swing.JSeparator jSeparatorLeftPanel;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTable jTableRequests;
+    private javax.swing.JTable jTableSchedule;
+    private javax.swing.JTextPane jTextPaneViewRequest;
     // End of variables declaration//GEN-END:variables
 }
