@@ -3,20 +3,19 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import persistence.Conexion;
 import persistence.ConnectionDB;
 /**
  *
  * @author Angie
  */
 public class RequestDAO {
-    Conexion conexion;
+    ConnectionDB connection;
     public RequestDAO(){
-        conexion = new Conexion();
+        connection = new ConnectionDB();
     }
     public ArrayList<Request> returnListRequest(String applicant){
         Request request = null;
-        Connection con = conexion.getConexion();
+        Connection con = connection.connect();
         ArrayList<Request> list = new ArrayList();
         try {
             PreparedStatement stmt= con.prepareStatement("Select dni_applicant,subject,state_request,message from request where dni_applicant=?");
@@ -33,9 +32,6 @@ public class RequestDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for(Request e: list){
-            System.out.println(e);
         }
         return list;
     }

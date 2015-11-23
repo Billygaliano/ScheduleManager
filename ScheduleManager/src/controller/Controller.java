@@ -23,7 +23,6 @@ public class Controller implements ActionListener{
 
     public ArrayList<Request> getAllRequest(){
         ArrayList<Request> lista=modeloRequest.returnListRequest(applicant);
-        
         return lista;
     }
     
