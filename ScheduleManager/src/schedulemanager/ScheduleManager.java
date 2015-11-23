@@ -13,7 +13,6 @@ import view.JF_ViewSchedule;
  * @author Guillermo Galiano
  */
 public class ScheduleManager {
-
     /**
      * @param args the command line arguments
      */
@@ -22,7 +21,6 @@ public class ScheduleManager {
      java.awt.EventQueue.invokeLater(new Runnable() {
             
             JF_Login view= new JF_Login();
-            //JF_ViewSchedule view= new JF_ViewSchedule();
             public void run() {
                 view.setVisible(true);
             }

@@ -182,6 +182,10 @@ public class User {
      * @param address
      * @param subjects 
      */
+    public User(){
+        
+    }
+    
     public User(String dni, String pass, String email, String name, String surname, String role, Date birthdate, String address, List<Subject> subjects) {
         this.dni = dni;
         this.pass = pass;

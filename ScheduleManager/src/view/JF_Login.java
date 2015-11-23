@@ -55,7 +55,7 @@ public class JF_Login extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(450, 250, 600, 300));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabelName.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("view/Properties/Login"); // NOI18N
@@ -78,7 +78,7 @@ public class JF_Login extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabelHead.setBackground(new java.awt.Color(255, 255, 255));
         jLabelHead.setFont(new java.awt.Font("American Typewriter", 0, 35)); // NOI18N
