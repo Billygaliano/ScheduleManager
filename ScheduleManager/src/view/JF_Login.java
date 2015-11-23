@@ -64,6 +64,12 @@ public class JF_Login extends javax.swing.JFrame {
         jLabelPass.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         jLabelPass.setText(bundle.getString("JF_Login.password")); // NOI18N
 
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                enter(evt);
+            }
+        });
+
         jButtonSignIn.setFont(new java.awt.Font("American Typewriter", 3, 18)); // NOI18N
         jButtonSignIn.setText(bundle.getString("JF_Login.entrar")); // NOI18N
         jButtonSignIn.addActionListener(new java.awt.event.ActionListener() {
@@ -216,12 +222,14 @@ public class JF_Login extends javax.swing.JFrame {
 
 
     private void jButtonEsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEsActionPerformed
-        Locale locale = new Locale("es", "ES");
-        ResourceBundle bundle = java.util.ResourceBundle.getBundle("view/Properties/Login", locale);
-        jLabelName.setText(bundle.getString("JF_Login.name"));
-        jLabelPass.setText(bundle.getString("JF_Login.password"));
-        jButtonSignIn.setText(bundle.getString("JF_Login.entrar"));
-        jLabelFooter.setText(bundle.getString("JF_Login.footer"));
+        ControllerLogin prueba = new ControllerLogin();
+        prueba.actionPerformedEs(evt,jLabelName,jLabelPass,jButtonSignIn,jLabelFooter);
+        //Locale locale = new Locale("es", "ES");
+        //ResourceBundle bundle = java.util.ResourceBundle.getBundle("view/Properties/Login", locale);
+        //jLabelName.setText(bundle.getString("JF_Login.name"));
+        //jLabelPass.setText(bundle.getString("JF_Login.password"));
+        //jButtonSignIn.setText(bundle.getString("JF_Login.entrar"));
+        //jLabelFooter.setText(bundle.getString("JF_Login.footer"));
     }//GEN-LAST:event_jButtonEsActionPerformed
 
     private void jButtonEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnActionPerformed
@@ -234,27 +242,15 @@ public class JF_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEnActionPerformed
 
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed
-        ConnectionDB prueba = new ConnectionDB();
-        try {
-            String name = jTextField1.getText();
-            String pass = jPasswordField1.getText();
-            boolean a = prueba.iniciarSesion(name, pass);
-            if(a==true){
-                JF_ViewSchedule prueba1 = new JF_ViewSchedule();
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new JF_ViewSchedule().setVisible(true);
-                    }
-                }); 
-            }else{
-                System.out.print("El usuario o contraseña introducido es incorrecto");
-                jLabelWarning.setText("El usuario o contraseña introducido es incorrecto");
-                prueba.cerrrarconexion();
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error al conectar con la bd");
-        }
+        String name = jTextField1.getText();
+        String pass = jPasswordField1.getText();
+        ControllerLogin controllerSignIn = new ControllerLogin();
+        controllerSignIn.actionPerformedSignIn(evt,name,pass,jLabelWarning);
     }//GEN-LAST:event_jButtonSignInActionPerformed
+
+    private void enter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enter
+
+    }//GEN-LAST:event_enter
     
     
     

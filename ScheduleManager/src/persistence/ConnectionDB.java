@@ -27,11 +27,11 @@ public class ConnectionDB {
             String controlador = "oracle.jdbc.driver.OracleDriver";
             Class.forName(controlador);
         } catch (Exception e) {
-            System.out.println("Error al cargar el driver");
+            System.out.println("Error loading the driver");
         }
     }
 
-    private Connection conectar() {
+    public Connection connect() {
         String url = "jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar";
 
         try {
@@ -41,21 +41,21 @@ public class ConnectionDB {
             // Mostrar las tablas de la base de datos
 
         } catch (SQLException ex) {
-            System.out.println("Error al conectar con la Base de Datos");
+            System.out.println("Error connect data base");
         }
         return conexion;
     }
 
-    public ResultSet obtenerTabla(String tabla) {
+    public ResultSet getTable(String tabla) {
         try {
             resul = sentenciaSQL.executeQuery("SELECT * FROM " + tabla);
         } catch (SQLException ex) {
-            System.out.println("Error al realizar la consulta en la bd");
+            System.out.println("Error performing query");
         }
         return resul;
     }
 
-    public void mostrarFilaActual() throws SQLException {
+    public void showRow() throws SQLException {
         int nColumnas = resul.getMetaData().getColumnCount();
         for (int i = 1; i <= nColumnas; ++i) {
             System.out.print(resul.getString(i) + " ");
@@ -63,16 +63,16 @@ public class ConnectionDB {
         System.out.println();
     }
 
-    public void mostrarTabla() throws SQLException {
+    public void showTable() throws SQLException {
         while (resul.next()) {
             System.out.println(resul.getString("DNI") + " " + resul.getString("PASS"));
         }
     }
 
-    public void mostrarTabla2(String tabla1) throws SQLException {
-        resul = obtenerTabla(tabla1);
+    public void showTable2(String tabla1) throws SQLException {
+        resul = getTable(tabla1);
         while (resul.next()) {
-            mostrarFilaActual();
+            showRow();
         }
     }
 
@@ -83,7 +83,7 @@ public class ConnectionDB {
      * @return boolean
      * @throws SQLException
      */
-    public boolean iniciarSesion(String user, String passw) throws SQLException {
+    public boolean startSection(String user, String passw) throws SQLException {
         boolean inciciado = false;
         resul = sentenciaSQL.executeQuery("SELECT * FROM user_u WHERE DNI = '" + user + "'");
         if (resul != null) {
@@ -97,7 +97,7 @@ public class ConnectionDB {
         return inciciado;
     }
 
-    public void cerrrarconexion() {
+    public void closeConnection() {
         try {
             if (resul != null) {
                 resul.close();
@@ -108,9 +108,9 @@ public class ConnectionDB {
             if (conexion != null) {
                 conexion.close();
             }
-            System.out.println("La conexion fue cerrada correctamente");
+            System.out.println("The connection was closed successfully");
         } catch (SQLException ex1) {
-            System.out.println("Error al cerrar conexion");
+            System.out.println("Error closing the connection");
         }
     }
 }
