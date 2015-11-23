@@ -31,7 +31,7 @@ public class ConnectionDB {
         }
     }
 
-    private Connection conectar() {
+    public Connection conectar() {
         String url = "jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar";
 
         try {

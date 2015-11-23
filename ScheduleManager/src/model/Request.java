@@ -1,6 +1,7 @@
 package model;
 
-import java.util.List;
+import java.util.*;
+import model.RequestDAO;
 /**
  *
  * @author Angie
@@ -111,6 +112,11 @@ public class Request {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" + "id_request=" + id_request + ", applicant=" + applicant + ", message=" + message + ", state=" + state + ", subject=" + subject + ", users=" + users + '}';
+    }
     
     /**
      * Class constructor.
@@ -128,5 +134,19 @@ public class Request {
         this.state = state;
         this.subject = subject;
         this.users = users;
+    }
+    
+    public Request(){}
+    
+    public ArrayList<Request> returnListRequest(String applicant){
+        RequestDAO requestDAO = new RequestDAO();
+        ArrayList<Request> list = requestDAO.returnListRequest(applicant);
+        return list;
+    }
+    
+    public String getSelectedMessage(int row, String applicant){
+        RequestDAO requestDAO = new RequestDAO();
+        ArrayList<Request> requests =requestDAO.returnListRequest(applicant);
+        return requests.get(row).getMessage();
     }
 }

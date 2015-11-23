@@ -235,6 +235,7 @@ public class JF_Login extends javax.swing.JFrame {
 
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed
         ConnectionDB prueba = new ConnectionDB();
+        prueba.conectar();
         try {
             String name = jTextField1.getText();
             String pass = jPasswordField1.getText();
