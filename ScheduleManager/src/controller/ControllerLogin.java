@@ -41,7 +41,7 @@ public class ControllerLogin implements ActionListener{
         c.setText(bundle.getString("JF_Login.footer"));
     }
     
-    public void actionPerformedSignIn(ActionEvent e,String name,String pass, JLabel jLabelWarning) {
+    public void actionPerformedSignIn(String name,String pass, JLabel jLabelWarning) {
         ConnectionDB prueba = new ConnectionDB();
         prueba.connect();
         try {           

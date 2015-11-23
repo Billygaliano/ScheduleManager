@@ -66,7 +66,7 @@ public class JF_Login extends javax.swing.JFrame {
 
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                enter(evt);
+                enter2(evt);
             }
         });
 
@@ -129,6 +129,12 @@ public class JF_Login extends javax.swing.JFrame {
         );
 
         jLabelHead.getAccessibleContext().setAccessibleName(bundle.getString("JF_Login.head")); // NOI18N
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                enter(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -245,12 +251,26 @@ public class JF_Login extends javax.swing.JFrame {
         String name = jTextField1.getText();
         String pass = jPasswordField1.getText();
         ControllerLogin controllerSignIn = new ControllerLogin();
-        controllerSignIn.actionPerformedSignIn(evt,name,pass,jLabelWarning);
+        controllerSignIn.actionPerformedSignIn(name,pass,jLabelWarning);
     }//GEN-LAST:event_jButtonSignInActionPerformed
 
     private void enter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enter
-
+          if(evt.getKeyCode() == evt.VK_ENTER){ 
+            String name = jTextField1.getText();
+            String pass = jPasswordField1.getText();
+            ControllerLogin controllerSignIn = new ControllerLogin();
+            controllerSignIn.actionPerformedSignIn(name,pass,jLabelWarning);
+        } 
     }//GEN-LAST:event_enter
+
+    private void enter2(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enter2
+          if(evt.getKeyCode() == evt.VK_ENTER){ 
+            String name = jTextField1.getText();
+            String pass = jPasswordField1.getText();
+            ControllerLogin controllerSignIn = new ControllerLogin();
+            controllerSignIn.actionPerformedSignIn(name,pass,jLabelWarning);
+        } 
+    }//GEN-LAST:event_enter2
     
     
     
