@@ -26,13 +26,12 @@ public class ConnectionDB {
         try {
             String controlador = "oracle.jdbc.driver.OracleDriver";
             Class.forName(controlador);
-            conectar();
         } catch (Exception e) {
             System.out.println("Error al cargar el driver");
         }
     }
 
-    private void conectar() {
+    private Connection conectar() {
         String url = "jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar";
 
         try {
@@ -44,6 +43,7 @@ public class ConnectionDB {
         } catch (SQLException ex) {
             System.out.println("Error al conectar con la Base de Datos");
         }
+        return conexion;
     }
 
     public ResultSet obtenerTabla(String tabla) {
