@@ -8,8 +8,11 @@ package view;
 import controller.Controller;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
+import javax.swing.table.DefaultTableModel;
+import model.Request;
 
 /**
  *
@@ -60,8 +63,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jPanelViewRequest = new javax.swing.JPanel();
         jScrollPanelViewRequest = new javax.swing.JScrollPane();
         jTableRequests = new javax.swing.JTable();
-        jScrollPaneViewRequestDetail = new javax.swing.JScrollPane();
-        jTextPaneViewRequest = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPaneMessageRequest = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -165,6 +168,11 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jPanelRTab.setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        jTabbedPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTabbedPaneMousePressed(evt);
+            }
+        });
 
         jTableSchedule.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTableSchedule.setModel(new javax.swing.table.DefaultTableModel(
@@ -242,9 +250,14 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 "Asunto", "Estado"
             }
         ));
+        jTableRequests.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableRequestsMousePressed(evt);
+            }
+        });
         jScrollPanelViewRequest.setViewportView(jTableRequests);
 
-        jScrollPaneViewRequestDetail.setViewportView(jTextPaneViewRequest);
+        jScrollPane1.setViewportView(jTextPaneMessageRequest);
 
         javax.swing.GroupLayout jPanelViewRequestLayout = new javax.swing.GroupLayout(jPanelViewRequest);
         jPanelViewRequest.setLayout(jPanelViewRequestLayout);
@@ -253,12 +266,12 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelViewRequestLayout.createSequentialGroup()
                 .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneViewRequestDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
         );
         jPanelViewRequestLayout.setVerticalGroup(
             jPanelViewRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
-            .addComponent(jScrollPaneViewRequestDetail)
+            .addComponent(jScrollPane1)
         );
 
         jTabbedPane.addTab("Ver solicitudes", jPanelViewRequest);
@@ -313,6 +326,28 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         Controller controller = new Controller();
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
+    private void jTabbedPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMousePressed
+        Controller controllerRequest = new Controller();
+        ArrayList<Request> request = controllerRequest.getAllRequest(); 
+        String titulo[] ={"Asunto", "Estado"};
+        DefaultTableModel m = new DefaultTableModel(null,titulo);
+        String fila[] = new String[2];
+
+        for(Request o: request){
+            fila[0]=o.getSubject();
+            fila[1]=o.getState();
+            m.addRow(fila);
+        }
+        jTableRequests.setModel(m);
+    }//GEN-LAST:event_jTabbedPaneMousePressed
+
+    private void jTableRequestsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRequestsMousePressed
+        Controller controllerRequest = new Controller();
+        int row = jTableRequests.getSelectedRow();
+        String message = controllerRequest.getSelectedRequest(row);
+        jTextPaneMessageRequest.setText(message);
+    }//GEN-LAST:event_jTableRequestsMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -363,15 +398,15 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSendRequest;
     private javax.swing.JPanel jPanelUpdateSchedule;
     private javax.swing.JPanel jPanelViewRequest;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneLeftPanel;
-    private javax.swing.JScrollPane jScrollPaneViewRequestDetail;
     private javax.swing.JScrollPane jScrollPaneViewSchedule;
     private javax.swing.JScrollPane jScrollPanelViewRequest;
     private javax.swing.JSeparator jSeparatorLeftPanel;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTableRequests;
     private javax.swing.JTable jTableSchedule;
-    private javax.swing.JTextPane jTextPaneViewRequest;
+    private javax.swing.JTextPane jTextPaneMessageRequest;
     private javax.swing.JTree jTreeLeftPanel;
     // End of variables declaration//GEN-END:variables
 }
