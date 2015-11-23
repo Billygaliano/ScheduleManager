@@ -48,6 +48,7 @@ public class JF_Login extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabelFooter = new javax.swing.JLabel();
+        jLabelWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestion de Horarios");
@@ -64,7 +65,6 @@ public class JF_Login extends javax.swing.JFrame {
         jLabelPass.setText(bundle.getString("JF_Login.password")); // NOI18N
 
         jButtonSignIn.setFont(new java.awt.Font("American Typewriter", 3, 18)); // NOI18N
-        jButtonSignIn.setForeground(new java.awt.Color(255, 51, 51));
         jButtonSignIn.setText(bundle.getString("JF_Login.entrar")); // NOI18N
         jButtonSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +149,10 @@ public class JF_Login extends javax.swing.JFrame {
 
         jLabelFooter.getAccessibleContext().setAccessibleName(bundle.getString("JF_Login.footer")); // NOI18N
 
+        jLabelWarning.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabelWarning.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,6 +160,7 @@ public class JF_Login extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSignIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -164,10 +169,10 @@ public class JF_Login extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
-                    .addComponent(jButtonSignIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelWarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +188,9 @@ public class JF_Login extends javax.swing.JFrame {
                     .addComponent(jLabelPass, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jButtonSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jLabelWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -206,25 +213,7 @@ public class JF_Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JLabel getjLabelFooter() {
-        return jLabelFooter;
-    }
 
-    public JLabel getjLabelHead() {
-        return jLabelHead;
-    }
-
-    public JLabel getjLabelName() {
-        return jLabelName;
-    }
-
-    public JLabel getjLabelPass() {
-        return jLabelPass;
-    }
-
-    public JButton getjButtonEn() {
-        return jButtonEn;
-    }
 
     private void jButtonEsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEsActionPerformed
         Locale locale = new Locale("es", "ES");
@@ -247,8 +236,8 @@ public class JF_Login extends javax.swing.JFrame {
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed
         ConnectionDB prueba = new ConnectionDB();
         try {
-            String name = jLabelName.getText();
-            String pass = jLabelPass.getText();
+            String name = jTextField1.getText();
+            String pass = jPasswordField1.getText();
             boolean a = prueba.iniciarSesion(name, pass);
             if(a==true){
                 JF_ViewSchedule prueba1 = new JF_ViewSchedule();
@@ -259,6 +248,7 @@ public class JF_Login extends javax.swing.JFrame {
                 }); 
             }else{
                 System.out.print("El usuario o contraseña introducido es incorrecto");
+                jLabelWarning.setText("El usuario o contraseña introducido es incorrecto");
                 prueba.cerrrarconexion();
             }
         } catch (SQLException ex) {
@@ -294,6 +284,7 @@ public class JF_Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JF_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -311,6 +302,7 @@ public class JF_Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelHead;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelPass;
+    private javax.swing.JLabel jLabelWarning;
     private javax.swing.JLabel jLabelicon;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
