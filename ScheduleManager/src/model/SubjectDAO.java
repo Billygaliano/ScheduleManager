@@ -27,40 +27,26 @@ public class SubjectDAO {
     public ArrayList<Subject> getSubjects(String titulation, String course, String quarter){
         ArrayList<Subject> subjects = new ArrayList();
         Connection con = connection.connect();
-        
-        try{
-
-            //PreparedStatement stmtTit = con.prepareStatement("select id_titulation from titulation where name_tit=?"); 
-            PreparedStatement stmt = con.prepareStatement("select id_titulation from titulation where name_tit='Grado en Ingeniería Informática'");
-            //stmt.setString(1, titulation);
-             ResultSet resultado=stmt.executeQuery();
+        int id_titulation = 0;
+        try{ 
+            PreparedStatement stmtTit = con.prepareStatement("select id_titulation from titulation where name_tit=?");
+            stmtTit.setString(1, titulation);
+            ResultSet resultadoTit=stmtTit.executeQuery();
             
-            while (resultado.next()){
-                Subject prueba = new Subject();
-                //prueba.setId_titulation(resultado.getInt("id_titulation"));
-       
+            while (resultadoTit.next()){
+                id_titulation = Integer.parseInt(resultadoTit.getString("id_titulation"));
             }
-        }catch (SQLException ex) {
-//            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        try {
-//            PreparedStatement stmtTit = con.prepareStatement("Select id_titulation, name_tit from titulation");
-//            ResultSet titResult=stmtTit.executeQuery();
-//            
-//            while (titResult.next()){
-//                Titulation titulation = new Titulation();
-//                
-//                titulation.setId_titulation(titResult.getInt("id_titulation"));
-//                int id_titulation = titResult.getInt("id_titulation");
-//                titulation.setName(titResult.getString("name_tit"));                
-//                subjects.add(titulation);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
-        
+            PreparedStatement stmtSub = con.prepareStatement("select name_subject from subject where id_tit=" 
+                    + id_titulation + " and course='" + course +  "' and quarter= '" + quarter + "'");
+
+            ResultSet resultadoSub=stmtSub.executeQuery();
+            while (resultadoSub.next()){
+                System.out.println(resultadoSub.getString("name_subject"));
+                Subject subject = new Subject(); 
+                subject.setName(resultadoSub.getString("name_subject"));
+                subjects.add(subject);
+            }  
+        }catch (SQLException ex) {        
         }
         return subjects;
     }
