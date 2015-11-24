@@ -15,7 +15,6 @@ public class Subject {
     private List<Schedule> schedules;
 
     public Subject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

@@ -28,12 +28,20 @@ public class SubjectDAO {
         ArrayList<Subject> subjects = new ArrayList();
         Connection con = connection.connect();
         
-//        try{
-//            PreparedStatement stmtSub = con.prepareStatement("select id_titulation from titulation where name_titulatio = ?");
-//            stmt.setString(1, applicant);
-//            ResultSet titResult=stmtTit.executeQuery();
-//        }catch(){
-//            
+        try{
+
+            //PreparedStatement stmtTit = con.prepareStatement("select id_titulation from titulation where name_tit=?"); 
+            PreparedStatement stmt = con.prepareStatement("select id_titulation from titulation where name_tit='Grado en Ingeniería Informática'");
+            //stmt.setString(1, titulation);
+             ResultSet resultado=stmt.executeQuery();
+            
+            while (resultado.next()){
+                Subject prueba = new Subject();
+                //prueba.setId_titulation(resultado.getInt("id_titulation"));
+       
+            }
+        }catch (SQLException ex) {
+//            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        
 //        try {
@@ -52,6 +60,8 @@ public class SubjectDAO {
 //            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         
+        
+        }
         return subjects;
     }
 }

@@ -507,7 +507,6 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         String titulation = (String) jComboBoxTit.getSelectedItem();
         String course = (String) jComboBoxCourse.getSelectedItem();
         String quarter = (String) jComboBoxQuarter.getSelectedItem();
-        
         ArrayList<Subject> subList = controller.getSubjectsTitulation(titulation, course, quarter);
         
         Vector comboBoxItems = new Vector();
