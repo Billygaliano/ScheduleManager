@@ -14,6 +14,10 @@ public class Subject {
     private List<User> users;
     private List<Schedule> schedules;
 
+    Subject() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * Method wich retuns subject's id.
      * @return id_subject

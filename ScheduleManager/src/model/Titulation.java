@@ -11,6 +11,8 @@ public class Titulation {
     private String name;
     private List<Subject> subjects;
 
+    public Titulation() {}
+
     /**
      * Method wich returns titulation's id.
      * @return id_titulation.
@@ -80,5 +82,9 @@ public class Titulation {
         this.subjects = subjects;
     }
     
+    public ArrayList<Titulation> returnsTitulationList(){
+        TitulationDAO titulationDao = new TitulationDAO();
+        return titulationDao.getTitulations();
+    }
     
 }

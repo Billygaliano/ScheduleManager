@@ -20,7 +20,9 @@ public class ScheduleManager {
         // TODO code application logic here
      java.awt.EventQueue.invokeLater(new Runnable() {
             
-            JF_Login view= new JF_Login();
+            //JF_Login view= new JF_Login();
+            JF_ViewSchedule view = new JF_ViewSchedule();
+                   
             public void run() {
                 view.setVisible(true);
             }
