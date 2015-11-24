@@ -14,7 +14,7 @@ public class Subject {
     private List<User> users;
     private List<Schedule> schedules;
 
-    Subject() {
+    public Subject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -152,6 +152,11 @@ public class Subject {
         boolean a;
         a = (this.id_subject != sub.getId_subject()) ? false :  true;
         return a;
+    }
+    
+    public ArrayList<Subject> returnSubjectList(String titulation, String course, String quarter){
+        SubjectDAO subjectDao = new SubjectDAO();
+        return subjectDao.getSubjects(titulation, course, quarter);
     }
     
     

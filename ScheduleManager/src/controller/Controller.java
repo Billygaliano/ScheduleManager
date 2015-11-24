@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import view.JF_ViewSchedule;
 import javax.swing.table.DefaultTableModel;
+import model.Subject;
 import model.Titulation;
 
 /**
@@ -15,6 +16,7 @@ import model.Titulation;
 public class Controller implements ActionListener{
     Request modeloRequest = new Request();
     Titulation titulationModel = new Titulation();
+    Subject subjectModel = new Subject();
     String applicant="12345678A";
     
     public Controller(){
@@ -36,7 +38,12 @@ public class Controller implements ActionListener{
     }
     
     public ArrayList<Titulation> getAllTitulations(){
-        ArrayList<Titulation> titulationsList  = titulationModel.returnsTitulationList();
+        ArrayList<Titulation> titulationsList = titulationModel.returnsTitulationList();
         return titulationsList;
+    }
+    
+    public ArrayList<Subject> getSubjectsTitulation(String titulation, String course, String quarter){
+        ArrayList<Subject> subjectList = subjectModel.returnSubjectList(titulation, course, quarter);
+        return subjectList;
     }
 }

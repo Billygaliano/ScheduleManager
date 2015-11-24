@@ -9,12 +9,11 @@ import controller.Controller;
 import controller.ControllerLogin;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import javax.swing.InputMap;
-import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
+import java.util.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import model.Request;
+import model.Subject;
 import model.Titulation;
 
 /**
@@ -219,7 +218,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jComboBoxTit.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jComboBoxTit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Titulación" }));
         jComboBoxTit.setToolTipText("Titulación");
         jComboBoxTit.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -228,22 +227,32 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         });
         jToolBar1.add(jComboBoxTit);
 
-        jComboBoxCourse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCourse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curso" }));
+        jComboBoxCourse.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxCourseItemStateChanged(evt);
+            }
+        });
         jToolBar1.add(jComboBoxCourse);
 
-        jComboBoxQuarter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxQuarter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cuatrimestre" }));
+        jComboBoxQuarter.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxQuarterItemStateChanged(evt);
+            }
+        });
         jToolBar1.add(jComboBoxQuarter);
 
-        jComboBoxSubject.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSubject.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Asignatura" }));
         jToolBar1.add(jComboBoxSubject);
 
-        jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Día" }));
         jToolBar1.add(jComboBoxDay);
 
-        jComboBoxHour.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxHour.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hora" }));
         jToolBar1.add(jComboBoxHour);
 
-        jComboBoxClassroom.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxClassroom.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aula" }));
         jToolBar1.add(jComboBoxClassroom);
 
         jButton1.setText("Añadir");
@@ -452,6 +461,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         
         Vector comboBoxItems = new Vector();
         
+        comboBoxItems.add("Titulación");
         for (Titulation tit : titList) {
             comboBoxItems.add(tit.getName());
         }
@@ -461,16 +471,55 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPaneMousePressed
 
     private void jComboBoxTitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTitItemStateChanged
+        Vector comboBoxItemsCourse = new Vector();
+        
+        if(jComboBoxTit.getSelectedIndex()!=0){  
+            comboBoxItemsCourse.add("Curso");
+            comboBoxItemsCourse.add("1º");
+            comboBoxItemsCourse.add("2º");
+            comboBoxItemsCourse.add("3º");
+            comboBoxItemsCourse.add("4º");
+        }else{
+            comboBoxItemsCourse.add(null);
+        }
+        
+        final DefaultComboBoxModel modelCourse = new DefaultComboBoxModel(comboBoxItemsCourse);
+        jComboBoxCourse.setModel(modelCourse);
+    }//GEN-LAST:event_jComboBoxTitItemStateChanged
+
+    private void jComboBoxCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxCourseItemStateChanged
+        Vector comboBoxItemsQuarter = new Vector();
+        
+        if(jComboBoxTit.getSelectedIndex()!=0){  
+            comboBoxItemsQuarter.add("Cuatrimestre");
+            comboBoxItemsQuarter.add("Primero");
+            comboBoxItemsQuarter.add("Segundo");
+        }else{
+            comboBoxItemsQuarter.add(null);
+        }
+        
+        final DefaultComboBoxModel modelQuarter = new DefaultComboBoxModel(comboBoxItemsQuarter);
+        jComboBoxQuarter.setModel(modelQuarter);
+    }//GEN-LAST:event_jComboBoxCourseItemStateChanged
+
+    private void jComboBoxQuarterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxQuarterItemStateChanged
+        Controller controller = new Controller();
+        String titulation = (String) jComboBoxTit.getSelectedItem();
+        String course = (String) jComboBoxCourse.getSelectedItem();
+        String quarter = (String) jComboBoxQuarter.getSelectedItem();
+        
+        ArrayList<Subject> subList = controller.getSubjectsTitulation(titulation, course, quarter);
+        
         Vector comboBoxItems = new Vector();
         
-        comboBoxItems.add("1º");
-        comboBoxItems.add("2º");
-        comboBoxItems.add("3º");
-        comboBoxItems.add("4º");
+        comboBoxItems.add("Titulación");
+        for (Subject subject : subList) {
+            comboBoxItems.add(subject.getName());
+        }
         
         final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
-        jComboBoxCourse.setModel(model);
-    }//GEN-LAST:event_jComboBoxTitItemStateChanged
+        jComboBoxSubject.setModel(model);
+    }//GEN-LAST:event_jComboBoxQuarterItemStateChanged
 
     /**
      * @param args the command line arguments
