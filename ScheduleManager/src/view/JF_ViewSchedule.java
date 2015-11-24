@@ -11,6 +11,7 @@ import controller.ControllerLogin;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.InputMap;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import model.Request;
@@ -325,8 +326,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
         ControllerLogin controller = new ControllerLogin();
-        //controller.closeSession(this, JF_Login);
-        
+        controller.closeSession(this); 
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jTabbedPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMousePressed

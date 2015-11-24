@@ -252,6 +252,7 @@ public class JF_Login extends javax.swing.JFrame {
         String pass = jPasswordField1.getText();
         ControllerLogin controllerSignIn = new ControllerLogin();
         controllerSignIn.actionPerformedSignIn(name,pass,jLabelWarning, this);
+        jPasswordField1.setText("");
     }//GEN-LAST:event_jButtonSignInActionPerformed
 
     private void enter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enter
@@ -260,6 +261,7 @@ public class JF_Login extends javax.swing.JFrame {
             String pass = jPasswordField1.getText();
             ControllerLogin controllerSignIn = new ControllerLogin();
             controllerSignIn.actionPerformedSignIn(name,pass,jLabelWarning, this);
+            jPasswordField1.setText("");
         } 
     }//GEN-LAST:event_enter
 
@@ -269,6 +271,7 @@ public class JF_Login extends javax.swing.JFrame {
             String pass = jPasswordField1.getText();
             ControllerLogin controllerSignIn = new ControllerLogin();
             controllerSignIn.actionPerformedSignIn(name,pass,jLabelWarning, this);
+            jPasswordField1.setText("");
         } 
     }//GEN-LAST:event_enter2
     

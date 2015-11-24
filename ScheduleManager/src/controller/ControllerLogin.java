@@ -19,7 +19,7 @@ import view.JF_ViewSchedule;
  * @author macbookpro
  */
 public class ControllerLogin implements ActionListener{
-
+    public static JF_Login vistauser;
 
 
     public void actionPerformed(ActionEvent e,JLabel a,JLabel b,JButton d,JLabel c) {
@@ -47,8 +47,9 @@ public class ControllerLogin implements ActionListener{
             JF_ViewSchedule api = new JF_ViewSchedule();
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
+                    vistauser = login;
                     new JF_ViewSchedule().setVisible(true);
-                    login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    login.setVisible(false);
                 }
             }); 
         }else{
@@ -58,8 +59,22 @@ public class ControllerLogin implements ActionListener{
         
     }
     
-    public void closeSession(){
+    public void closeSession(JF_ViewSchedule section){
         ConnectionDB.closeConnection();
+        section.setAlwaysOnTop(false);
+        if(JOptionPane.showConfirmDialog (null, new Object[]{"¿Desea cerrar la sesión?"},"JOPtion", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+            section.setVisible(false);
+            ControllerLogin.vistauser.setVisible(true);
+        }
+        else{
+        
+        }
+        //String confirmar = JOptionPane.showInputDialog("Estas seguro de salir de la secion: si o no");
+        /*if(confirmar.equalsIgnoreCase("si")){
+          ControllerLogin.vistauser.setVisible(true);  
+        }else{
+        section.setVisible(true);
+        }*/
     }
 
     @Override
