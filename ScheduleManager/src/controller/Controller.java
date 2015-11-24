@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import view.JF_ViewSchedule;
 import javax.swing.table.DefaultTableModel;
+import model.Schedule;
 import model.Subject;
 import model.Titulation;
 
@@ -17,6 +18,7 @@ public class Controller implements ActionListener{
     Request modeloRequest = new Request();
     Titulation titulationModel = new Titulation();
     Subject subjectModel = new Subject();
+    Schedule scheduleModel = new Schedule();
     String applicant="12345678A";
     
     public Controller(){
@@ -46,6 +48,25 @@ public class Controller implements ActionListener{
         return subjectList;
     }
     
+    public ArrayList<String> getAvailableDays(){
+        ArrayList<String> daysList = scheduleModel.returnDaysList();
+        return daysList;
+    }
+    
+    public ArrayList<String> getAvailableHours(String day){
+        ArrayList<String> hourList = scheduleModel.returnHourList(day);
+        return hourList;
+    }
+    
+    public ArrayList<String> getAvailableClassroom(String day,String hour){
+        ArrayList<String> classList = scheduleModel.returnClassList(day,hour);
+        return classList;
+    }
+    
+    public void setSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom){
+        scheduleModel.insertSchedule(titulation,course,quarter,subject,day,hour,classroom);
+    }
+
     public ArrayList<Titulation> getTitulationsAndSubjects() {
         ArrayList<Titulation> titulationsSubjectsList = titulationModel.returnsTitulationSubjectList(applicant);
         return titulationsSubjectsList;

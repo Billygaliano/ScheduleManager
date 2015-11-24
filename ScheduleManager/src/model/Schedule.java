@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 /**
  *
@@ -37,6 +38,8 @@ public class Schedule {
         this.hour = hour;
         this.quarter = quarter;
     }
+
+    public Schedule() {}
 
     /**
      * Method wich returns a Shedule object in String format.
@@ -181,5 +184,27 @@ public class Schedule {
     public void setQuarter(String quarter) {
         this.quarter = quarter;
     }
+    
+    public ArrayList<String> returnDaysList(){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        ArrayList<String> days =scheduleDAO.returnDaysList();
+        return days;
+    }
+    
+    public ArrayList<String> returnHourList(String day){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        ArrayList<String> hours =scheduleDAO.returnHoursList(day);
+        return hours;
+    }
+    public ArrayList<String> returnClassList(String day,String hour){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        ArrayList<String> classroom =scheduleDAO.returnClassList(day,hour);
+        return classroom;
+    }
+    
+    public void insertSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        scheduleDAO.insertSchedule(titulation,course,quarter,subject,day,hour,classroom);
 
+    }
 }
