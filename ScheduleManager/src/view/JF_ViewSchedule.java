@@ -6,6 +6,7 @@
 package view;
 
 import controller.Controller;
+import controller.ControllerLogin;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -323,7 +324,9 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
-        Controller controller = new Controller();
+        ControllerLogin controller = new ControllerLogin();
+        //controller.closeSession(this, JF_Login);
+        
     }//GEN-LAST:event_jButtonLogoutActionPerformed
 
     private void jTabbedPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMousePressed

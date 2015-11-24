@@ -14,9 +14,9 @@ import java.sql.*;
 public class ConnectionDB {
 
     /*ATRIBUTOS*/
-    private Connection conexion;
-    private Statement sentenciaSQL;
-    private ResultSet resul;
+    private static Connection conexion;
+    private static Statement sentenciaSQL;
+    private static ResultSet resul;
 
     /*METODOS*/
     /**
@@ -31,7 +31,7 @@ public class ConnectionDB {
         }
     }
 
-    public Connection connect() {
+    public static Connection connect() {
         String url = "jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar";
 
         try {
@@ -97,7 +97,7 @@ public class ConnectionDB {
         return inciciado;
     }
 
-    public void closeConnection() {
+    public static void closeConnection() {
         try {
             if (resul != null) {
                 resul.close();

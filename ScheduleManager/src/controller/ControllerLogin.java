@@ -40,11 +40,26 @@ public class ControllerLogin implements ActionListener{
         c.setText(bundle.getString("JF_Login.footer"));
     }
     
-    public void actionPerformedSignIn(String name,String pass, JLabel jLabelWarning) {
+    public void actionPerformedSignIn(String name,String pass, JLabel jLabelWarning, JF_Login login) {
         UserDAO user = new UserDAO();
         System.out.print(user.returnUserSection(name, pass));
-        user.returnStartSection(name, pass, jLabelWarning);
+        if(user.returnStartSection(name, pass, jLabelWarning)){
+            JF_ViewSchedule api = new JF_ViewSchedule();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new JF_ViewSchedule().setVisible(true);
+                    login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                }
+            }); 
+        }else{
+            jLabelWarning.setText("El usuario o contraseña introducido es incorrecto");
+            user.closeConnection();
+        }
         
+    }
+    
+    public void closeSession(){
+        ConnectionDB.closeConnection();
     }
 
     @Override

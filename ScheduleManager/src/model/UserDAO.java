@@ -48,20 +48,13 @@ public class UserDAO {
         boolean iniciado = false;  
         try {           
             iniciado = connection.startSection(dni, pass);
-            if(iniciado==true){
-                JF_ViewSchedule api = new JF_ViewSchedule();
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new JF_ViewSchedule().setVisible(true);
-                    }
-                }); 
-            }else{
-                jLabelWarning.setText("El usuario o contraseña introducido es incorrecto");
-                connection.closeConnection();
-            }
         } catch (SQLException ex) {
             System.out.println("Error connect database");
         }
         return iniciado;
+    }
+    
+    public void closeConnection(){
+        ConnectionDB.closeConnection();
     }
 }
