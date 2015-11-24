@@ -65,6 +65,7 @@ public class Controller implements ActionListener{
     
     public void setSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom){
         scheduleModel.insertSchedule(titulation,course,quarter,subject,day,hour,classroom);
+
     }
 
     public ArrayList<Titulation> getTitulationsAndSubjects() {
