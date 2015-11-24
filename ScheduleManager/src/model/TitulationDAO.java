@@ -42,4 +42,26 @@ public class TitulationDAO {
         
         return titulations;
     }
+    
+    public ArrayList<Titulation> getTitulationsSubjects(String applicant){
+        ArrayList<Titulation> titulations = new ArrayList();
+        Connection con = connection.connect();
+        
+        try {
+            PreparedStatement stmtTit = con.prepareStatement("SELECT id_titulation, name_tit FROM titulation WHERE id_titulation IN (SELECT id_tit FROM subject WHERE id_subject IN(SELECT id_subject FROM subject_user WHERE dni = ?))");
+            stmtTit.setString(1, applicant);
+            ResultSet titResult=stmtTit.executeQuery();
+            
+            while (titResult.next()){
+                Titulation titulation = new Titulation();
+                titulation.setId_titulation(titResult.getInt("id_titulation"));
+                titulation.setName(titResult.getString("name_tit"));  
+                titulations.add(titulation);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return titulations;
+    }
 }

@@ -8,9 +8,10 @@ import java.util.*;
  */
 public class Subject {
     private int id_subject;
-    private Titulation titulation;
+    private int id_titulation;
     private String name;
-    private int course;
+    private String course;
+    private String quarter;
     private List<User> users;
     private List<Schedule> schedules;
 
@@ -29,8 +30,8 @@ public class Subject {
      * Method wich returns titulation's id.
      * @return id_titulation
      */
-    public Titulation getId_titulation() {
-        return titulation;
+    public int getId_titulation() {
+        return id_titulation;
     }
 
     /**
@@ -45,8 +46,16 @@ public class Subject {
      * Method wich returns subject's course.
      * @return course
      */
-    public int getCourse() {
+    public String getCourse() {
         return course;
+    }   
+    
+    /**
+     * Method which returns subject's quarter.
+     * @return quarter
+     */
+    public String getQuarter() {
+        return quarter;
     }
 
     /**
@@ -77,8 +86,8 @@ public class Subject {
      * Method wich sets titulation's id.
      * @param titulation of Titulation
      */
-    public void setId_titulation(Titulation titulation) {
-        this.titulation = titulation;
+    public void setId_titulation(int id_titulation) {
+        this.id_titulation = id_titulation;
     }
 
     /**
@@ -93,10 +102,18 @@ public class Subject {
      * Method wich sets subject's course.
      * @param course of Subject
      */
-    public void setCourse(int course) {
+    public void setCourse(String course) {
         this.course = course;
-    }
+    }    
 
+    /**
+     * Method which sets subject's quarter.
+     * @param quarter of Subject
+     */
+    public void setQuarter(String quarter) {
+        this.quarter = quarter;
+    }
+        
     /**
      * Method wich sets a list of users.
      * @param users of Subject
@@ -119,7 +136,7 @@ public class Subject {
      */
     @Override
     public String toString() {
-        return "Subject{" + "id_subject=" + id_subject + ", id_titulation=" + titulation + ", name=" + name + ", course=" + course + ", users=" + users + ", schedules=" + schedules + '}';
+        return "Subject{" + "id_subject=" + id_subject + ", id_titulation=" + id_titulation + ", name=" + name + ", course=" + course + ", quarter=" + quarter + ", users=" + users + ", schedules=" + schedules + '}';
     }
 
     /**
@@ -128,14 +145,16 @@ public class Subject {
      * @param titulation
      * @param name
      * @param course
+     * @param quarter
      * @param users
      * @param schedules 
      */
-    public Subject(int id_subject, Titulation titulation, String name, int course, List<User> users, List<Schedule> schedules) {
+    public Subject(int id_subject, int id_titulation, String name, String course, String quarter, List<User> users, List<Schedule> schedules) {
         this.id_subject = id_subject;
-        this.titulation = titulation;
+        this.id_titulation = id_titulation;
         this.name = name;
         this.course = course;
+        this.quarter = quarter;
         this.users = users;
         this.schedules = schedules;
     }
@@ -156,6 +175,16 @@ public class Subject {
     public ArrayList<Subject> returnSubjectList(String titulation, String course, String quarter){
         SubjectDAO subjectDao = new SubjectDAO();
         return subjectDao.getSubjects(titulation, course, quarter);
+    }
+    
+    public ArrayList<String> returnCoursesTitulationUser(String applicant, int id_titulation){
+        SubjectDAO subjectDao = new SubjectDAO();
+        return subjectDao.getCoursesTitulationUser(applicant, id_titulation);
+    }
+    
+    public ArrayList<String> returnQuartersTitulationUser(String applicant, int id_titulation, String course){
+        SubjectDAO subjectDao = new SubjectDAO();
+        return subjectDao.getQuartersTitulationUser(applicant, id_titulation, course);
     }
     
     

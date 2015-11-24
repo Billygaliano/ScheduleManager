@@ -20,8 +20,7 @@ public class Controller implements ActionListener{
     String applicant="12345678A";
     
     public Controller(){
-    }  
-       
+    }         
 
     public ArrayList<Request> getAllRequest(){
         ArrayList<Request> lista = modeloRequest.returnListRequest(applicant);
@@ -45,5 +44,20 @@ public class Controller implements ActionListener{
     public ArrayList<Subject> getSubjectsTitulation(String titulation, String course, String quarter){
         ArrayList<Subject> subjectList = subjectModel.returnSubjectList(titulation, course, quarter);
         return subjectList;
+    }
+    
+    public ArrayList<Titulation> getTitulationsAndSubjects() {
+        ArrayList<Titulation> titulationsSubjectsList = titulationModel.returnsTitulationSubjectList(applicant);
+        return titulationsSubjectsList;
+    }
+    
+    public ArrayList<String> getCoursesTitulationUser(int id_titulation){
+        ArrayList<String> courses = subjectModel.returnCoursesTitulationUser(applicant, id_titulation);
+        return courses;
+    }
+    
+    public ArrayList<String> getQuartersTitulationUser(int id_titulation, String course){
+        ArrayList<String> quarters = subjectModel.returnQuartersTitulationUser(applicant, id_titulation, course);
+        return quarters;
     }
 }

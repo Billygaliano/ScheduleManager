@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import model.Request;
 import model.Subject;
 import model.Titulation;
@@ -27,13 +29,39 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
      */
     public JF_ViewSchedule() {
         InputMap map = new InputMap();
-
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released");    
         
         initComponents();       
         
         jButtonLogout.setToolTipText("Cerrar sesión");
+        fillTreeSchedule();
+    }
+    
+    private void fillTreeSchedule(){
+        DefaultTreeModel model = (DefaultTreeModel) jTreeLeftPanel.getModel();
+        Controller controller = new Controller();
+        
+        ArrayList<Titulation> titulations = controller.getTitulationsAndSubjects();
+        
+        for (Titulation titulation : titulations) {            
+            DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+            root.add(new DefaultMutableTreeNode(titulation.getName()));
+            int id_titulation = titulation.getId_titulation();
+            
+            root = root.getNextNode();
+            ArrayList<String> courses = controller.getCoursesTitulationUser(id_titulation);
+            for (String course : courses) {
+                root.add(new DefaultMutableTreeNode(course));
+                
+                root = root.getNextNode();
+                ArrayList<String> quarters = controller.getQuartersTitulationUser(id_titulation, course);
+                
+                for (String quarter : quarters) {
+                    root.add(new DefaultMutableTreeNode(quarter));
+                }
+            }
+        }
     }
 
     /**
@@ -92,6 +120,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
         jTreeLeftPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTreeLeftPanel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Titulación");
+        jTreeLeftPanel.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTreeLeftPanel.setCellRenderer(null);
         jScrollPaneLeftPanel.setViewportView(jTreeLeftPanel);
 

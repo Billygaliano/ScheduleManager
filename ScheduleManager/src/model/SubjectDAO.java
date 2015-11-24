@@ -64,4 +64,47 @@ public class SubjectDAO {
         }
         return subjects;
     }
+    
+    public ArrayList<String> getCoursesTitulationUser(String applicant, int id_titulation){
+        ArrayList<String> courses = new ArrayList();
+        Connection con = connection.connect();
+        
+        try {
+            PreparedStatement stmtCour = con.prepareStatement("SELECT DISTINCT course FROM subject WHERE id_subject IN(SELECT id_subject FROM subject_user WHERE dni = ?) AND id_tit = ?");
+            stmtCour.setString(1, applicant);
+            stmtCour.setInt(2, id_titulation);
+            ResultSet courResult=stmtCour.executeQuery();
+            
+            while (courResult.next()){
+                String course = courResult.getString("course");   
+                courses.add(course);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return courses;
+    }
+    
+    public ArrayList<String> getQuartersTitulationUser(String applicant, int id_titulation, String course){
+        ArrayList<String> quarters = new ArrayList();
+        Connection con = connection.connect();
+        
+        try {
+            PreparedStatement stmtQuart = con.prepareStatement("SELECT DISTINCT quarter FROM subject WHERE id_subject IN(SELECT id_subject FROM subject_user WHERE dni = ?) AND id_tit = ? AND course = ? ");
+            stmtQuart.setString(1, applicant);
+            stmtQuart.setInt(2, id_titulation);
+            stmtQuart.setString(3, course);
+            ResultSet quartResult=stmtQuart.executeQuery();
+            
+            while (quartResult.next()){
+                String quarter = quartResult.getString("quarter");   
+                quarters.add(quarter);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return quarters;
+    }
 }

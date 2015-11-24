@@ -48,7 +48,7 @@ public class ControllerLogin implements ActionListener{
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     vistauser = login;
-                    new JF_ViewSchedule().setVisible(true);
+                    api.setVisible(true);
                     login.setVisible(false);
                 }
             }); 

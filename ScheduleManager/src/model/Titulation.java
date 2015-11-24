@@ -9,7 +9,7 @@ import java.util.*;
 public class Titulation {
     private int id_titulation;
     private String name;
-    private List<Subject> subjects;
+    private ArrayList<Subject> subjects;
 
     public Titulation() {}
 
@@ -30,10 +30,10 @@ public class Titulation {
     }
     
     /**
-     * Method wich returns a list of subjects.
+     * Method wich returns a Arraylist of subjects.
      * @return subjects
      */
-    public List<Subject> getSubjects() {
+    public ArrayList<Subject> getSubjects() {
         return subjects;
     }
 
@@ -57,7 +57,7 @@ public class Titulation {
      * Method wich sets titulation's subejcts.
      * @param subjects of titulation
      */
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(ArrayList<Subject> subjects) {
         this.subjects = subjects;
     }
 
@@ -76,7 +76,7 @@ public class Titulation {
      * @param name
      * @param subjects 
      */
-    public Titulation(int id_titulation, String name, List<Subject> subjects) {
+    public Titulation(int id_titulation, String name, ArrayList<Subject> subjects) {
         this.id_titulation = id_titulation;
         this.name = name;
         this.subjects = subjects;
@@ -85,6 +85,11 @@ public class Titulation {
     public ArrayList<Titulation> returnsTitulationList(){
         TitulationDAO titulationDao = new TitulationDAO();
         return titulationDao.getTitulations();
+    }
+    
+    public ArrayList<Titulation> returnsTitulationSubjectList(String applicant){
+        TitulationDAO titulationDao = new TitulationDAO();
+        return titulationDao.getTitulationsSubjects(applicant);
     }
     
 }
