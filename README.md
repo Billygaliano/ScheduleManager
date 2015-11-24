@@ -3,6 +3,7 @@ ScheduleManager
 Application that lets you manage and display schedules available on a university degree
 
 Project UML -> https://www.draw.io/#G0Bzqtfq3T9WixNXVTdHRRVnBaUE0
+https://www.youtube.com/watch?v=N9MGgdKKJ0U
 
 Buenas maneras de programación:
 --------------------
