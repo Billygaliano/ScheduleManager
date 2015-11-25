@@ -24,12 +24,11 @@ public class UserDAO {
         con = connection.connect();
     }
     public User returnUserSection(String dni, String pass){
-        User section = null;
+        User section = new User();
         try {
             PreparedStatement stmt= con.prepareStatement("Select * FROM user_u WHERE DNI = '" + dni + "'");
             ResultSet resultado=stmt.executeQuery();
             while (resultado.next()){
-                section = new User(); 
                 section.setDni(dni);
                 section.setPass(pass);
                 section.setEmail(resultado.getString("EMAIL"));
@@ -37,6 +36,7 @@ public class UserDAO {
                 section.setSurname(resultado.getString("SURNAME"));
                 section.setRole(resultado.getString("USER_ROLE"));
                 section.setAddress(resultado.getString("ADDRESS"));
+                
             }
         }catch (SQLException ex){
             System.out.println("Error performing query");
@@ -44,7 +44,7 @@ public class UserDAO {
         return section;
     }
     
-    public boolean returnStartSection(String dni, String pass, JLabel jLabelWarning){
+    public boolean returnStartSection(String dni, String pass){
         boolean iniciado = false;  
         try {           
             iniciado = connection.startSection(dni, pass);

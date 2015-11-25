@@ -17,6 +17,8 @@ import javax.swing.tree.DefaultTreeModel;
 import model.Request;
 import model.Subject;
 import model.Titulation;
+import model.User;
+import model.UserDAO;
 
 /**
  *
@@ -30,6 +32,10 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
      */
     String titulo[] ={"Titulación", "Curso","Cuatrimestre","Asignatura","Día","Hora","Aula"};
     DefaultTableModel tableJSchedule = new DefaultTableModel(null,titulo);
+    User user = null;
+    String name_user;
+    
+    
     public JF_ViewSchedule() {
         InputMap map = new InputMap();
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
@@ -39,6 +45,20 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         
         jButtonLogout.setToolTipText("Cerrar sesión");
         fillTreeSchedule();
+    }
+    
+     public JF_ViewSchedule(User user) {
+         InputMap map = new InputMap();
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released");    
+        
+        initComponents();       
+        
+        jButtonLogout.setToolTipText("Cerrar sesión");
+        fillTreeSchedule();
+        this.user = user;
+        jLabelWelcomeTitle.setText("GESTOR DE HORARIOS UMA - BIENVENIDO/A "+user.getName()+ " " + user.getSurname());
+        
     }
     
     private void fillTreeSchedule(){
@@ -192,7 +212,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jPanelRTop.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabelWelcomeTitle.setFont(new java.awt.Font("Arial Unicode MS", 0, 18)); // NOI18N
-        jLabelWelcomeTitle.setText("GESTOR DE HORARIOS UMA - BIENVENIDO/A (Usuario)");
+        jLabelWelcomeTitle.setText("GESTOR DE HORARIOS UMA - BIENVENIDO/A ");
 
         jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/logout2.jpg"))); // NOI18N
         jButtonLogout.setBorderPainted(false);
@@ -213,7 +233,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             jPanelRTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRTopLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelWelcomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelWelcomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))

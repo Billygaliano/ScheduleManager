@@ -174,7 +174,7 @@ public class User {
      * Class default constructor. 
      */
     public User(){
-        
+
     }
     
     /**
@@ -200,6 +200,19 @@ public class User {
         this.birthdate = birthdate;
         this.address = address;
         this.subjects = subjects;
+    }
+    
+    public boolean returnStartSection(String dni,String pass){
+        
+        UserDAO user = new UserDAO();
+        boolean ret = user.returnStartSection(dni, pass);
+        
+        return ret;   
+    }
+    
+    public User returnUserSection(String dni,String pass){
+        UserDAO user = new UserDAO();
+        return user.returnUserSection(dni,pass);
     }
 
 

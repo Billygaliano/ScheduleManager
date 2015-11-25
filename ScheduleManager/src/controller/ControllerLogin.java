@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.*;
+import model.User;
 import model.UserDAO;
 import persistence.ConnectionDB;
 import view.JF_Login;
@@ -40,11 +41,11 @@ public class ControllerLogin implements ActionListener{
         c.setText(bundle.getString("JF_Login.footer"));
     }
     
-    public void actionPerformedSignIn(String name,String pass, JLabel jLabelWarning, JF_Login login) {
-        UserDAO user = new UserDAO();
-        System.out.print(user.returnUserSection(name, pass));
-        if(user.returnStartSection(name, pass, jLabelWarning)){
-            JF_ViewSchedule api = new JF_ViewSchedule();
+    public void actionPerformedSignIn(String dni,String pass, JLabel jLabelWarning, JF_Login login) {
+        User user = new User();
+        if(user.returnStartSection(dni, pass)){
+            user = user.returnUserSection(dni,pass);
+            JF_ViewSchedule api = new JF_ViewSchedule(user);
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     vistauser = login;
@@ -54,7 +55,6 @@ public class ControllerLogin implements ActionListener{
             }); 
         }else{
             jLabelWarning.setText("El usuario o contraseña introducido es incorrecto");
-            user.closeConnection();
         }
         
     }
