@@ -171,7 +171,14 @@ public class User {
     }
 
     /**
-     * Class constructor.
+     * Class default constructor. 
+     */
+    public User(){
+        
+    }
+    
+    /**
+     * Class non-default constructor
      * @param dni
      * @param pass
      * @param email
@@ -182,9 +189,6 @@ public class User {
      * @param address
      * @param subjects 
      */
-    public User(){
-        
-    }
     
     public User(String dni, String pass, String email, String name, String surname, String role, Date birthdate, String address, List<Subject> subjects) {
         this.dni = dni;
@@ -197,4 +201,22 @@ public class User {
         this.address = address;
         this.subjects = subjects;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.dni, other.dni)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
