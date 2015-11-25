@@ -54,6 +54,10 @@ public class UserDAO {
         return iniciado;
     }
     
+    public void closeConnection(){
+        ConnectionDB.closeConnection();
+    }
+    
     @Override
     protected void finalize() throws Throwable{
             super.finalize();
