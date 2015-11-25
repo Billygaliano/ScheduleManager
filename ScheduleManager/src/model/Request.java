@@ -149,4 +149,10 @@ public class Request {
         ArrayList<Request> requests =requestDAO.returnListRequest(applicant);
         return requests.get(row).getMessage();
     }
+    
+     public boolean setRequest(String user, String subject, String text){
+        RequestDAO requestDAO = new RequestDAO();
+        boolean ok = requestDAO.insertRequest(user,subject,text);
+        return ok;
+    }
 }

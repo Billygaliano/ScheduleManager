@@ -82,4 +82,10 @@ public class Controller implements ActionListener{
         ArrayList<String> quarters = subjectModel.returnQuartersTitulationUser(applicant, id_titulation, course);
         return quarters;
     }
+    
+    public boolean setRequest(String subject, String text){
+        boolean ok;
+        ok = modeloRequest.setRequest(applicant, subject, text);
+        return ok;
+    }
 }

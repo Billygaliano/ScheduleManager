@@ -35,4 +35,26 @@ public class RequestDAO {
         }
         return list;
     }
+    
+        public boolean insertRequest(String user, String subject, String text){
+        boolean ok = false;
+        String status = "pendiente";
+        Connection con = connection.connect();
+        try {
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO REQUEST (DNI_APPLICANT, MESSAGE, STATE_REQUEST, SUBJECT) VALUES (?,?,?,?)");
+            stmt.setString(1, user);
+            stmt.setString(2, text);
+            stmt.setString(3, status);
+            stmt.setString(4,subject);
+            int i = stmt.executeUpdate();
+            if (i>0){
+                ok=true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ok;
+    }
 }

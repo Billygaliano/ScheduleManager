@@ -105,6 +105,13 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jTablesSetSchedule = new javax.swing.JTable();
         jPanelUpdateSchedule = new javax.swing.JPanel();
         jPanelSendRequest = new javax.swing.JPanel();
+        jLabelSubject = new javax.swing.JLabel();
+        jTextFieldReqSubj = new javax.swing.JTextField();
+        jLabelReqText = new javax.swing.JLabel();
+        jLabelRequest = new javax.swing.JLabel();
+        jTextFieldReqText = new javax.swing.JTextField();
+        jTextFieldReqWarning = new javax.swing.JTextField();
+        jButtonSendRequest = new javax.swing.JButton();
         jPanelViewRequest = new javax.swing.JPanel();
         jScrollPanelViewRequest = new javax.swing.JScrollPane();
         jTableRequests = new javax.swing.JTable();
@@ -383,15 +390,72 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Modificar Horario", jPanelUpdateSchedule);
 
+        jPanelSendRequest.setToolTipText("");
+
+        jLabelSubject.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSubject.setText("Asunto");
+
+        jTextFieldReqSubj.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabelReqText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabelRequest.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelRequest.setText("Solicitud");
+
+        jTextFieldReqText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextFieldReqWarning.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldReqWarning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldReqWarningActionPerformed(evt);
+            }
+        });
+
+        jButtonSendRequest.setText("Enviar Solicitud");
+        jButtonSendRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonSendRequestMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSendRequestLayout = new javax.swing.GroupLayout(jPanelSendRequest);
         jPanelSendRequest.setLayout(jPanelSendRequestLayout);
         jPanelSendRequestLayout.setHorizontalGroup(
             jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 961, Short.MAX_VALUE)
+            .addComponent(jLabelSubject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTextFieldReqSubj, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanelSendRequestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldReqText)
+                    .addComponent(jTextFieldReqWarning)
+                    .addGroup(jPanelSendRequestLayout.createSequentialGroup()
+                        .addGroup(jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonSendRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanelSendRequestLayout.createSequentialGroup()
+                                .addGap(627, 627, 627)
+                                .addComponent(jLabelReqText, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE))
+                            .addComponent(jLabelRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanelSendRequestLayout.setVerticalGroup(
             jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGroup(jPanelSendRequestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelSubject)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldReqSubj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelRequest)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldReqText, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelReqText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldReqWarning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSendRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane.addTab("Enviar solicitud", jPanelSendRequest);
@@ -667,6 +731,22 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jTextFieldReqWarningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldReqWarningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldReqWarningActionPerformed
+
+    private void jButtonSendRequestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSendRequestMouseClicked
+        // Enviar solicitud
+        Controller controllerRequest = new Controller();
+        boolean ok;
+        ok = controllerRequest.setRequest(jTextFieldReqSubj.getText(), jTextFieldReqText.getText());
+        if (ok){
+            jTextFieldReqWarning.setText("Solicitud enviada correctamente"); 
+        }else{
+            jTextFieldReqWarning.setText("Error al enviar solicitud");
+        }
+    }//GEN-LAST:event_jButtonSendRequestMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -705,6 +785,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonSendRequest;
     private javax.swing.JComboBox jComboBoxClassroom;
     private javax.swing.JComboBox jComboBoxCourse;
     private javax.swing.JComboBox jComboBoxDay;
@@ -713,6 +794,9 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxSubject;
     private javax.swing.JComboBox jComboBoxTit;
     private javax.swing.JLabel jLabelLogoImg;
+    private javax.swing.JLabel jLabelReqText;
+    private javax.swing.JLabel jLabelRequest;
+    private javax.swing.JLabel jLabelSubject;
     private javax.swing.JLabel jLabelWelcomeTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelLeft;
@@ -734,6 +818,9 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JTable jTableRequests;
     private javax.swing.JTable jTableSchedule;
     private javax.swing.JTable jTablesSetSchedule;
+    private javax.swing.JTextField jTextFieldReqSubj;
+    private javax.swing.JTextField jTextFieldReqText;
+    private javax.swing.JTextField jTextFieldReqWarning;
     private javax.swing.JTextPane jTextPaneMessageRequest;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTree jTreeLeftPanel;
