@@ -36,6 +36,63 @@ public class RequestDAO {
         return list;
     }
     
+    
+    public ArrayList<Request> returnListRequest1(){
+        Request request = null;
+        Connection con = connection.connect();
+        ArrayList<Request> list = new ArrayList();
+        try {
+            PreparedStatement stmt= con.prepareStatement("Select dni_applicant,subject,state_request,message from request");
+            ResultSet resultado=stmt.executeQuery();
+            
+            while (resultado.next()){
+                request = new Request(); 
+                request.setApplicant(resultado.getString("dni_applicant"));
+                request.setSubject(resultado.getString("subject"));
+                request.setState(resultado.getString("state_request"));
+                request.setMessage(resultado.getString("message"));
+                list.add(request);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public void SetAdminRequest(int fila,String status){
+        Request request = null;
+        Request requestModified = null;
+        ArrayList<Request> list = new ArrayList();
+        Connection con = connection.connect();
+        try {
+            PreparedStatement stmt= con.prepareStatement("Select id_request,dni_applicant,subject,state_request,message from request");
+            ResultSet resultado=stmt.executeQuery();
+            
+            while (resultado.next()){
+                request = new Request();
+                request.setId_request(resultado.getInt("id_request"));
+                request.setApplicant(resultado.getString("dni_applicant"));
+                request.setSubject(resultado.getString("subject"));
+                request.setState(resultado.getString("state_request"));
+                request.setMessage(resultado.getString("message"));
+                list.add(request);
+            }
+            
+            requestModified = new Request();
+            requestModified = list.get(fila);
+            
+            int ID_REQUEST = requestModified.getId_request();
+            
+           PreparedStatement stmt2 = con.prepareStatement("UPDATE REQUEST SET STATE_REQUEST =? WHERE ID_REQUEST=?");
+           stmt2.setString(1, status);
+           stmt2.setInt(2, ID_REQUEST);
+           stmt2.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
         public boolean insertRequest(String user, String subject, String text){
         boolean ok = false;
         String status = "pendiente";

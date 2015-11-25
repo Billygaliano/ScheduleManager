@@ -144,6 +144,18 @@ public class Request {
         return list;
     }
     
+    public ArrayList<Request> returnListRequest1(){
+        RequestDAO requestDAO = new RequestDAO();
+        ArrayList<Request> list = requestDAO.returnListRequest1();
+        return list;
+    }
+    
+    public void SetAdminRequest(int fila,String status){
+        RequestDAO requestAdminDAO = new RequestDAO();
+        requestAdminDAO.SetAdminRequest(fila,status);
+    }
+    
+    
     public String getSelectedMessage(int row, String applicant){
         RequestDAO requestDAO = new RequestDAO();
         ArrayList<Request> requests =requestDAO.returnListRequest(applicant);

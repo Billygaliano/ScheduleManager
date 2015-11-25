@@ -29,6 +29,15 @@ public class Controller implements ActionListener{
         return lista;
     }
     
+    public ArrayList<Request> getAllAdminRequest(){
+        ArrayList<Request> lista = modeloRequest.returnListRequest1();
+        return lista;
+    }
+    
+    public void SetAdminRequest(int fila,String status){
+        modeloRequest.SetAdminRequest(fila,status);
+    }
+    
     public String getSelectedRequest(int row){
        return modeloRequest.getSelectedMessage(row, applicant);
     }

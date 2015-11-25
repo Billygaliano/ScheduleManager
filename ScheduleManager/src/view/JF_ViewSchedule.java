@@ -118,6 +118,14 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jTableRequests = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneMessageRequest = new javax.swing.JTextPane();
+        jPanelAdminRequest = new javax.swing.JPanel();
+        jScrollPanelViewRequest1 = new javax.swing.JScrollPane();
+        jTableRequests1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPaneMessageRequest1 = new javax.swing.JTextPane();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        JLabelRequestMod = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -506,6 +514,82 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Ver solicitudes", jPanelViewRequest);
 
+        jTableRequests1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Asunto", "Estado"
+            }
+        ));
+        jTableRequests1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableRequests1MousePressed(evt);
+            }
+        });
+        jScrollPanelViewRequest1.setViewportView(jTableRequests1);
+
+        jScrollPane4.setViewportView(jTextPaneMessageRequest1);
+
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton2.setText("ACEPTAR");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton3.setText("DENEGAR");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton3MousePressed(evt);
+            }
+        });
+
+        JLabelRequestMod.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanelAdminRequestLayout = new javax.swing.GroupLayout(jPanelAdminRequest);
+        jPanelAdminRequest.setLayout(jPanelAdminRequestLayout);
+        jPanelAdminRequestLayout.setHorizontalGroup(
+            jPanelAdminRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAdminRequestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelAdminRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAdminRequestLayout.createSequentialGroup()
+                        .addComponent(jScrollPanelViewRequest1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                    .addGroup(jPanelAdminRequestLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(JLabelRequestMod, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelAdminRequestLayout.setVerticalGroup(
+            jPanelAdminRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAdminRequestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelAdminRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPanelViewRequest1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAdminRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JLabelRequestMod, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+
+        jTabbedPane.addTab("Administrar solicitudes", jPanelAdminRequest);
+
         javax.swing.GroupLayout jPanelRTabLayout = new javax.swing.GroupLayout(jPanelRTab);
         jPanelRTab.setLayout(jPanelRTabLayout);
         jPanelRTabLayout.setHorizontalGroup(
@@ -579,6 +663,21 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             m.addRow(fila);
         }
         jTableRequests.setModel(m);
+        
+        
+        //PARA CREAR ADMINISTRADOR DE SOLICITUDES
+        Controller controllerAdminRequest = new Controller();
+        ArrayList<Request> Adminrequest = controllerAdminRequest.getAllAdminRequest();
+        String tituloAdmin[] ={"Asunto", "Estado"};
+        DefaultTableModel admin = new DefaultTableModel(null,tituloAdmin);
+        String fila1[] = new String[2];
+
+        for(Request e: Adminrequest){
+            fila1[0]=e.getSubject();
+            fila1[1]=e.getState();
+            admin.addRow(fila1);
+        }
+        jTableRequests1.setModel(admin);
         
         
         //Para crea horario
@@ -752,6 +851,39 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSendRequestMouseClicked
 
+    private void jTableRequests1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRequests1MousePressed
+        Controller controllerRequest = new Controller();
+        int row = jTableRequests1.getSelectedRow();
+        String message = controllerRequest.getSelectedRequest(row);
+        jTextPaneMessageRequest1.setText(message);
+    }//GEN-LAST:event_jTableRequests1MousePressed
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        int fila = jTableRequests1.getSelectedRow();
+        if(fila>=0){
+            Controller controllerAdminRequest = new Controller();
+            controllerAdminRequest.SetAdminRequest(fila,"aceptada");
+            
+            JLabelRequestMod.setText("La solicitud ha sido aceptada");
+            
+            jTabbedPaneMousePressed(evt);
+            
+        }
+    }//GEN-LAST:event_jButton2MousePressed
+
+    private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
+        int fila = jTableRequests1.getSelectedRow();
+        if(fila>=0){
+            Controller controllerAdminRequest = new Controller();
+            controllerAdminRequest.SetAdminRequest(fila,"denegada");
+            
+            JLabelRequestMod.setText("La solicitud ha sido denegada");
+            
+            jTabbedPaneMousePressed(evt);
+            
+        }
+    }//GEN-LAST:event_jButton3MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -788,7 +920,10 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLabelRequestMod;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonSendRequest;
     private javax.swing.JComboBox jComboBoxClassroom;
@@ -805,6 +940,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSubject;
     private javax.swing.JLabel jLabelWelcomeTitle;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelAdminRequest;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelMakeSchedule;
     private javax.swing.JPanel jPanelMenu;
@@ -817,17 +953,21 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPaneLeftPanel;
     private javax.swing.JScrollPane jScrollPaneViewSchedule;
     private javax.swing.JScrollPane jScrollPanelViewRequest;
+    private javax.swing.JScrollPane jScrollPanelViewRequest1;
     private javax.swing.JSeparator jSeparatorLeftPanel;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTableRequests;
+    private javax.swing.JTable jTableRequests1;
     private javax.swing.JTable jTableSchedule;
     private javax.swing.JTable jTablesSetSchedule;
     private javax.swing.JTextArea jTextAreaResq;
     private javax.swing.JTextField jTextFieldReqSubj;
     private javax.swing.JTextPane jTextPaneMessageRequest;
+    private javax.swing.JTextPane jTextPaneMessageRequest1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTree jTreeLeftPanel;
     // End of variables declaration//GEN-END:variables
