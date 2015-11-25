@@ -7,6 +7,7 @@ package model;
 
 import java.util.Date;
 import java.util.List;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -255,9 +256,9 @@ public class UserTest {
     public void testToString() {
         System.out.println("toString");
         User instance = new User();
-        String expResult = instance.toString();
+        String expResult = "";
         String result = instance.toString();
-        assertEquals(expResult, result);
+        assertFalse(expResult.equals(result));
     }
     
     @Test
@@ -265,9 +266,8 @@ public class UserTest {
         System.out.println("Equals");
         User instance = new User();
         instance.setDni("");
-        User instance2 = new User();
-        instance2.setDni("");
-        assertEquals(instance, instance2);
+        //User instance2 = new User();
+        assertFalse(instance.equals(this));
     }
     
     
