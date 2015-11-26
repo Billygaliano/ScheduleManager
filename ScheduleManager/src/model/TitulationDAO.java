@@ -64,4 +64,10 @@ public class TitulationDAO {
         
         return titulations;
     }
+    
+    protected void finalize() throws Throwable{
+            super.finalize();
+            ConnectionDB.closeConnection();
+            
+        }
 }
