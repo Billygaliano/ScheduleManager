@@ -270,5 +270,24 @@ public class UserTest {
         assertFalse(instance.equals(this));
     }
     
+    @Test
+    public void testreturnStartSection(){
+        System.out.println("returnStartSection");
+        User instance = new User();
+        String dni = null;
+        String pass = null;
+        boolean result = instance.returnStartSection(dni, pass);
+        boolean expResult = false;
+        assertEquals(result,expResult);
+    }
+    
+    @Test
+    public void testreturnUserSection(){
+        System.out.println("returnUserSection");
+        User instance = new User();
+        User expResult = instance.returnUserSection(null, null);
+        assertTrue(expResult.equals(instance));
+    }
+    
     
 }
