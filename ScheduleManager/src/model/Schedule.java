@@ -136,20 +136,20 @@ public class Schedule {
         this.quarter = quarter;
     }
     
-    public ArrayList<String> returnDaysList(){
+    public ArrayList<String> returnDaysList(String quarter){
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        ArrayList<String> days =scheduleDAO.returnDaysList();
+        ArrayList<String> days =scheduleDAO.returnDaysList(quarter);
         return days;
     }
     
-    public ArrayList<String> returnHourList(String day){
+    public ArrayList<String> returnHourList(String day,String quarter){
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        ArrayList<String> hours =scheduleDAO.returnHoursList(day);
+        ArrayList<String> hours =scheduleDAO.returnHoursList(day,quarter);
         return hours;
     }
-    public ArrayList<String> returnClassList(String day,String hour,String subject){
+    public ArrayList<String> returnClassList(String day,String hour,String subject,String quarter){
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        ArrayList<String> classroom =scheduleDAO.returnClassList(day,hour,subject);
+        ArrayList<String> classroom =scheduleDAO.returnClassList(day,hour,subject,quarter);
         return classroom;
     }
     
@@ -183,5 +183,12 @@ public class Schedule {
         ArrayList<Schedule> schedules = scheduleDAO.getSchedules(titulation,course,quarter);
         
         return schedules;
+    }
+    
+    public int updateSchedule(String day_old,String hour_old,String classroom_old,String day_new,String hour_new,String classroom_new,String quarter){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        int update = scheduleDAO.updateSchedule(day_old,hour_old,classroom_old,day_new,hour_new,classroom_new,quarter);
+        return update;
+    
     }
 }

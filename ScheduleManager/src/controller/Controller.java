@@ -26,7 +26,7 @@ public class Controller implements ActionListener{
     public Controller(){
     }         
 
-    public ArrayList<Request> getAllRequest(){
+    public ArrayList<Request> getAllRequest(String applicant){
         ArrayList<Request> lista = modeloRequest.returnListRequest(applicant);
         return lista;
     }
@@ -40,7 +40,7 @@ public class Controller implements ActionListener{
         modeloRequest.SetAdminRequest(fila,status);
     }
     
-    public String getSelectedRequest(int row){
+    public String getSelectedRequest(int row,String applicant){
        return modeloRequest.getSelectedMessage(row, applicant);
     }
 
@@ -59,18 +59,18 @@ public class Controller implements ActionListener{
         return subjectList;
     }
     
-    public ArrayList<String> getAvailableDays(){
-        ArrayList<String> daysList = scheduleModel.returnDaysList();
+    public ArrayList<String> getAvailableDays(String quarter){
+        ArrayList<String> daysList = scheduleModel.returnDaysList(quarter);
         return daysList;
     }
     
-    public ArrayList<String> getAvailableHours(String day){
-        ArrayList<String> hourList = scheduleModel.returnHourList(day);
+    public ArrayList<String> getAvailableHours(String day,String quarter){
+        ArrayList<String> hourList = scheduleModel.returnHourList(day,quarter);
         return hourList;
     }
     
-    public ArrayList<String> getAvailableClassroom(String day,String hour,String subject){
-        ArrayList<String> classList = scheduleModel.returnClassList(day,hour,subject);
+    public ArrayList<String> getAvailableClassroom(String day,String hour,String subject,String quarter){
+        ArrayList<String> classList = scheduleModel.returnClassList(day,hour,subject,quarter);
         return classList;
     }
     
@@ -100,7 +100,7 @@ public class Controller implements ActionListener{
         return ok;
     }
     
-    public ArrayList<String> getAllYears(){
+    public ArrayList<String> getAllYears(String applicant){
        ArrayList<String> years = subjectModel.returnYearsSubjectUser(applicant);
        return years;
     }
@@ -557,5 +557,11 @@ public class Controller implements ActionListener{
         } 
         
         jTableSchedule.setModel(m);
+    }
+    
+    public int updateSchedule(String day_old,String hour_old,String classroom_old,String day_new,String hour_new,String classroom_new,String quarter){
+        int  update = scheduleModel.updateSchedule(day_old,hour_old,classroom_old,day_new,hour_new,classroom_new,quarter);
+        return update;
+    
     }
 }

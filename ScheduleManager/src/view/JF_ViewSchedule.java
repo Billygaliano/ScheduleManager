@@ -171,6 +171,15 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jComboBoxHourMod = new javax.swing.JComboBox();
         jComboBoxClassMod = new javax.swing.JComboBox();
         jButtonSel = new javax.swing.JButton();
+        jPanelMod = new javax.swing.JPanel();
+        jScrollPaneMod = new javax.swing.JScrollPane();
+        jTableMod = new javax.swing.JTable();
+        jToolBar3 = new javax.swing.JToolBar();
+        jComboBoxDaySel = new javax.swing.JComboBox();
+        jComboBoxHourSel = new javax.swing.JComboBox();
+        jComboBoxClassSel = new javax.swing.JComboBox();
+        jButtonMod = new javax.swing.JButton();
+        jLabelModified = new javax.swing.JLabel();
         jPanelSendRequest = new javax.swing.JPanel();
         jLabelSubject = new javax.swing.JLabel();
         jTextFieldReqSubj = new javax.swing.JTextField();
@@ -336,8 +345,6 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 .addComponent(jButtonDownloadPDF)
                 .addContainerGap())
         );
-
-        jScrollPaneViewSchedule.setBackground(new java.awt.Color(255, 255, 255));
 
         jTableSchedule.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTableSchedule.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -571,12 +578,92 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jButtonSel.setFocusable(false);
         jButtonSel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonSel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSelActionPerformed(evt);
+        jButtonSel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButtonSelMousePressed(evt);
             }
         });
         jToolBar2.add(jButtonSel);
+
+        jTableMod.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Año", "Titulación", "Curso", "Cuatrimestre", "Asignatura", "Día", "Hora", "Aula"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPaneMod.setViewportView(jTableMod);
+
+        jToolBar3.setBorder(null);
+        jToolBar3.setRollover(true);
+
+        jComboBoxDaySel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nuevo Día" }));
+        jComboBoxDaySel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxDaySelItemStateChanged(evt);
+            }
+        });
+        jToolBar3.add(jComboBoxDaySel);
+
+        jComboBoxHourSel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nuevo Hora" }));
+        jComboBoxHourSel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxHourSelItemStateChanged(evt);
+            }
+        });
+        jToolBar3.add(jComboBoxHourSel);
+
+        jComboBoxClassSel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nueva Aula" }));
+        jToolBar3.add(jComboBoxClassSel);
+
+        jButtonMod.setText("Modificar");
+        jButtonMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButtonModMousePressed(evt);
+            }
+        });
+        jToolBar3.add(jButtonMod);
+
+        jLabelModified.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabelModified.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanelModLayout = new javax.swing.GroupLayout(jPanelMod);
+        jPanelMod.setLayout(jPanelModLayout);
+        jPanelModLayout.setHorizontalGroup(
+            jPanelModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPaneMod)
+            .addGroup(jPanelModLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelModLayout.createSequentialGroup()
+                        .addComponent(jToolBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(17, 17, 17))
+                    .addGroup(jPanelModLayout.createSequentialGroup()
+                        .addComponent(jLabelModified, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        jPanelModLayout.setVerticalGroup(
+            jPanelModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelModLayout.createSequentialGroup()
+                .addComponent(jScrollPaneMod, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(jLabelModified, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(115, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanelUpdateScheduleLayout = new javax.swing.GroupLayout(jPanelUpdateSchedule);
         jPanelUpdateSchedule.setLayout(jPanelUpdateScheduleLayout);
@@ -584,15 +671,18 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             jPanelUpdateScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUpdateScheduleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
+                .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanelMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelUpdateScheduleLayout.setVerticalGroup(
             jPanelUpdateScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUpdateScheduleLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(720, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(347, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Modificar Horario", jPanelUpdateSchedule);
@@ -843,14 +933,14 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private void jTableRequestsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRequestsMousePressed
         Controller controllerRequest = new Controller();
         int row = jTableRequests.getSelectedRow();
-        String message = controllerRequest.getSelectedRequest(row);
+        String message = controllerRequest.getSelectedRequest(row,user.getDni());
         jTextPaneMessageRequest.setText(message);
     }//GEN-LAST:event_jTableRequestsMousePressed
 
     private void jTabbedPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMousePressed
         //Para ver solicitudes
         Controller controllerRequest = new Controller();
-        ArrayList<Request> request = controllerRequest.getAllRequest(); 
+        ArrayList<Request> request = controllerRequest.getAllRequest(user.getDni()); 
         String titulo[] ={"Asunto", "Estado"};
         DefaultTableModel m = new DefaultTableModel(null,titulo);
         String fila[] = new String[2];
@@ -864,7 +954,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         
          //Para crea horario, carga pestaña año
         Controller controllerYear = new Controller();
-        ArrayList<String> yearList = controllerYear.getAllYears();
+        ArrayList<String> yearList = controllerYear.getAllYears(user.getDni());
         Vector comboBoxItemsYears = new Vector();
         comboBoxItemsYears.add("Año");
         for (String year : yearList) {
@@ -998,9 +1088,10 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         Vector comboBoxItems = new Vector();
         Vector comboBoxItemsHour = new Vector();
         Vector comboBoxItemsClass = new Vector();
-
+        String quarter = (String)  jComboBoxQuarter.getSelectedItem();
+        
         Controller controller = new Controller();
-        ArrayList<String> days = controller.getAvailableDays(); 
+        ArrayList<String> days = controller.getAvailableDays(quarter); 
         
         comboBoxItemsDay.add("Día");
         for (String day : days) {
@@ -1021,7 +1112,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         Vector comboBoxItemsHour = new Vector();
         Vector comboBoxItemsClass = new Vector();
         String day = (String) jComboBoxDay.getSelectedItem();
-        ArrayList<String> hours = controller.getAvailableHours(day);
+        String quarter = (String) jComboBoxQuarter.getSelectedItem();
+        ArrayList<String> hours = controller.getAvailableHours(day,quarter);
         
         comboBoxItemsHour.add("Hora");
         for (String hour : hours) {
@@ -1042,7 +1134,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         String day = (String) jComboBoxDay.getSelectedItem();
         String hour = (String) jComboBoxHour.getSelectedItem();
         String subject = (String) jComboBoxSubject.getSelectedItem();
-        ArrayList<String> classroom = controller.getAvailableClassroom(day,hour,subject);
+        String quarter = (String) jComboBoxQuarter.getSelectedItem();
+        ArrayList<String> classroom = controller.getAvailableClassroom(day,hour,subject,quarter);
         
         comboBoxItemsClass.add("Aula");
         for (String classfree : classroom) {
@@ -1088,7 +1181,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private void jTableRequests1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRequests1MousePressed
         Controller controllerRequest = new Controller();
         int row = jTableRequests1.getSelectedRow();
-        String message = controllerRequest.getSelectedRequest(row);
+        String message = controllerRequest.getSelectedRequest(row,user.getDni());
         jTextPaneMessageRequest1.setText(message);
     }//GEN-LAST:event_jTableRequests1MousePressed
 
@@ -1346,45 +1439,6 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jComboBoxClassMod.setModel(modelClass);
     }//GEN-LAST:event_jComboBoxHourModItemStateChanged
 
-    private void jButtonSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelActionPerformed
-        Vector comboBoxItemsYear = new Vector();
-        Vector comboBoxItemsCourse = new Vector();
-        Vector comboBoxItemsSubject = new Vector();
-        Vector comboBoxItemsQuarter = new Vector();
-        Vector comboBoxItemsDay = new Vector();
-        Vector comboBoxItemsHour = new Vector();
-        Vector comboBoxItemsClass = new Vector();
-        Vector comboBoxItemsTit = new Vector();
-
-        Controller controller = new Controller();
-        ArrayList<Titulation> titList = controller.getAllTitulations();
-
-        comboBoxItemsTit.add("Titulación");
-        for (Titulation tit : titList) {
-            comboBoxItemsTit.add(tit.getName());
-        }
-        final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItemsTit);
-        jComboBoxTit.setModel(model);
-        comboBoxItemsSubject.add("Asignaturas");
-        final DefaultComboBoxModel modelSubject = new DefaultComboBoxModel(comboBoxItemsSubject);
-        jComboBoxSubject.setModel(modelSubject);
-        comboBoxItemsQuarter.add("Cuatrimestre");
-        final DefaultComboBoxModel modelQuarter = new DefaultComboBoxModel(comboBoxItemsQuarter);
-        jComboBoxQuarter.setModel(modelQuarter);
-        comboBoxItemsDay.add("Día");
-        final DefaultComboBoxModel modelDay = new DefaultComboBoxModel(comboBoxItemsDay);
-        jComboBoxDay.setModel(modelDay);
-        comboBoxItemsHour.add("Hora");
-        final DefaultComboBoxModel modelHour = new DefaultComboBoxModel(comboBoxItemsHour);
-        jComboBoxHour.setModel(modelHour);
-        comboBoxItemsClass.add("Aula");
-        final DefaultComboBoxModel modelClass = new DefaultComboBoxModel(comboBoxItemsClass);
-        jComboBoxClassroom.setModel(modelClass);  
-        comboBoxItemsCourse.add("Curso");
-        final DefaultComboBoxModel modelCourse = new DefaultComboBoxModel(comboBoxItemsCourse);
-        jComboBoxCourse.setModel(modelCourse); 
-    }//GEN-LAST:event_jButtonSelActionPerformed
-
     private void jButtonDownloadPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDownloadPDFActionPerformed
         printSchedule();
     }//GEN-LAST:event_jButtonDownloadPDFActionPerformed
@@ -1407,6 +1461,107 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             controller.loadSchedule(jTableSchedule, quarter, course, titulation);
         }        
     }//GEN-LAST:event_jTreeLeftPanelValueChanged
+
+    private void jButtonSelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSelMousePressed
+        if (jComboBoxClassMod.getSelectedIndex() > 0) {
+            Controller controller = new Controller();
+            String titulation = (String) jComboBoxTitMod.getSelectedItem();
+            String course = (String) jComboBoxCourseMod.getSelectedItem();
+            String quarter = (String) jComboBoxQuarterMod.getSelectedItem();
+            String subject = (String) jComboBoxSubMod.getSelectedItem();
+            String day = (String) jComboBoxDayMod.getSelectedItem();
+            String hour = (String) jComboBoxHourMod.getSelectedItem();
+            String classroom = (String) jComboBoxClassMod.getSelectedItem();
+            String year = (String) jComboBoxYearMod.getSelectedItem();
+            controller.setSchedule(titulation, course, quarter, subject, day, hour, classroom, year);
+
+            String titulo[] = {"Titulación", "Curso", "Cuatrimestre", "Asignatura", "Día", "Hora", "Aula"};
+            String fila[] = {titulation, course, quarter, subject, day, hour, classroom};
+            DefaultTableModel tableJMod = new DefaultTableModel(null,titulo);
+            tableJMod.addRow(fila);
+            jTableMod.setModel(tableJMod);
+            
+            Vector comboBoxItemsDay = new Vector();
+            Vector comboBoxItems = new Vector();
+            Vector comboBoxItemsHour = new Vector();
+            Vector comboBoxItemsClass = new Vector();
+            
+            Controller controller_days = new Controller();
+            ArrayList<String> days = controller_days.getAvailableDays(quarter);
+
+            comboBoxItemsDay.add("Día Nuevo");
+            for (String d : days) {
+                comboBoxItemsDay.add(d);
+            }
+            comboBoxItemsHour.add("Hora Nueva");
+            final DefaultComboBoxModel modelHour = new DefaultComboBoxModel(comboBoxItemsHour);
+            jComboBoxHourSel.setModel(modelHour);
+            comboBoxItemsClass.add("Aula Nueva");
+            final DefaultComboBoxModel modelClass = new DefaultComboBoxModel(comboBoxItemsClass);
+            jComboBoxClassSel.setModel(modelClass);
+            final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItemsDay);
+            jComboBoxDaySel.setModel(model);
+
+        }
+    }//GEN-LAST:event_jButtonSelMousePressed
+
+    private void jComboBoxDaySelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxDaySelItemStateChanged
+        Controller controller = new Controller();
+        Vector comboBoxItemsHour = new Vector();
+        Vector comboBoxItemsClass = new Vector();
+        String day = (String) jComboBoxDaySel.getSelectedItem();
+        String quarter = (String) jComboBoxQuarterMod.getSelectedItem();
+        ArrayList<String> hours = controller.getAvailableHours(day,quarter);
+        
+        comboBoxItemsHour.add("Hora Nueva");
+        for (String hour : hours) {
+            comboBoxItemsHour.add(hour);
+        }
+        final DefaultComboBoxModel modelHour = new DefaultComboBoxModel(comboBoxItemsHour);
+        jComboBoxHourSel.setModel(modelHour);
+        comboBoxItemsClass.add("Aula Nueva");
+        final DefaultComboBoxModel modelClass = new DefaultComboBoxModel(comboBoxItemsClass);
+        jComboBoxClassSel.setModel(modelClass);   
+        final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItemsHour);
+        jComboBoxHourSel.setModel(model);
+    }//GEN-LAST:event_jComboBoxDaySelItemStateChanged
+
+    private void jComboBoxHourSelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxHourSelItemStateChanged
+        Controller controller = new Controller();
+        Vector comboBoxItemsClass = new Vector();
+        String day = (String) jComboBoxDaySel.getSelectedItem();
+        String hour = (String) jComboBoxHourSel.getSelectedItem();
+        String subject = (String) jComboBoxSubMod.getSelectedItem();
+        String quarter = (String) jComboBoxQuarterMod.getSelectedItem();
+        ArrayList<String> classroom = controller.getAvailableClassroom(day,hour,subject,quarter);
+        
+        comboBoxItemsClass.add("Aula Nueva");
+        for (String classfree : classroom) {
+           comboBoxItemsClass.add(classfree);
+        }
+        final DefaultComboBoxModel modelClass = new DefaultComboBoxModel(comboBoxItemsClass);
+        jComboBoxClassSel.setModel(modelClass);   
+    }//GEN-LAST:event_jComboBoxHourSelItemStateChanged
+
+    private void jButtonModMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModMousePressed
+        Controller controller = new Controller();
+        String day_new = (String) jComboBoxDaySel.getSelectedItem();
+        String hour_new = (String) jComboBoxHourSel.getSelectedItem();
+        String subject = (String) jComboBoxSubMod.getSelectedItem();
+        String quarter = (String) jComboBoxQuarterMod.getSelectedItem();
+        String classroom_new = (String) jComboBoxClassSel.getSelectedItem();
+        String day_old = (String) jComboBoxDayMod.getSelectedItem();
+        String hour_old = (String) jComboBoxHourMod.getSelectedItem();
+        String classroom_old = (String) jComboBoxClassMod.getSelectedItem();
+        int update = controller.updateSchedule(day_old,hour_old,classroom_old,day_new,hour_new,classroom_new,quarter);
+        if(update > 0){
+            jLabelModified.setText("La modificación se ha realizado de forma correcta");
+        }
+        else{
+            jLabelModified.setText("La modificación no se ha podido realizar");
+        }
+        
+    }//GEN-LAST:event_jButtonModMousePressed
     
     /**
      * @param args the command line arguments
@@ -1450,16 +1605,20 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonDownloadPDF;
     private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton jButtonMod;
     private javax.swing.JButton jButtonSel;
     private javax.swing.JButton jButtonSendRequest;
     private javax.swing.JComboBox jComboBoxClassMod;
+    private javax.swing.JComboBox jComboBoxClassSel;
     private javax.swing.JComboBox jComboBoxClassroom;
     private javax.swing.JComboBox jComboBoxCourse;
     private javax.swing.JComboBox jComboBoxCourseMod;
     private javax.swing.JComboBox jComboBoxDay;
     private javax.swing.JComboBox jComboBoxDayMod;
+    private javax.swing.JComboBox jComboBoxDaySel;
     private javax.swing.JComboBox jComboBoxHour;
     private javax.swing.JComboBox jComboBoxHourMod;
+    private javax.swing.JComboBox jComboBoxHourSel;
     private javax.swing.JComboBox jComboBoxQuarter;
     private javax.swing.JComboBox jComboBoxQuarterMod;
     private javax.swing.JComboBox jComboBoxSubMod;
@@ -1469,6 +1628,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxYear;
     private javax.swing.JComboBox jComboBoxYearMod;
     private javax.swing.JLabel jLabelLogoImg;
+    private javax.swing.JLabel jLabelModified;
     private javax.swing.JLabel jLabelReqSend;
     private javax.swing.JLabel jLabelReqText;
     private javax.swing.JLabel jLabelRequest;
@@ -1480,6 +1640,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelMakeSchedule;
     private javax.swing.JPanel jPanelMenu;
+    private javax.swing.JPanel jPanelMod;
     private javax.swing.JPanel jPanelRTab;
     private javax.swing.JPanel jPanelRTop;
     private javax.swing.JPanel jPanelRight;
@@ -1492,11 +1653,13 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPaneLeftPanel;
+    private javax.swing.JScrollPane jScrollPaneMod;
     private javax.swing.JScrollPane jScrollPaneViewSchedule;
     private javax.swing.JScrollPane jScrollPanelViewRequest;
     private javax.swing.JScrollPane jScrollPanelViewRequest1;
     private javax.swing.JSeparator jSeparatorLeftPanel;
     private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JTable jTableMod;
     private javax.swing.JTable jTableRequests;
     private javax.swing.JTable jTableRequests1;
     private javax.swing.JTable jTableSchedule;
@@ -1507,6 +1670,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneMessageRequest1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JToolBar jToolBar3;
     private javax.swing.JTree jTreeLeftPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,7 +26,7 @@ class ScheduleDAO {
         connection = new ConnectionDB();
     }
 
-    public ArrayList<String> returnDaysList() {
+    public ArrayList<String> returnDaysList(String quarter) {
         ArrayList<String> days = new ArrayList();
         String[] daysArray = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes"};
         Connection con = connection.connect();
@@ -36,7 +36,7 @@ class ScheduleDAO {
             num_class.next();
             int num = num_class.getInt(1);
             for (String day : daysArray) {
-                ResultSet numhor = con.createStatement().executeQuery("select count(hour_schedule) from schedule where day_schedule='" + day + "'");
+                ResultSet numhor = con.createStatement().executeQuery("select count(hour_schedule) from schedule where day_schedule='" + day + "' and quarter='"+quarter+"'");
                 numhor.next();
                 int houroccup = numhor.getInt(1);
                 if (houroccup < (num * 12)) {
@@ -48,7 +48,7 @@ class ScheduleDAO {
         return days;
     }
 
-    public ArrayList<String> returnHoursList(String day){
+    public ArrayList<String> returnHoursList(String day,String quarter){
             
         ArrayList<String> hours = new ArrayList();
         String[] hoursArray = {"8:30-9:30","9:30-10:30","10:30-11:30","11:30-12:30","12:30-13:30","13:30-14:30","15:30-16:30",
@@ -59,7 +59,7 @@ class ScheduleDAO {
             num_class.next();
             int num = num_class.getInt(1);
             for (String hour : hoursArray) {
-                ResultSet num_ocup = con.createStatement().executeQuery("select count(hour_schedule) from schedule where hour_schedule='" + hour + "' and day_schedule='" + day + "'");
+                ResultSet num_ocup = con.createStatement().executeQuery("select count(hour_schedule) from schedule where hour_schedule='" + hour + "' and day_schedule='" + day + "' and quarter='"+quarter+"'");
                 num_ocup.next();
                 int houroccup = num_ocup.getInt(1);
                 if (houroccup < num) {
@@ -71,7 +71,7 @@ class ScheduleDAO {
         return hours;
     }
     
-       public ArrayList<String> returnClassList(String day,String hour,String subject){
+       public ArrayList<String> returnClassList(String day,String hour,String subject,String quarter){
             
         ArrayList<String> classroom = new ArrayList();
         ArrayList<Integer> classroom_ocup = new ArrayList();
@@ -85,11 +85,12 @@ class ScheduleDAO {
             rs_numstud.next();
             int numstud = rs_numstud.getInt(1);
             
-            ResultSet class_ocup = con.createStatement().executeQuery("select id_classroom from schedule where hour_schedule='" + hour + "' and day_schedule='" + day + "'");
+            ResultSet class_ocup = con.createStatement().executeQuery("select id_classroom from schedule where hour_schedule='" + hour + "' and day_schedule='" + day + "'and quarter='"+quarter+"'");
             
             while(class_ocup.next()){
                 //classroom_ocup.add(class_ocup.getInt(1));
                 x.append(","+class_ocup.getInt(1));
+                System.out.println(class_ocup.getInt(1));
             }
           
             ResultSet class_free = con.createStatement().executeQuery("select * from classroom where id_classroom not in ("+x+")and capacity_classroom>=" + numstud);
@@ -98,7 +99,6 @@ class ScheduleDAO {
             }
         } catch (SQLException ex) {
         }
-        
         return classroom;
     }
        
@@ -152,7 +152,6 @@ class ScheduleDAO {
             ResultSet rs_idsub = con.createStatement().executeQuery("select id_subject from subject where name_subject='" + subject + "'");
             rs_idsub.next();
             int id_sub = rs_idsub.getInt(1);
-            System.out.println(id_sub);
             ResultSet rs_hours = con.createStatement().executeQuery("select  hour_schedule from schedule where day_schedule='" + day + "' and id_subject=" + id_sub);
             while(rs_hours.next()){
                 hours.add(rs_hours.getString("hour_schedule"));
@@ -213,6 +212,38 @@ class ScheduleDAO {
         }
         
         return schedules;
+    }
+    
+    public int updateSchedule(String day_old,String hour_old,String classroom_old,String day_new,String hour_new,String classroom_new,String quarter){
+        System.out.println(day_old+hour_old+classroom_old+day_new+hour_new+classroom_new+quarter);
+        int update = 0;
+        Connection con = connection.connect();
+        try {
+            ResultSet rs_classNew = con.createStatement().executeQuery("select id_classroom from classroom where name_classroom='" + classroom_new + "'");
+            rs_classNew.next();
+            int id_classNew = rs_classNew.getInt(1);
+            System.out.println("idnuevo "+id_classNew);
+            
+            ResultSet rs_classOld = con.createStatement().executeQuery("select id_classroom from classroom where name_classroom='" + classroom_old + "'");
+            rs_classOld.next();
+            int id_classOld = rs_classOld.getInt(1);
+            System.out.println("idviejo "+id_classOld);
+            
+            PreparedStatement ps_update = con.prepareStatement("update schedule set day_schedule=?, hour_schedule=?, quarter=?,id_classroom=? where day_schedule=? "
+                    + "and hour_schedule=? and id_classroom=?");
+            ps_update.setString(1,day_new);
+            ps_update.setString(2,hour_new);
+            ps_update.setString(3,quarter);
+            ps_update.setInt(4,id_classNew);
+            ps_update.setString(5,day_old);
+            ps_update.setString(6,hour_old);
+            ps_update.setInt(7,id_classOld);
+            update = ps_update.executeUpdate();     
+        } catch (SQLException ex) {
+            
+        }
+        return update;
+    
     }
 
 }
