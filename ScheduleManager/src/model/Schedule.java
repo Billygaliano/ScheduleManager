@@ -196,15 +196,34 @@ public class Schedule {
         ArrayList<String> hours =scheduleDAO.returnHoursList(day);
         return hours;
     }
-    public ArrayList<String> returnClassList(String day,String hour){
+    public ArrayList<String> returnClassList(String day,String hour,String subject){
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        ArrayList<String> classroom =scheduleDAO.returnClassList(day,hour);
+        ArrayList<String> classroom =scheduleDAO.returnClassList(day,hour,subject);
         return classroom;
     }
     
-    public void insertSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom){
+    public void insertSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom,String year){
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        scheduleDAO.insertSchedule(titulation,course,quarter,subject,day,hour,classroom);
+        scheduleDAO.insertSchedule(titulation,course,quarter,subject,day,hour,classroom,year);
 
+    }
+    
+    public ArrayList<String> returnOcuppiedDays(String subject){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        ArrayList<String> days = scheduleDAO.returnOcuppiedDays(subject);
+        return days;
+
+    }
+    
+    public ArrayList<String> returnOcuppiedHours(String subject, String day){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        ArrayList<String> hours = scheduleDAO.returnOcuppiedHours(subject,day);
+        return hours;
+    }
+    
+    public ArrayList<String> returnOcuppiedClassroom(String day,String hour,String subject){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        ArrayList<String> classroom = scheduleDAO.returnOcuppiedClassroom(day,hour,subject);
+        return classroom;
     }
 }

@@ -67,13 +67,13 @@ public class Controller implements ActionListener{
         return hourList;
     }
     
-    public ArrayList<String> getAvailableClassroom(String day,String hour){
-        ArrayList<String> classList = scheduleModel.returnClassList(day,hour);
+    public ArrayList<String> getAvailableClassroom(String day,String hour,String subject){
+        ArrayList<String> classList = scheduleModel.returnClassList(day,hour,subject);
         return classList;
     }
     
-    public void setSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom){
-        scheduleModel.insertSchedule(titulation,course,quarter,subject,day,hour,classroom);
+    public void setSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom,String year){
+        scheduleModel.insertSchedule(titulation,course,quarter,subject,day,hour,classroom,year);
 
     }
 
@@ -96,5 +96,25 @@ public class Controller implements ActionListener{
         boolean ok;
         ok = modeloRequest.setRequest(applicant, subject, text);
         return ok;
+    }
+    
+    public ArrayList<String> getAllYears(){
+       ArrayList<String> years = subjectModel.returnYearsSubjectUser(applicant);
+       return years;
+    }
+    
+    public ArrayList<String> getOccupiedDays(String subject){
+        ArrayList<String> days = scheduleModel.returnOcuppiedDays(subject);
+        return days;
+    }
+    
+    public ArrayList<String> getOccupiedHours(String subject,String day){
+        ArrayList<String> hours = scheduleModel.returnOcuppiedHours(subject,day);
+        return hours;
+    }
+    
+    public ArrayList<String> getOcuppiedClassroom(String day,String hour,String subject){
+        ArrayList<String> classroom = scheduleModel.returnOcuppiedClassroom(day,hour,subject);
+        return classroom;
     }
 }

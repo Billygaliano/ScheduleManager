@@ -93,4 +93,21 @@ public class SubjectDAO {
         
         return quarters;
     }
+    
+    public ArrayList<String> getYearsSubjectUser(String applicant){
+    
+        ArrayList<String> years = new ArrayList();
+        Connection con = connection.connect();
+        try {
+            PreparedStatement rs_stmt = con.prepareStatement("SELECT DISTINCT year FROM subject");
+            ResultSet rs_year=rs_stmt.executeQuery();
+            while (rs_year.next()){
+                String year = rs_year.getString("year");   
+                years.add(year);
+            }
+            
+        } catch (SQLException ex) {
+        }
+        return years;
+    }
 }

@@ -186,6 +186,9 @@ public class Subject {
         SubjectDAO subjectDao = new SubjectDAO();
         return subjectDao.getQuartersTitulationUser(applicant, id_titulation, course);
     }
-    
+    public ArrayList<String> returnYearsSubjectUser(String applicant){
+        SubjectDAO subjectDao = new SubjectDAO();
+        return subjectDao.getYearsSubjectUser(applicant);
+    }
     
 }

@@ -407,6 +407,18 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
                       <SubComponents>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxYear">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="A&#xf1;o"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxYearItemStateChanged"/>
+                          </Events>
+                        </Component>
                         <Component class="javax.swing.JComboBox" name="jComboBoxTit">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -515,7 +527,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" pref="618" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" pref="855" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -605,15 +617,141 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="971" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jToolBar2" pref="959" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="670" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="jToolBar2" min="-2" pref="25" max="-2" attributes="0"/>
+                              <EmptySpace pref="865" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
+                  <SubComponents>
+                    <Container class="javax.swing.JToolBar" name="jToolBar2">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="rollover" type="boolean" value="true"/>
+                      </Properties>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxYearMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="A&#xf1;o"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxYearModItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxTitMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="Titulaci&#xf3;n"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxTitModItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxCourseMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="Curso"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxCourseModItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxQuarterMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="Cuatrimestre"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxQuarterModItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxSubMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="Asignatura"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxSubModItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxDayMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="D&#xed;a"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxDayModItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxHourMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="Hora"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBoxHourModItemStateChanged"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="jComboBoxClassMod">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="Aula"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="jButtonSel">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Selecccionar"/>
+                            <Property name="focusable" type="boolean" value="false"/>
+                            <Property name="horizontalTextPosition" type="int" value="0"/>
+                            <Property name="verticalTextPosition" type="int" value="3"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanelSendRequest">
                   <Properties>
@@ -681,7 +819,7 @@
                               <Component id="jButtonSendRequest" min="-2" pref="37" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabelReqText" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="119" max="32767" attributes="0"/>
+                              <EmptySpace pref="356" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -772,7 +910,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPanelViewRequest" pref="670" max="32767" attributes="0"/>
+                          <Component id="jScrollPanelViewRequest" pref="907" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
@@ -872,7 +1010,7 @@
                                   <Component id="jButton3" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                   <Component id="JLabelRequestMod" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="98" max="32767" attributes="0"/>
+                              <EmptySpace pref="335" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
