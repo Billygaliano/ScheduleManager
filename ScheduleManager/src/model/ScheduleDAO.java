@@ -219,6 +219,7 @@ class ScheduleDAO {
             ConnectionDB.closeConnection();
             
         }
+    
     public int updateSchedule(String day_old,String hour_old,String classroom_old,String day_new,String hour_new,String classroom_new,String quarter){
         System.out.println(day_old+hour_old+classroom_old+day_new+hour_new+classroom_new+quarter);
         int update = 0;
