@@ -18,12 +18,13 @@ public class RequestDAO {
         Connection con = connection.connect();
         ArrayList<Request> list = new ArrayList();
         try {
-            PreparedStatement stmt= con.prepareStatement("Select dni_applicant,subject,state_request,message from request where dni_applicant=?");
+            PreparedStatement stmt= con.prepareStatement("Select * from request where dni_applicant=?");
             stmt.setString(1, applicant);
             ResultSet resultado=stmt.executeQuery();
             
             while (resultado.next()){
                 request = new Request(); 
+                request.setId_request(resultado.getInt("id_request"));
                 request.setApplicant(resultado.getString("dni_applicant"));
                 request.setSubject(resultado.getString("subject"));
                 request.setState(resultado.getString("state_request"));
@@ -42,11 +43,12 @@ public class RequestDAO {
         Connection con = connection.connect();
         ArrayList<Request> list = new ArrayList();
         try {
-            PreparedStatement stmt= con.prepareStatement("Select dni_applicant,subject,state_request,message from request");
+            PreparedStatement stmt= con.prepareStatement("Select * from request");
             ResultSet resultado=stmt.executeQuery();
             
             while (resultado.next()){
                 request = new Request(); 
+                request.setId_request(resultado.getInt("id_request"));
                 request.setApplicant(resultado.getString("dni_applicant"));
                 request.setSubject(resultado.getString("subject"));
                 request.setState(resultado.getString("state_request"));
@@ -121,4 +123,26 @@ public class RequestDAO {
             ConnectionDB.closeConnection();
             
         }
+        
+        public Request returnMessageRequest(int idreq){
+        Request request = new Request();
+        Connection con = connection.connect();
+        try {
+            PreparedStatement stmt= con.prepareStatement("Select * from request where id_request=?");
+            stmt.setInt(1, idreq);
+            ResultSet resultado=stmt.executeQuery();
+            
+            resultado.next();
+            request.setId_request(resultado.getInt("id_request"));
+            request.setApplicant(resultado.getString("dni_applicant"));
+            request.setSubject(resultado.getString("subject"));
+            request.setState(resultado.getString("state_request"));
+            request.setMessage(resultado.getString("message"));
+  
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return request;
+    }
 }

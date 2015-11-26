@@ -964,8 +964,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
     private void jTableRequestsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRequestsMousePressed
         Controller controllerRequest = new Controller();
-        int row = jTableRequests.getSelectedRow();
-        String message = controllerRequest.getSelectedRequest(row,user.getDni());
+        int row = Integer.parseInt((String)jTableRequests.getValueAt(jTableRequests.getSelectedRow(),0));
+        String message = controllerRequest.getSelectedRequest(row);
         jTextPaneMessageRequest.setText(message);
     }//GEN-LAST:event_jTableRequestsMousePressed
 
@@ -973,13 +973,14 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         //Para ver solicitudes
         Controller controllerRequest = new Controller();
         ArrayList<Request> request = controllerRequest.getAllRequest(user.getDni()); 
-        String titulo[] ={"Asunto", "Estado"};
+        String titulo[] ={"Id","Asunto", "Estado"};
         DefaultTableModel m = new DefaultTableModel(null,titulo);
-        String fila[] = new String[2];
+        String fila[] = new String[3];
 
         for(Request o: request){
-            fila[0]=o.getSubject();
-            fila[1]=o.getState();
+            fila[1]=o.getSubject();
+            fila[2]=o.getState();
+            fila[0]=Integer.toString(o.getId_request());
             m.addRow(fila);
         }
         jTableRequests.setModel(m);
@@ -999,13 +1000,14 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         //PARA CREAR ADMINISTRADOR DE SOLICITUDES
         Controller controllerAdminRequest = new Controller();
         ArrayList<Request> Adminrequest = controllerAdminRequest.getAllAdminRequest();
-        String tituloAdmin[] ={"Asunto", "Estado"};
+        String tituloAdmin[] ={"Id","Asunto", "Estado"};
         DefaultTableModel admin = new DefaultTableModel(null,tituloAdmin);
-        String fila1[] = new String[2];
+        String fila1[] = new String[3];
 
         for(Request e: Adminrequest){
-            fila1[0]=e.getSubject();
-            fila1[1]=e.getState();
+            fila1[1]=e.getSubject();
+            fila1[2]=e.getState();
+            fila1[0]=Integer.toString(e.getId_request());
             admin.addRow(fila1);
         }
         jTableRequests1.setModel(admin);
@@ -1202,7 +1204,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         // Enviar solicitud
         Controller controllerRequest = new Controller();
         boolean ok;
-        ok = controllerRequest.setRequest(jTextFieldReqSubj.getText(), jTextAreaResq.getText());
+        ok = controllerRequest.setRequest(user.getDni(),jTextFieldReqSubj.getText(), jTextAreaResq.getText());
         if (ok){
             jLabelReqSend.setText("Solicitud enviada correctamente"); 
         }else{
@@ -1212,8 +1214,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
 
     private void jTableRequests1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRequests1MousePressed
         Controller controllerRequest = new Controller();
-        int row = jTableRequests1.getSelectedRow();
-        String message = controllerRequest.getSelectedRequest(row,user.getDni());
+        int row= Integer.parseInt((String)jTableRequests1.getValueAt(jTableRequests1.getSelectedRow(),0));
+        String message = controllerRequest.getSelectedRequest(row);
         jTextPaneMessageRequest1.setText(message);
     }//GEN-LAST:event_jTableRequests1MousePressed
 

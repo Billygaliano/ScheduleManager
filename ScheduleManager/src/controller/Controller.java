@@ -40,8 +40,8 @@ public class Controller implements ActionListener{
         modeloRequest.SetAdminRequest(fila,status);
     }
     
-    public String getSelectedRequest(int row,String applicant){
-       return modeloRequest.getSelectedMessage(row, applicant);
+    public String getSelectedRequest(int row){
+       return modeloRequest.getSelectedMessage(row);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Controller implements ActionListener{
         return quarters;
     }
     
-    public boolean setRequest(String subject, String text){
+    public boolean setRequest(String applicant,String subject, String text){
         boolean ok;
         ok = modeloRequest.setRequest(applicant, subject, text);
         return ok;

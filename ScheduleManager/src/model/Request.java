@@ -156,10 +156,10 @@ public class Request {
     }
     
     
-    public String getSelectedMessage(int row, String applicant){
+    public String getSelectedMessage(int row){
         RequestDAO requestDAO = new RequestDAO();
-        ArrayList<Request> requests =requestDAO.returnListRequest(applicant);
-        return requests.get(row).getMessage();
+        Request requests =requestDAO.returnMessageRequest(row);
+        return requests.getMessage();
     }
     
      public boolean setRequest(String user, String subject, String text){
