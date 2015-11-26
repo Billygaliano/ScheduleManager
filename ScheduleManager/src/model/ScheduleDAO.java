@@ -214,5 +214,11 @@ class ScheduleDAO {
         
         return schedules;
     }
+    
+    protected void finalize() throws Throwable{
+            super.finalize();
+            ConnectionDB.closeConnection();
+            
+        }
 
 }
