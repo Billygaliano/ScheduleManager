@@ -36,6 +36,8 @@ public class Classroom {
         this.building = building;
         this.schedules = schedules;
     }
+
+    public Classroom() {}
     
     /**
      * Method wich returns a Classroom object in String format.
@@ -156,6 +158,11 @@ public class Classroom {
         }else{
             return true;
         }
+    }
+    
+    public Classroom returnClassroomById(int idClassroom){
+        ClassroomDAO classroomDao = new ClassroomDAO();
+        return classroomDao.getClassroomById(idClassroom);
     }
     
        

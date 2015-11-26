@@ -13,11 +13,11 @@ import java.util.Objects;
  */
 public class Schedule {
 
-    private Classroom classroom;
-    private Subject subject;
+    private int classroom;
+    private int subject;
     private int year;
-    private int day;
-    private int hour;
+    private String day;
+    private String hour;
     private String quarter;
 
     /**
@@ -30,7 +30,7 @@ public class Schedule {
      * @param hour
      * @param quarter
      */
-    public Schedule(Classroom classroom, Subject subject, int year, int day, int hour, String quarter) {
+    public Schedule(int classroom, int subject, int year, String day, String hour, String quarter) {
         this.classroom = classroom;
         this.subject = subject;
         this.year = year;
@@ -41,26 +41,25 @@ public class Schedule {
 
     public Schedule() {}
 
-    /**
-     * Method wich returns a Shedule object in String format.
-     *
-     * @return String
-     */
     @Override
     public String toString() {
         return "Schedule{" + "classroom=" + classroom + ", subject=" + subject + ", year=" + year + ", day=" + day + ", hour=" + hour + ", quarter=" + quarter + '}';
     }
 
-    /**
-     * Method wich compare Shedules object 
-     * @param obj
-     * @return boolean
-     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + this.classroom;
+        hash = 47 * hash + this.subject;
+        hash = 47 * hash + this.year;
+        hash = 47 * hash + Objects.hashCode(this.day);
+        hash = 47 * hash + Objects.hashCode(this.hour);
+        hash = 47 * hash + Objects.hashCode(this.quarter);
+        return hash;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -68,119 +67,71 @@ public class Schedule {
             return false;
         }
         final Schedule other = (Schedule) obj;
-        if (!this.classroom.equals(other.classroom)) {
+        if (this.classroom != other.classroom) {
             return false;
         }
-        if (!this.subject.equals(other.subject)) {
+        if (this.subject != other.subject) {
+            return false;
+        }
+        if (this.year != other.year) {
+            return false;
+        }
+        if (!Objects.equals(this.day, other.day)) {
+            return false;
+        }
+        if (!Objects.equals(this.hour, other.hour)) {
+            return false;
+        }
+        if (!Objects.equals(this.quarter, other.quarter)) {
             return false;
         }
         return true;
     }
 
-    /**
-     * Method wich gets classroom's id.
-     *
-     * @return id_classroom
-     */
-    public Classroom getId_classroom() {
+    public int getClassroom() {
         return classroom;
     }
 
-    /**
-     * Method wich sets classroom's id.
-     *
-     * @param classroom
-     */
-    public void setId_classroom(Classroom classroom) {
+    public void setClassroom(int classroom) {
         this.classroom = classroom;
     }
 
-    /**
-     * Method wich gets subject's id.
-     *
-     * @return id_subject
-     */
-    public Subject getId_subject() {
+    public int getSubject() {
         return subject;
     }
 
-    /**
-     * Method wich sets subject's id.
-     *
-     * @param subject
-     */
-    public void setId_subject(Subject id_subject) {
+    public void setSubject(int subject) {
         this.subject = subject;
     }
 
-    /**
-     * Method wich gets Schedule's year.
-     *
-     * @return year
-     */
     public int getYear() {
         return year;
     }
 
-    /**
-     * Method wich sets Schedule's year.
-     *
-     * @param year
-     */
     public void setYear(int year) {
         this.year = year;
     }
 
-    /**
-     * Method wich gets Schedule's day.
-     *
-     * @return day
-     */
-    public int getDay() {
+    public String getDay() {
         return day;
     }
 
-    /**
-     * Method wich sets Schedule's day.
-     *
-     * @param day
-     */
-    public void setDay(int day) {
+    public void setDay(String day) {
         this.day = day;
     }
 
-    /**
-     * Method wich gets Schedule's hour.
-     *
-     * @return hour
-     */
-    public int getHour() {
+    public String getHour() {
         return hour;
     }
 
-    /**
-     * Method wich sets Schedule's hour.
-     *
-     * @param hour
-     */
-    public void setHour(int hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 
-    /**
-     * Method wich gets Schedule's quarter
-     *
-     * @return quarter
-     */
     public String getQuarter() {
         return quarter;
     }
 
-    /**
-     * Method wich sets Schedule's quarter.
-     *
-     * @param quarter
-     */
     public void setQuarter(String quarter) {
         this.quarter = quarter;
     }
@@ -225,5 +176,12 @@ public class Schedule {
         ScheduleDAO scheduleDAO = new ScheduleDAO();
         ArrayList<String> classroom = scheduleDAO.returnOcuppiedClassroom(day,hour,subject);
         return classroom;
+    }
+    
+    public ArrayList<Schedule> returnSchedules(String quarter, String course, String titulation){
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        ArrayList<Schedule> schedules = scheduleDAO.getSchedules(titulation,course,quarter);
+        
+        return schedules;
     }
 }

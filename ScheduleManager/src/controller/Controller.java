@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import view.JF_ViewSchedule;
 import javax.swing.table.DefaultTableModel;
+import model.Classroom;
 import model.Schedule;
 import model.Subject;
 import model.Titulation;
@@ -19,6 +20,7 @@ public class Controller implements ActionListener{
     Titulation titulationModel = new Titulation();
     Subject subjectModel = new Subject();
     Schedule scheduleModel = new Schedule();
+    Classroom classroomModel = new Classroom();
     String applicant="12345678A";
     
     public Controller(){
@@ -116,5 +118,444 @@ public class Controller implements ActionListener{
     public ArrayList<String> getOcuppiedClassroom(String day,String hour,String subject){
         ArrayList<String> classroom = scheduleModel.returnOcuppiedClassroom(day,hour,subject);
         return classroom;
+    }
+    
+    public void loadSchedule(JTable jTableSchedule, String quarter, String course, String titulation){
+        ArrayList<Schedule> schedules = scheduleModel.returnSchedules(quarter, course, titulation);
+        String title[] = {"Hora/Día", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
+        DefaultTableModel m = new DefaultTableModel(null,title);
+        String row[] = new String[6];
+        String hour;
+            
+        for (int i = 0; i <= 12; i++) {
+            switch(i){
+                case 0:{
+                    row[0] = "8:30-9:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 1:{
+                    row[0] = "9:30-10:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 2:{
+                    row[0] = "10:30-11:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 3:{
+                    row[0] = "11:30-12:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 4:{
+                    row[0] = "12:30-13:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 5:{
+                    row[0] = "13:30-14:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 6:{
+                    row[0] = "14:30-15:30";
+                    row[1] = "ES";
+                    row[2] = "LA";
+                    row[3] = "HORA";
+                    row[4] = "DEL";
+                    row[5] = "ALMUERZO";
+                }break;
+
+                case 7:{
+                    row[0] = "15:30-16:30";
+                    row[1] = "";
+                    row[2] = "";
+                    row[3] = "";
+                    row[4] = "";
+                    row[5] = "";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 8:{
+                    row[0] = "16:30-17:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 9:{
+                    row[0] = "17:30-18:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 10:{
+                    row[0] = "18:30-19:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 11:{
+                    row[0] = "19:30-20:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+                case 12:{
+                    row[0] = "20:30-21:30";
+                    
+                    for (Schedule schedule : schedules){ 
+                        int idSubject = schedule.getSubject();
+                        int idClassroom = schedule.getClassroom();
+                        String subjectName = subjectModel.returnSubjectById(idSubject);
+                        Classroom classroom = classroomModel.returnClassroomById(idClassroom);
+                        String day = schedule.getDay();
+
+                        switch(day){
+                            case "Lunes":{
+                                row[1] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Martes":{
+                                row[2] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Miercoles":{
+                                row[3] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Jueves":{
+                                row[4] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+
+                            case "Viernes":{
+                                row[5] = subjectName + " \n " + classroom.getBuilding() + " - " + classroom.getName();
+                            }break;
+                        }
+                    }
+                }break;
+
+            }
+            
+            m.addRow(row);   
+        } 
+        
+        jTableSchedule.setModel(m);
     }
 }

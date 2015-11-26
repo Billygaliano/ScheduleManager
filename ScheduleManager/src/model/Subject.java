@@ -191,4 +191,9 @@ public class Subject {
         return subjectDao.getYearsSubjectUser(applicant);
     }
     
+    public String returnSubjectById(int id_subject){
+        SubjectDAO subjectDao = new SubjectDAO();
+        return subjectDao.getSubjectById(id_subject);
+    }
+    
 }

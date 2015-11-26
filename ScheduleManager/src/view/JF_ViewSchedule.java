@@ -19,6 +19,14 @@ import model.Subject;
 import model.Titulation;
 import model.User;
 import model.UserDAO;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.io.FileOutputStream;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfWriter;
 
 /**
  *
@@ -86,6 +94,31 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void printSchedule() {
+        Document document = new Document(PageSize.A4.rotate());
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HorarioPDF.pdf"));
+
+            document.open();
+            PdfContentByte cb = writer.getDirectContent();
+
+            cb.saveState();
+            Graphics2D g2 = cb.createGraphicsShapes(500, 500);
+
+            Shape oldClip = g2.getClip();
+            g2.clipRect(0, 0, 500, 500);
+
+            jTableSchedule.print(g2);
+            g2.setClip(oldClip);
+
+            g2.dispose();
+            cb.restoreState();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        document.close();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,6 +141,9 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jButtonLogout = new javax.swing.JButton();
         jPanelRTab = new javax.swing.JPanel();
         jTabbedPane = new javax.swing.JTabbedPane();
+        jPanelViewSchedule = new javax.swing.JPanel();
+        jPanelDownloadButton = new javax.swing.JPanel();
+        jButtonDownloadPDF = new javax.swing.JButton();
         jScrollPaneViewSchedule = new javax.swing.JScrollPane();
         jTableSchedule = new javax.swing.JTable();
         jPanelMakeSchedule = new javax.swing.JPanel();
@@ -173,6 +209,11 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Titulación");
         jTreeLeftPanel.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTreeLeftPanel.setCellRenderer(null);
+        jTreeLeftPanel.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jTreeLeftPanelValueChanged(evt);
+            }
+        });
         jScrollPaneLeftPanel.setViewportView(jTreeLeftPanel);
 
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
@@ -268,21 +309,41 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             }
         });
 
+        jPanelViewSchedule.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanelDownloadButton.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButtonDownloadPDF.setText("Descargar PDF");
+        jButtonDownloadPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDownloadPDFActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelDownloadButtonLayout = new javax.swing.GroupLayout(jPanelDownloadButton);
+        jPanelDownloadButton.setLayout(jPanelDownloadButtonLayout);
+        jPanelDownloadButtonLayout.setHorizontalGroup(
+            jPanelDownloadButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDownloadButtonLayout.createSequentialGroup()
+                .addContainerGap(886, Short.MAX_VALUE)
+                .addComponent(jButtonDownloadPDF)
+                .addContainerGap())
+        );
+        jPanelDownloadButtonLayout.setVerticalGroup(
+            jPanelDownloadButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDownloadButtonLayout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jButtonDownloadPDF)
+                .addContainerGap())
+        );
+
+        jScrollPaneViewSchedule.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTableSchedule.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTableSchedule.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTableSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"8:30", null, null, null, null, null},
-                {"9:30", null, null, null, null, null},
-                {"10:30", null, null, null, null, null},
-                {"11:30", null, null, null, null, null},
-                {"12:30", null, null, null, null, null},
-                {"13:30", null, null, null, null, null},
-                {"15:30", null, null, null, null, null},
-                {"16:30", null, null, null, null, null},
-                {"17:30", null, null, null, null, null},
-                {"18:30", null, null, null, null, null},
-                {"19:30", null, null, null, null, null},
-                {"20:30", null, null, null, null, null}
+
             },
             new String [] {
                 "Hora/Día", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"
@@ -292,7 +353,26 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jTableSchedule.setRowHeight(40);
         jScrollPaneViewSchedule.setViewportView(jTableSchedule);
 
-        jTabbedPane.addTab("Horario", jScrollPaneViewSchedule);
+        javax.swing.GroupLayout jPanelViewScheduleLayout = new javax.swing.GroupLayout(jPanelViewSchedule);
+        jPanelViewSchedule.setLayout(jPanelViewScheduleLayout);
+        jPanelViewScheduleLayout.setHorizontalGroup(
+            jPanelViewScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelDownloadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelViewScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPaneViewSchedule, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE))
+        );
+        jPanelViewScheduleLayout.setVerticalGroup(
+            jPanelViewScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelViewScheduleLayout.createSequentialGroup()
+                .addGap(0, 709, Short.MAX_VALUE)
+                .addComponent(jPanelDownloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanelViewScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelViewScheduleLayout.createSequentialGroup()
+                    .addComponent(jScrollPaneViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 48, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane.addTab("Horario", jPanelViewSchedule);
 
         jToolBar1.setBorder(null);
         jToolBar1.setRollover(true);
@@ -402,14 +482,14 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanelMakeScheduleLayout = new javax.swing.GroupLayout(jPanelMakeSchedule);
         jPanelMakeSchedule.setLayout(jPanelMakeScheduleLayout);
         jPanelMakeScheduleLayout.setHorizontalGroup(
             jPanelMakeScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
             .addGroup(jPanelMakeScheduleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -504,7 +584,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             jPanelUpdateScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUpdateScheduleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 959, Short.MAX_VALUE)
+                .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelUpdateScheduleLayout.setVerticalGroup(
@@ -512,7 +592,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             .addGroup(jPanelUpdateScheduleLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(865, Short.MAX_VALUE))
+                .addContainerGap(720, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Modificar Horario", jPanelUpdateSchedule);
@@ -554,7 +634,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 .addGroup(jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSendRequestLayout.createSequentialGroup()
                         .addGap(633, 633, 633)
-                        .addComponent(jLabelReqText, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
+                        .addComponent(jLabelReqText, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
                     .addGroup(jPanelSendRequestLayout.createSequentialGroup()
                         .addGroup(jPanelSendRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelSendRequestLayout.createSequentialGroup()
@@ -590,7 +670,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 .addComponent(jButtonSendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelReqText)
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Enviar solicitud", jPanelSendRequest);
@@ -622,11 +702,11 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelViewRequestLayout.createSequentialGroup()
                 .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
         );
         jPanelViewRequestLayout.setVerticalGroup(
             jPanelViewRequestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+            .addComponent(jScrollPanelViewRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
         );
 
@@ -680,7 +760,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                     .addGroup(jPanelAdminRequestLayout.createSequentialGroup()
                         .addComponent(jScrollPanelViewRequest1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
                     .addGroup(jPanelAdminRequestLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -703,7 +783,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JLabelRequestMod, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Administrar solicitudes", jPanelAdminRequest);
@@ -1304,6 +1384,29 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         final DefaultComboBoxModel modelCourse = new DefaultComboBoxModel(comboBoxItemsCourse);
         jComboBoxCourse.setModel(modelCourse); 
     }//GEN-LAST:event_jButtonSelActionPerformed
+
+    private void jButtonDownloadPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDownloadPDFActionPerformed
+        printSchedule();
+    }//GEN-LAST:event_jButtonDownloadPDFActionPerformed
+
+    private void jTreeLeftPanelValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeLeftPanelValueChanged
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)jTreeLeftPanel.getLastSelectedPathComponent();
+        Controller controller = new Controller();
+        
+        if(node == null)
+            return;
+        if(node.getLevel() == 3){
+            String quarter = (String)node.getUserObject();
+            
+            node = node.getPreviousNode();
+            String course = (String)node.getUserObject();
+            
+            node = node.getPreviousNode();
+            String titulation = (String)node.getUserObject();
+            
+            controller.loadSchedule(jTableSchedule, quarter, course, titulation);
+        }        
+    }//GEN-LAST:event_jTreeLeftPanelValueChanged
     
     /**
      * @param args the command line arguments
@@ -1345,6 +1448,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonDownloadPDF;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonSel;
     private javax.swing.JButton jButtonSendRequest;
@@ -1372,6 +1476,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelWelcomeTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAdminRequest;
+    private javax.swing.JPanel jPanelDownloadButton;
     private javax.swing.JPanel jPanelLeft;
     private javax.swing.JPanel jPanelMakeSchedule;
     private javax.swing.JPanel jPanelMenu;
@@ -1381,6 +1486,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSendRequest;
     private javax.swing.JPanel jPanelUpdateSchedule;
     private javax.swing.JPanel jPanelViewRequest;
+    private javax.swing.JPanel jPanelViewSchedule;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

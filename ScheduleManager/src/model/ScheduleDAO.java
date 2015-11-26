@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.ConnectionDB;
 
 /**
@@ -180,6 +182,37 @@ class ScheduleDAO {
         }
         System.out.println(classroom);
         return classroom;
+    }
+    
+    public ArrayList<Schedule> getSchedules(String titulation,String course,String quarter){
+        ArrayList<Schedule> schedules = new ArrayList();
+        SubjectDAO subjectDao = new SubjectDAO();
+        
+        ArrayList<Subject> subjects = subjectDao.getSubjects(titulation, course, quarter);        
+        
+        Connection con = connection.connect();
+        
+        try {
+            for (Subject subject : subjects) {
+                PreparedStatement stmtSched = con.prepareStatement("SELECT id_classroom, id_subject, hour_schedule, day_schedule FROM schedule WHERE id_subject = ? ");
+                stmtSched.setInt(1, subject.getId_subject());
+                ResultSet schedResult=stmtSched.executeQuery();
+
+                while (schedResult.next()){
+                    Schedule schedule = new Schedule(); 
+                    schedule.setClassroom(schedResult.getInt("id_classroom"));
+                    schedule.setSubject(schedResult.getInt("id_subject"));
+                    schedule.setHour(schedResult.getString("hour_schedule"));
+                    schedule.setDay(schedResult.getString("day_schedule"));
+                    
+                    schedules.add(schedule);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return schedules;
     }
 
 }

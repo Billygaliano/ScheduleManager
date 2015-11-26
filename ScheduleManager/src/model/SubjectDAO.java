@@ -110,4 +110,22 @@ public class SubjectDAO {
         }
         return years;
     }
+    
+    public String getSubjectById(int id_subject){
+        Connection con = connection.connect();
+        String nameSubject = null;
+        
+        try {
+            PreparedStatement stmtSub = con.prepareStatement("SELECT name_subject FROM subject WHERE id_subject = ?");
+            stmtSub.setInt(1, id_subject);
+            ResultSet subResult=stmtSub.executeQuery();
+            
+            while (subResult.next()){
+                nameSubject = subResult.getString("name_subject");   
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nameSubject;
+    }
 }
