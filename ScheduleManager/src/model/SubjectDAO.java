@@ -128,4 +128,10 @@ public class SubjectDAO {
         }
         return nameSubject;
     }
+    
+    protected void finalize() throws Throwable{
+            super.finalize();
+            ConnectionDB.closeConnection();
+            
+        }
 }
