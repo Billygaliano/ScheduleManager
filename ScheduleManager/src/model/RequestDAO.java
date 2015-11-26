@@ -114,4 +114,11 @@ public class RequestDAO {
         
         return ok;
     }
+        
+        @Override
+        protected void finalize() throws Throwable{
+            super.finalize();
+            ConnectionDB.closeConnection();
+            
+        }
 }
