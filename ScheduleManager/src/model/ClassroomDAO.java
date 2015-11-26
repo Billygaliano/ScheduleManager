@@ -42,4 +42,10 @@ public class ClassroomDAO {
         
         return classroom;
     }
+    
+    protected void finalize() throws Throwable{
+            super.finalize();
+            ConnectionDB.closeConnection();
+            
+        }
 }
