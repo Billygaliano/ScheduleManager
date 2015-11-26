@@ -58,9 +58,41 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
      public JF_ViewSchedule(User user) {
          InputMap map = new InputMap();
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released");    
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released"); 
         
-        initComponents();       
+        initComponents();     
+        
+//        jTabbedPane.removeTabAt(0);
+        switch(user.getRole()){
+            case "Alumno":
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+            break;
+            
+            case "Profesor":
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(3);
+            break;
+            
+            case "Gerente":
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(1);
+            break;
+            
+            case "Administrador":
+                jTabbedPane.removeTabAt(2);
+                jTabbedPane.removeTabAt(2);
+                jTabbedPane.removeTabAt(2);
+                jTabbedPane.removeTabAt(2);
+            break;
+        }
+        
         
         jButtonLogout.setToolTipText("Cerrar sesión");
         fillTreeSchedule();
