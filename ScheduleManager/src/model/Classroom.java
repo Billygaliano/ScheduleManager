@@ -144,6 +144,22 @@ public class Classroom {
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Classroom other = (Classroom) obj;
+        if (this.id_classroom != other.id_classroom) {
+            return false;
+        }
+        return true;
+    }
     
     /**
      * Method which compares two classrooms
@@ -152,13 +168,7 @@ public class Classroom {
      * @return 
      */
     
-    public boolean equals(Classroom clas){
-        if(this.id_classroom != clas.getId_classroom()){
-            return false;
-        }else{
-            return true;
-        }
-    }
+   
     
     public Classroom returnClassroomById(int idClassroom){
         ClassroomDAO classroomDao = new ClassroomDAO();
