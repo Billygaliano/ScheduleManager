@@ -289,5 +289,14 @@ public class UserTest {
         assertTrue(expResult.equals(instance));
     }
     
+    @Test
+    public void testreturnUserSectionDAO(){
+        System.out.println("JUnit conexion base de datos");
+        User instance = new User();
+        String expResult = "Aitor";
+        instance = instance.returnUserSection("78970910L", "aitor");
+        assertEquals(expResult,instance.getName());
+    }
+    
     
 }
