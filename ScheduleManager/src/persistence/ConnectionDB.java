@@ -18,10 +18,7 @@ public class ConnectionDB {
     private static Statement sentenciaSQL;
     private static ResultSet resul;
 
-    /*METODOS*/
-    /**
-     * @desc Constructor privado de la clase Singleton
-     */
+  
     public ConnectionDB() {
         try {
             String controlador = "oracle.jdbc.driver.OracleDriver";
@@ -30,7 +27,10 @@ public class ConnectionDB {
             System.out.println("Error loading the driver");
         }
     }
-
+    /**
+     * Method connected with data base
+     * @return Connection
+     */
     public static Connection connect() {
         String url = "jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar";
 
@@ -45,7 +45,12 @@ public class ConnectionDB {
         }
         return conexion;
     }
-
+    
+    /**
+     * Method get ResultSet for a table
+     * @param tabla
+     * @return ResultSet
+     */
     public ResultSet getTable(String tabla) {
         try {
             resul = sentenciaSQL.executeQuery("SELECT * FROM " + tabla);
@@ -54,6 +59,7 @@ public class ConnectionDB {
         }
         return resul;
     }
+    
 
     public void showRow() throws SQLException {
         int nColumnas = resul.getMetaData().getColumnCount();
@@ -77,11 +83,11 @@ public class ConnectionDB {
     }
 
     /**
-     * @desc Con este metodo iniciamos la sesion del usuario
-     * @param user Usuario que quiere conectarse
-     * @param passw Contrasenia del mismo usuario
-     * @return boolean
-     * @throws SQLException
+     * Method Connection begins with data base
+     * @param user
+     * @param passw
+     * @return inciciado
+     * @throws SQLException 
      */
     public boolean startSection(String user, String passw) throws SQLException {
         boolean inciciado = false;
@@ -96,7 +102,10 @@ public class ConnectionDB {
         }
         return inciciado;
     }
-
+    
+    /**
+     * Method static that close connection
+     */
     public static void closeConnection() {
         try {
             if (resul != null) {

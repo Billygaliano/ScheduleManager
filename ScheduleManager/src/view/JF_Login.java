@@ -233,21 +233,11 @@ public class JF_Login extends javax.swing.JFrame {
     private void jButtonEsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEsActionPerformed
         ControllerLogin prueba = new ControllerLogin();
         prueba.actionPerformedEs(evt,jLabelName,jLabelPass,jButtonSignIn,jLabelFooter);
-        //Locale locale = new Locale("es", "ES");
-        //ResourceBundle bundle = java.util.ResourceBundle.getBundle("view/Properties/Login", locale);
-        //jLabelName.setText(bundle.getString("JF_Login.name"));
-        //jLabelPass.setText(bundle.getString("JF_Login.password"));
-        //jButtonSignIn.setText(bundle.getString("JF_Login.entrar"));
-        //jLabelFooter.setText(bundle.getString("JF_Login.footer"));
     }//GEN-LAST:event_jButtonEsActionPerformed
 
     private void jButtonEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnActionPerformed
         ControllerLogin prueba = new ControllerLogin();
         prueba.actionPerformed(evt,jLabelName,jLabelPass,jButtonSignIn,jLabelFooter);
-        //jLabelName.setText(bundle.getString("JF_Login.name"));
-        //jLabelPass.setText(bundle.getString("JF_Login.password"));
-        //jButtonSignIn.setText(bundle.getString("JF_Login.entrar"));
-        //jLabelFooter.setText(bundle.getString("JF_Login.footer"));
     }//GEN-LAST:event_jButtonEnActionPerformed
 
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed

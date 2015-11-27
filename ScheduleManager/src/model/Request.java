@@ -112,7 +112,10 @@ public class Request {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
+    /**
+     * Method becomes the object to string
+     * @return String
+     */
     @Override
     public String toString() {
         return "Request{" + "id_request=" + id_request + ", applicant=" + applicant + ", message=" + message + ", state=" + state + ", subject=" + subject + ", users=" + users + '}';
@@ -135,33 +138,59 @@ public class Request {
         this.subject = subject;
         this.users = users;
     }
-    
+    /**
+     * Method builder
+     */
     public Request(){}
-    
+    /**
+     * Method get ArrayList Request for a user through the RequestDAO
+     * @param applicant
+     * @return ArrayList
+     */
     public ArrayList<Request> returnListRequest(String applicant){
         RequestDAO requestDAO = new RequestDAO();
         ArrayList<Request> list = requestDAO.returnListRequest(applicant);
         return list;
     }
     
+    /**
+     * Method get ArrayList Request for all user through the RequestDAO
+     * @return ArrayList Request
+     */
     public ArrayList<Request> returnListRequest1(){
         RequestDAO requestDAO = new RequestDAO();
         ArrayList<Request> list = requestDAO.returnListRequest1();
         return list;
     }
     
+    /**
+     * Method set the Request through the RequestDAO
+     * @param fila
+     * @param status 
+     */
     public void SetAdminRequest(int fila,String status){
         RequestDAO requestAdminDAO = new RequestDAO();
         requestAdminDAO.SetAdminRequest(fila,status);
     }
     
-    
+    /**
+     * Method get the selected message by user through the RequestDAO
+     * @param row
+     * @return String
+     */
     public String getSelectedMessage(int row){
         RequestDAO requestDAO = new RequestDAO();
         Request requests =requestDAO.returnMessageRequest(row);
         return requests.getMessage();
     }
     
+    /**
+     * Method get if the request was setting through the RequestDAO
+     * @param user
+     * @param subject
+     * @param text
+     * @return boolean
+     */
      public boolean setRequest(String user, String subject, String text){
         RequestDAO requestDAO = new RequestDAO();
         boolean ok = requestDAO.insertRequest(user,subject,text);

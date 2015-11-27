@@ -25,7 +25,11 @@ class ScheduleDAO {
     public ScheduleDAO() {
         connection = new ConnectionDB();
     }
-
+    /**
+     * Method get list of days for a quarter
+     * @param quarter
+     * @return ArrayList String
+     */
     public ArrayList<String> returnDaysList(String quarter) {
         ArrayList<String> days = new ArrayList();
         String[] daysArray = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes"};
@@ -47,7 +51,13 @@ class ScheduleDAO {
         }
         return days;
     }
-
+    
+    /**
+     * Method get list of hours for a day and quarter 
+     * @param day
+     * @param quarter
+     * @return ArrayList String
+     */
     public ArrayList<String> returnHoursList(String day,String quarter){
             
         ArrayList<String> hours = new ArrayList();
@@ -70,7 +80,15 @@ class ScheduleDAO {
         }
         return hours;
     }
-    
+        
+        /**
+         * Method get list classroom of  day, hour, subject quarter 
+         * @param day
+         * @param hour
+         * @param subject
+         * @param quarter
+         * @return ArrayList String
+         */
        public ArrayList<String> returnClassList(String day,String hour,String subject,String quarter){
             
         ArrayList<String> classroom = new ArrayList();
@@ -102,6 +120,17 @@ class ScheduleDAO {
         return classroom;
     }
        
+    /**
+     * Method insert Shedule
+     * @param titulation
+     * @param course
+     * @param quarter
+     * @param subject
+     * @param day
+     * @param hour
+     * @param classroom
+     * @param year 
+     */
     public void insertSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom,String year){
         Connection con = connection.connect();
         try {
@@ -125,6 +154,12 @@ class ScheduleDAO {
         } catch (SQLException ex) {
         }
     }
+    
+    /**
+     * Method get Days Ocuppied
+     * @param subject
+     * @return ArrayList String
+     */
     public ArrayList<String> returnOcuppiedDays(String subject){
         
         ArrayList<String> days = new ArrayList();
@@ -144,7 +179,12 @@ class ScheduleDAO {
     
     
     }
-    
+    /**
+     * Method get OcuppiedHours for a  subject and day
+     * @param subject
+     * @param day
+     * @return ArrayList String 
+     */
     public ArrayList<String> returnOcuppiedHours(String subject, String day){      
         ArrayList<String> hours = new ArrayList();
         Connection con = connection.connect();
@@ -161,7 +201,13 @@ class ScheduleDAO {
         System.out.println(hours);
         return hours;
     }
-    
+    /**
+     * Method get OcuppiedClassroom for a day, hour and subject
+     * @param day
+     * @param hour
+     * @param subject
+     * @return ArrayList String
+     */
     public ArrayList<String> returnOcuppiedClassroom(String day,String hour,String subject){
         ArrayList<String> classroom = new ArrayList();
         Connection con = connection.connect();
@@ -182,7 +228,13 @@ class ScheduleDAO {
         System.out.println(classroom);
         return classroom;
     }
-    
+    /**
+     * Method get Shedules for titulation, course and quarter
+     * @param titulation
+     * @param course
+     * @param quarter
+     * @return ArrayList Schedule
+     */
     public ArrayList<Schedule> getSchedules(String titulation,String course,String quarter){
         ArrayList<Schedule> schedules = new ArrayList();
         SubjectDAO subjectDao = new SubjectDAO();
@@ -213,13 +265,26 @@ class ScheduleDAO {
         
         return schedules;
     }
-    
+    /**
+     * Method close connection
+     * @throws Throwable 
+     */
     protected void finalize() throws Throwable{
             super.finalize();
             ConnectionDB.closeConnection();
             
         }
-    
+    /**
+     * Method update shedule
+     * @param day_old
+     * @param hour_old
+     * @param classroom_old
+     * @param day_new
+     * @param hour_new
+     * @param classroom_new
+     * @param quarter
+     * @return int
+     */
     public int updateSchedule(String day_old,String hour_old,String classroom_old,String day_new,String hour_new,String classroom_new,String quarter){
         System.out.println(day_old+hour_old+classroom_old+day_new+hour_new+classroom_new+quarter);
         int update = 0;

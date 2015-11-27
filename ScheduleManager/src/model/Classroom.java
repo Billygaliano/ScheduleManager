@@ -57,10 +57,10 @@ public class Classroom {
         return id_classroom;
     }
     
-    /**
-     * Method wich sets classroom's id.
-     * @param id_classroom 
-     */
+   /**
+    * Method set id_classroom
+    * @param id_classroom 
+    */
     public void setId_classroom(int id_classroom) {
         this.id_classroom = id_classroom;
     }
@@ -74,7 +74,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich sets Classroom's name.
+     * Method set Name
      * @param name 
      */
     public void setName(String name) {
@@ -145,7 +145,11 @@ public class Classroom {
         this.schedules = schedules;
     }
 
-
+    /**
+     * 
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -161,15 +165,13 @@ public class Classroom {
         return true;
     }
     
-    /**
-     * Method which compares two classrooms
-     * return true if both id's are equal
-     * @param clas
-     * @return 
-     */
     
    
-    
+    /**
+     * Method get Classroom for a idClassroom
+     * @param idClassroom
+     * @return Classroom
+     */
     public Classroom returnClassroomById(int idClassroom){
         ClassroomDAO classroomDao = new ClassroomDAO();
         return classroomDao.getClassroomById(idClassroom);

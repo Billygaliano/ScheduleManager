@@ -84,7 +84,7 @@ public class Subject {
 
     /**
      * Method wich sets titulation's id.
-     * @param titulation of Titulation
+     * @param id_titulation of Titulation
      */
     public void setId_titulation(int id_titulation) {
         this.id_titulation = id_titulation;
@@ -142,7 +142,7 @@ public class Subject {
     /**
      * Class constructor.
      * @param id_subject
-     * @param titulation
+     * @param id_titulation
      * @param name
      * @param course
      * @param quarter

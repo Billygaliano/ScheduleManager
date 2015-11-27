@@ -13,6 +13,12 @@ public class RequestDAO {
     public RequestDAO(){
         connection = new ConnectionDB();
     }
+    
+    /**
+     * Method get ArrayList Request for a user
+     * @param applicant
+     * @return ArrayList Request
+     */
     public ArrayList<Request> returnListRequest(String applicant){
         Request request = null;
         Connection con = connection.connect();
@@ -37,7 +43,10 @@ public class RequestDAO {
         return list;
     }
     
-    
+    /**
+     * Method get ArrayList Request for all user
+     * @return ArrayList Request
+     */
     public ArrayList<Request> returnListRequest1(){
         Request request = null;
         Connection con = connection.connect();
@@ -61,6 +70,11 @@ public class RequestDAO {
         return list;
     }
     
+    /**
+     * Method set the Request
+     * @param fila
+     * @param status 
+     */
     public void SetAdminRequest(int fila,String status){
         Request request = null;
         Request requestModified = null;
@@ -94,7 +108,14 @@ public class RequestDAO {
             Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+        
+        /**
+         * Method get true if the insert it is successful
+         * @param user
+         * @param subject
+         * @param text
+         * @return boolean
+         */
         public boolean insertRequest(String user, String subject, String text){
         boolean ok = false;
         String status = "pendiente";
@@ -116,14 +137,21 @@ public class RequestDAO {
         
         return ok;
     }
-        
+        /**
+         * 
+         * @throws Throwable 
+         */
         @Override
         protected void finalize() throws Throwable{
             super.finalize();
             ConnectionDB.closeConnection();
             
         }
-        
+        /**
+         * Method get the message request
+         * @param idreq
+         * @return Request
+         */
         public Request returnMessageRequest(int idreq){
         Request request = new Request();
         Connection con = connection.connect();

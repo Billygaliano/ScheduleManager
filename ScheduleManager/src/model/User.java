@@ -176,19 +176,7 @@ public class User {
     public User(){
 
     }
-    
-    /**
-     * Class non-default constructor
-     * @param dni
-     * @param pass
-     * @param email
-     * @param name
-     * @param surname
-     * @param role
-     * @param birthdate
-     * @param address
-     * @param subjects 
-     */
+
     
     public User(String dni, String pass, String email, String name, String surname, String role, Date birthdate, String address, List<Subject> subjects) {
         this.dni = dni;

@@ -14,15 +14,19 @@ import java.util.logging.Logger;
 import persistence.ConnectionDB;
 
 /**
- *
- * @author Guillermo Galiano
+ * 
+ * @author macbookpro
  */
 public class ClassroomDAO {
     ConnectionDB connection;        
     public ClassroomDAO(){
         connection = new ConnectionDB();
     }
-    
+    /**
+     * Method get Classroom
+     * @param idClassroom
+     * @return Classroom
+     */
     public Classroom getClassroomById(int idClassroom){
         Classroom classroom = new Classroom();
         Connection con = connection.connect();
