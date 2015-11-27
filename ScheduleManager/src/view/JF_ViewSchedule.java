@@ -18,15 +18,39 @@ import model.Request;
 import model.Subject;
 import model.Titulation;
 import model.User;
-import model.UserDAO;
+import model.Schedule;
+import model.Classroom;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.io.FileOutputStream;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfWriter;
+//import com.lowagie.text.Document;
+//import com.lowagie.text.Element;
+//import com.lowagie.text.Font;
+//import com.lowagie.text.PageSize;
+//import com.lowagie.text.Paragraph;
+//import com.lowagie.text.Phrase;
+//import com.lowagie.text.Rectangle;
+//import com.lowagie.text.pdf.PdfContentByte;
+//import com.lowagie.text.pdf.PdfPCell;
+//import com.lowagie.text.pdf.PdfPTable;
+//import com.lowagie.text.pdf.PdfWriter;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+ 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -56,7 +80,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     }
     
      public JF_ViewSchedule(User user) {
-         InputMap map = new InputMap();
+        InputMap map = new InputMap();
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released"); 
         
@@ -78,11 +102,10 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 jTabbedPane.removeTabAt(3);
             break;
             
-            case "Gerente":
+            case "Jefe de estudios":
                 jTabbedPane.removeTabAt(1);
-                jTabbedPane.removeTabAt(1);
-                jTabbedPane.removeTabAt(1);
-                jTabbedPane.removeTabAt(1);
+                jTabbedPane.removeTabAt(2);
+                jTabbedPane.removeTabAt(2);
             break;
             
             case "Administrador":
@@ -95,9 +118,9 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         
         
         jButtonLogout.setToolTipText("Cerrar sesión");
-        fillTreeSchedule();
         this.user = user;
         jLabelWelcomeTitle.setText("GESTOR DE HORARIOS UMA - BIENVENIDO/A "+user.getName()+ " " + user.getSurname());
+        fillTreeSchedule();
         
     }
     
@@ -105,7 +128,7 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         DefaultTreeModel model = (DefaultTreeModel) jTreeLeftPanel.getModel();
         Controller controller = new Controller();
         
-        ArrayList<Titulation> titulations = controller.getTitulationsAndSubjects();
+        ArrayList<Titulation> titulations = controller.getTitulationsAndSubjects(user.getDni());
         
         for (Titulation titulation : titulations) {            
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
@@ -113,12 +136,12 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             int id_titulation = titulation.getId_titulation();
             
             root = root.getNextNode();
-            ArrayList<String> courses = controller.getCoursesTitulationUser(id_titulation);
+            ArrayList<String> courses = controller.getCoursesTitulationUser(user.getDni(), id_titulation);
             for (String course : courses) {
                 root.add(new DefaultMutableTreeNode(course));
                 
                 root = root.getNextNode();
-                ArrayList<String> quarters = controller.getQuartersTitulationUser(id_titulation, course);
+                ArrayList<String> quarters = controller.getQuartersTitulationUser(user.getDni(), id_titulation, course);
                 
                 for (String quarter : quarters) {
                     root.add(new DefaultMutableTreeNode(quarter));
@@ -127,29 +150,214 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         }
     }
     
-    private void printSchedule() {
-        Document document = new Document(PageSize.A4.rotate());
-        try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HorarioPDF.pdf"));
-
-            document.open();
-            PdfContentByte cb = writer.getDirectContent();
-
-            cb.saveState();
-            Graphics2D g2 = cb.createGraphicsShapes(500, 500);
-
-            Shape oldClip = g2.getClip();
-            g2.clipRect(0, 0, 500, 500);
-
-            jTableSchedule.print(g2);
-            g2.setClip(oldClip);
-
-            g2.dispose();
-            cb.restoreState();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
+    private void printSchedule() throws FileNotFoundException, DocumentException {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)jTreeLeftPanel.getLastSelectedPathComponent();
+        Controller controller = new Controller();
+        String titulation = null;
+        String quarter = null;
+        String course = null;
+        
+        if(node == null)
+            return;
+        if(node.getLevel() == 3){
+            quarter = (String)node.getUserObject();
+            
+            node = node.getPreviousNode();
+            course = (String)node.getUserObject();
+            
+            node = node.getPreviousNode();
+            titulation = (String)node.getUserObject();
         }
-        document.close();
+//        
+//        Document document = new Document(PageSize.A2.rotate());
+//            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("HorarioPDF.pdf"));
+            ArrayList<Schedule> schedules = controller.getSchedules(quarter, course, titulation);
+
+            FileOutputStream archivo = new FileOutputStream("horarioPDF.pdf");
+            Document document = new Document(PageSize.A2.rotate());
+            PdfWriter.getInstance(document, archivo);
+            
+            document.open();
+            
+            Font title = new Font();
+            Font subTitle = new Font();
+            Font body = new Font();
+            title.setSize(28);
+            subTitle.setSize(22);
+            body.setSize(20);
+            
+            Paragraph pTitle = new Paragraph("Horario " + titulation + " - Curso: " + course + " - Cuatrimestre: " + quarter, title);
+            document.add(pTitle);
+            
+            Paragraph separator = new Paragraph("\n \n \n \n \n ");
+            document.add(separator);
+            
+            
+            PdfPTable table = new PdfPTable(5);
+            table.setWidths(new int[]{ 2, 2, 3, 1, 1 });
+            table.setWidthPercentage(100);
+            PdfPCell cell;
+            
+            // row 1, cell 1
+            cell = new PdfPCell(new Phrase("Día", subTitle));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            // row 1, cell 2
+            cell = new PdfPCell(new Phrase("Hora", subTitle));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            // row 1, cell 3
+            cell = new PdfPCell(new Phrase("Asignatura", subTitle));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            // row 1, cell 4
+            cell = new PdfPCell(new Phrase("Edificio", subTitle));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            // row 1, cell 5
+            cell = new PdfPCell(new Phrase("Aula", subTitle));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            
+            for (Schedule schedule : schedules) {
+                int idSubject = schedule.getSubject();
+                int idClassroom = schedule.getClassroom();
+                String subjectName = controller.getSubjectById(idSubject);
+                Classroom classroom = controller.getClassroomById(idClassroom);
+                String day = schedule.getDay();
+                
+                cell = new PdfPCell(new Phrase(schedule.getDay(), body));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+                
+                cell = new PdfPCell(new Phrase(schedule.getHour(), body));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+                
+                cell = new PdfPCell(new Phrase(subjectName, body));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+                
+                cell = new PdfPCell(new Phrase(classroom.getBuilding(), body));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+                
+                cell = new PdfPCell(new Phrase(classroom.getName(), body));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+            }
+            
+            document.add(table);
+            
+            document.close();
+            
+            
+//            document.open();
+//            PdfContentByte cb = writer.getDirectContent();
+//
+//            cb.saveState();
+//            Graphics2D g2 = cb.createGraphicsShapes(2000, 1000);
+//            Font title = new Font();
+//            Font body = new Font();
+//            title.setSize(28);
+//            body.setSize(14);
+//            
+//            Paragraph pTitle = new Paragraph("Horario " + titulation + " - Curso: " + course + " - Cuatrimestre: " + quarter, title);
+//            document.add(pTitle);
+//            
+//            Paragraph separator = new Paragraph("\n \n \n \n \n ");
+//            document.add(separator);
+//            
+//            PdfPTable table = new PdfPTable(5);
+//            table.setWidths(new int[]{ 2, 2, 3, 1, 1 });
+//            table.setWidthPercentage(100);
+//            PdfPCell cell;
+//            
+//            // row 1, cell 1
+//            cell = new PdfPCell(new Phrase("Día"));
+//            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            table.addCell(cell);
+//            // row 1, cell 2
+//            cell = new PdfPCell(new Phrase("Hora"));
+//            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            table.addCell(cell);
+//            // row 1, cell 3
+//            cell = new PdfPCell(new Phrase("Asignatura"));
+//            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            table.addCell(cell);
+//            // row 1, cell 4
+//            cell = new PdfPCell(new Phrase("Edificio"));
+//            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            table.addCell(cell);
+//            // row 1, cell 5
+//            cell = new PdfPCell(new Phrase("Aula"));
+//            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            table.addCell(cell);
+//            cb.saveState();
+//            
+//            for (Schedule schedule : schedules) {
+//                int idSubject = schedule.getSubject();
+//                int idClassroom = schedule.getClassroom();
+//                String subjectName = controller.getSubjectById(idSubject);
+//                Classroom classroom = controller.getClassroomById(idClassroom);
+//                String day = schedule.getDay();
+//                
+//                cell = new PdfPCell(new Phrase(schedule.getDay()));
+//                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//                table.addCell(cell);
+//                
+//                cell = new PdfPCell(new Phrase(schedule.getHour()));
+//                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//                table.addCell(cell);
+//                
+//                cell = new PdfPCell(new Phrase(subjectName));
+//                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//                table.addCell(cell);
+//                
+//                cell = new PdfPCell(new Phrase(classroom.getBuilding()));
+//                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//                table.addCell(cell);
+//                
+//                cell = new PdfPCell(new Phrase(classroom.getName()));
+//                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+//                table.addCell(cell);
+//                
+//                cb.saveState();
+//            }
+//            
+//            document.add(table);
+//
+//            Shape oldClip = g2.getClip();
+//            g2.clipRect(0, 0, 2000, 1000);
+//            
+//            g2.setClip(oldClip);
+//
+//            g2.dispose();
+//            cb.saveState();
+//        } catch (Exception e) {
+//            System.err.println(e.getMessage());
+//        }
+//        document.close();
     }
 
     /**
@@ -407,8 +615,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
                 .addComponent(jPanelDownloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanelViewScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelViewScheduleLayout.createSequentialGroup()
-                    .addComponent(jScrollPaneViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 48, Short.MAX_VALUE)))
+                    .addComponent(jScrollPaneViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 54, Short.MAX_VALUE)))
         );
 
         jTabbedPane.addTab("Horario", jPanelViewSchedule);
@@ -477,7 +685,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jComboBoxClassroom.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aula" }));
         jToolBar1.add(jComboBoxClassroom);
 
-        jButton1.setText("Añadir");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/add-icon.png"))); // NOI18N
+        jButton1.setBorder(null);
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -606,7 +815,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jComboBoxClassMod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aula" }));
         jToolBar2.add(jComboBoxClassMod);
 
-        jButtonSel.setText("Selecccionar");
+        jButtonSel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/select-icon.png"))); // NOI18N
+        jButtonSel.setBorder(null);
         jButtonSel.setFocusable(false);
         jButtonSel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -660,7 +870,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jComboBoxClassSel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nueva Aula" }));
         jToolBar3.add(jComboBoxClassSel);
 
-        jButtonMod.setText("Modificar");
+        jButtonMod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/update-icon.png"))); // NOI18N
+        jButtonMod.setBorder(null);
         jButtonMod.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButtonModMousePressed(evt);
@@ -691,8 +902,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
             .addGroup(jPanelModLayout.createSequentialGroup()
                 .addComponent(jScrollPaneMod, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
                 .addComponent(jLabelModified, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(115, Short.MAX_VALUE))
         );
@@ -710,8 +921,8 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
         jPanelUpdateScheduleLayout.setVerticalGroup(
             jPanelUpdateScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUpdateScheduleLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(347, Short.MAX_VALUE))
@@ -1474,7 +1685,13 @@ public class JF_ViewSchedule extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxHourModItemStateChanged
 
     private void jButtonDownloadPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDownloadPDFActionPerformed
-        printSchedule();
+        try {
+            printSchedule();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JF_ViewSchedule.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(JF_ViewSchedule.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonDownloadPDFActionPerformed
 
     private void jTreeLeftPanelValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeLeftPanelValueChanged

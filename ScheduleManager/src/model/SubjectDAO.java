@@ -36,13 +36,13 @@ public class SubjectDAO {
             while (resultadoTit.next()){
                 id_titulation = Integer.parseInt(resultadoTit.getString("id_titulation"));
             }
-            PreparedStatement stmtSub = con.prepareStatement("select name_subject from subject where id_tit=" 
+            PreparedStatement stmtSub = con.prepareStatement("select id_subject, name_subject from subject where id_tit=" 
                     + id_titulation + " and course='" + course +  "' and quarter= '" + quarter + "'");
 
             ResultSet resultadoSub=stmtSub.executeQuery();
             while (resultadoSub.next()){
-                System.out.println(resultadoSub.getString("name_subject"));
                 Subject subject = new Subject(); 
+                subject.setId_subject(resultadoSub.getInt("id_subject"));
                 subject.setName(resultadoSub.getString("name_subject"));
                 subjects.add(subject);
             }  

@@ -57,11 +57,11 @@ public class JF_Login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabelName.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        jLabelName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("view/Properties/Login"); // NOI18N
         jLabelName.setText(bundle.getString("JF_Login.name")); // NOI18N
 
-        jLabelPass.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        jLabelPass.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabelPass.setText(bundle.getString("JF_Login.password")); // NOI18N
 
         jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -70,7 +70,7 @@ public class JF_Login extends javax.swing.JFrame {
             }
         });
 
-        jButtonSignIn.setFont(new java.awt.Font("American Typewriter", 3, 18)); // NOI18N
+        jButtonSignIn.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButtonSignIn.setText(bundle.getString("JF_Login.entrar")); // NOI18N
         jButtonSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,11 +81,12 @@ public class JF_Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabelHead.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelHead.setFont(new java.awt.Font("American Typewriter", 0, 35)); // NOI18N
+        jLabelHead.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabelHead.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelHead.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelHead.setText(bundle.getString("JF_Login.head")); // NOI18N
 
-        jLabelicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/login.jpg"))); // NOI18N
+        jLabelicon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/login-2.png"))); // NOI18N
 
         jButtonEs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/españa.jpg"))); // NOI18N
         jButtonEs.addActionListener(new java.awt.event.ActionListener() {
@@ -108,8 +109,8 @@ public class JF_Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabelicon)
-                .addGap(149, 149, 149)
-                .addComponent(jLabelHead, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(jLabelHead, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jButtonEs, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -123,9 +124,11 @@ public class JF_Login extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonEn, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelHead, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEs, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelHead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabelHead.getAccessibleContext().setAccessibleName(bundle.getString("JF_Login.head")); // NOI18N
