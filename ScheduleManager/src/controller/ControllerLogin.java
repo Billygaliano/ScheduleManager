@@ -22,23 +22,38 @@ import view.JF_ViewSchedule;
 public class ControllerLogin implements ActionListener{
     public static JF_Login vistauser;
 
-
-    public void actionPerformed(ActionEvent e,JLabel a,JLabel b,JButton d,JLabel c) {
+    /**
+     * Method change the language to English 
+     * @param e
+     * @param name
+     * @param password
+     * @param signin
+     * @param footer 
+     */
+    public void actionPerformed(ActionEvent e,JLabel name,JLabel password,JButton signin,JLabel footer) {
         Locale locale = new Locale("en", "US");
         ResourceBundle bundle = java.util.ResourceBundle.getBundle("view/Properties/Login", locale);
-        a.setText(bundle.getString("JF_Login.name"));
-        b.setText(bundle.getString("JF_Login.password"));
-        d.setText(bundle.getString("JF_Login.entrar"));
-        c.setText(bundle.getString("JF_Login.footer"));
+        name.setText(bundle.getString("JF_Login.name"));
+        password.setText(bundle.getString("JF_Login.password"));
+        signin.setText(bundle.getString("JF_Login.entrar"));
+        footer.setText(bundle.getString("JF_Login.footer"));
     }
     
-    public void actionPerformedEs(ActionEvent e,JLabel a,JLabel b,JButton d,JLabel c) {
+    /**
+     * Method change the language to Spanish
+     * @param e
+     * @param name
+     * @param password
+     * @param signin
+     * @param footer 
+     */
+    public void actionPerformedEs(ActionEvent e,JLabel name,JLabel password,JButton signin,JLabel footer) {
         Locale locale = new Locale("es", "ES");
         ResourceBundle bundle = java.util.ResourceBundle.getBundle("view/Properties/Login", locale);
-        a.setText(bundle.getString("JF_Login.name"));
-        b.setText(bundle.getString("JF_Login.password"));
-        d.setText(bundle.getString("JF_Login.entrar"));
-        c.setText(bundle.getString("JF_Login.footer"));
+        name.setText(bundle.getString("JF_Login.name"));
+        password.setText(bundle.getString("JF_Login.password"));
+        signin.setText(bundle.getString("JF_Login.entrar"));
+        footer.setText(bundle.getString("JF_Login.footer"));
     }
     
     public void actionPerformedSignIn(String dni,String pass, JLabel jLabelWarning, JF_Login login) {
