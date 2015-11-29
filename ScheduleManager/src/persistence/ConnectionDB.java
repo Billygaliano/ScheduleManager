@@ -28,21 +28,35 @@ public class ConnectionDB {
         }
     }
     
+    /**
+     * Method that creates a instance object of this class
+     */
     private synchronized static void createInstance(){
         if(instance == null)
             instance = new ConnectionDB();
     }
     
+    /**
+     * Method that returns the Singleton instance
+     * @return ConnectionDB
+     */
     public static ConnectionDB getInstance(){
         if(instance == null) createInstance();
         return instance;
     }
     
+    /**
+     * Method that delete the singleton instance
+     */
     public static void deleteInstance(){
         instance = null;
         closeConnection();
     }
     
+    /**
+     * Method that retuns the connection
+     * @return Connection
+     */
     public static Connection getConnection(){
         return connection;
     }
