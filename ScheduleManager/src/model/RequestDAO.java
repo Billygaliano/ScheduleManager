@@ -11,14 +11,12 @@ import persistence.ConnectionDB;
  * @author Group2
  */
 public class RequestDAO {
-    ConnectionDB connection;
+    ConnectionDB connectionDB = ConnectionDB.getInstance();   
     
     /**
      * Class Construct 
      */
-    public RequestDAO(){
-        connection = new ConnectionDB();
-    }
+    public RequestDAO(){}
     
     /**
      * Method that gets a list of Requests for a user
@@ -27,7 +25,7 @@ public class RequestDAO {
      */
     public ArrayList<Request> returnListRequest(String applicant){
         Request request = null;
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         ArrayList<Request> list = new ArrayList();
         try {
             PreparedStatement stmt= con.prepareStatement("Select * from request where dni_applicant=?");
@@ -55,7 +53,7 @@ public class RequestDAO {
      */
     public ArrayList<Request> returnListRequest1(){
         Request request = null;
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         ArrayList<Request> list = new ArrayList();
         try {
             PreparedStatement stmt= con.prepareStatement("Select * from request");
@@ -85,7 +83,7 @@ public class RequestDAO {
         Request request = null;
         Request requestModified = null;
         ArrayList<Request> list = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             PreparedStatement stmt= con.prepareStatement("Select id_request,dni_applicant,subject,state_request,message from request");
             ResultSet resultado=stmt.executeQuery();
@@ -125,7 +123,7 @@ public class RequestDAO {
     public boolean insertRequest(String user, String subject, String text){
         boolean ok = false;
         String status = "pendiente";
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             PreparedStatement stmt = con.prepareStatement("INSERT INTO REQUEST (DNI_APPLICANT, MESSAGE, STATE_REQUEST, SUBJECT) VALUES (?,?,?,?)");
             stmt.setString(1, user);
@@ -145,23 +143,13 @@ public class RequestDAO {
     }
     
     /**
-     * Method that closes the connection
-     * @throws Throwable 
-     */
-    @Override
-    protected void finalize() throws Throwable{
-        super.finalize();
-        ConnectionDB.closeConnection();
-    }
-    
-    /**
      * Method that gets the message request
      * @param idreq
      * @return Request
      */
     public Request returnMessageRequest(int idreq){
         Request request = new Request();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             PreparedStatement stmt= con.prepareStatement("Select * from request where id_request=?");
             stmt.setInt(1, idreq);
@@ -179,5 +167,14 @@ public class RequestDAO {
             Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return request;
+    }
+    
+    /**
+     * Method that closes the connection
+     * @throws Throwable 
+     */
+    @Override
+    protected void finalize() throws Throwable{
+        super.finalize();
     }
 }

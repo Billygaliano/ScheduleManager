@@ -208,7 +208,6 @@ public class User {
      * @return boolean
      */
     public boolean returnStartSession(String dni,String pass){
-        
         UserDAO user = new UserDAO();
         boolean ret = user.returnStartSession(dni, pass);
         

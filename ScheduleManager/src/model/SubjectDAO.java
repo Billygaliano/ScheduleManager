@@ -14,14 +14,12 @@ import persistence.ConnectionDB;
  * @author Group2
  */
 public class SubjectDAO {
-    ConnectionDB connection;  
+    ConnectionDB connectionDB = ConnectionDB.getInstance();   
     
     /**
      * Class Constructor
      */
-    public SubjectDAO(){
-        connection = new ConnectionDB();
-    }
+    public SubjectDAO(){}
     
     /**
      * Method that returns a list of subjects that by titulation, course and quarter
@@ -32,7 +30,7 @@ public class SubjectDAO {
      */
     public ArrayList<Subject> getSubjects(String titulation, String course, String quarter){
         ArrayList<Subject> subjects = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         int id_titulation = 0;
         try{ 
             PreparedStatement stmtTit = con.prepareStatement("select id_titulation from titulation where name_tit=?");
@@ -65,7 +63,7 @@ public class SubjectDAO {
      */
     public ArrayList<String> getCoursesTitulationUser(String applicant, int id_titulation){
         ArrayList<String> courses = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         
         try {
             PreparedStatement stmtCour = con.prepareStatement("SELECT DISTINCT course FROM subject WHERE id_subject IN(SELECT id_subject FROM subject_user WHERE dni = ?) AND id_tit = ?");
@@ -93,7 +91,7 @@ public class SubjectDAO {
      */
     public ArrayList<String> getQuartersTitulationUser(String applicant, int id_titulation, String course){
         ArrayList<String> quarters = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         
         try {
             PreparedStatement stmtQuart = con.prepareStatement("SELECT DISTINCT quarter FROM subject WHERE id_subject IN(SELECT id_subject FROM subject_user WHERE dni = ?) AND id_tit = ? AND course = ? ");
@@ -121,7 +119,7 @@ public class SubjectDAO {
     public ArrayList<String> getYearsSubjectUser(String applicant){
     
         ArrayList<String> years = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             PreparedStatement rs_stmt = con.prepareStatement("SELECT DISTINCT year FROM subject");
             ResultSet rs_year=rs_stmt.executeQuery();
@@ -141,7 +139,7 @@ public class SubjectDAO {
      * @return String
      */
     public String getSubjectById(int id_subject){
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         String nameSubject = null;
         
         try {
@@ -164,6 +162,5 @@ public class SubjectDAO {
      */
     protected void finalize() throws Throwable{
         super.finalize();
-        ConnectionDB.closeConnection();
     }
 }

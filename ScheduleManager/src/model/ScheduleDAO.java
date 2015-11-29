@@ -14,15 +14,12 @@ import persistence.ConnectionDB;
  * @author Group2
  */
 class ScheduleDAO {
-
-    ConnectionDB connection;
+    ConnectionDB connectionDB = ConnectionDB.getInstance();   
 
     /**
      * Class Constructor
      */
-    public ScheduleDAO() {
-        connection = new ConnectionDB();
-    }
+    public ScheduleDAO() {}
     
     /**
      * Method that get list of days for a quarter
@@ -32,7 +29,7 @@ class ScheduleDAO {
     public ArrayList<String> returnDaysList(String quarter) {
         ArrayList<String> days = new ArrayList();
         String[] daysArray = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes"};
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
 
             ResultSet num_class = con.createStatement().executeQuery("select count(id_classroom) from classroom");
@@ -62,7 +59,7 @@ class ScheduleDAO {
         ArrayList<String> hours = new ArrayList();
         String[] hoursArray = {"8:30-9:30","9:30-10:30","10:30-11:30","11:30-12:30","12:30-13:30","13:30-14:30","15:30-16:30",
                                    "16:30-17:30","17:30-18:30","18:30-19:30","19:30-20:30","20:30-21:30"};
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try{ 
             ResultSet num_class = con.createStatement().executeQuery("select count(id_classroom) from classroom");
             num_class.next();
@@ -93,7 +90,7 @@ class ScheduleDAO {
         ArrayList<String> classroom = new ArrayList();
         ArrayList<Integer> classroom_ocup = new ArrayList();
         StringBuilder x = new StringBuilder("0");
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try{ 
             ResultSet rs_idsub = con.createStatement().executeQuery("select id_subject from subject where name_subject='" + subject + "'");
             rs_idsub.next();
@@ -131,7 +128,7 @@ class ScheduleDAO {
      * @param year 
      */
     public void insertSchedule(String titulation,String course,String quarter,String subject,String day,String hour,String classroom,String year){
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             ResultSet rs_class = con.createStatement().executeQuery("select id_classroom from classroom where name_classroom='" + classroom + "'");
             rs_class.next();
@@ -162,7 +159,7 @@ class ScheduleDAO {
     public ArrayList<String> returnOcuppiedDays(String subject){
         
         ArrayList<String> days = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             ResultSet rs_idsub = con.createStatement().executeQuery("select id_subject from subject where name_subject='" + subject + "'");
             rs_idsub.next();
@@ -186,7 +183,7 @@ class ScheduleDAO {
      */
     public ArrayList<String> returnOcuppiedHours(String subject, String day){      
         ArrayList<String> hours = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             ResultSet rs_idsub = con.createStatement().executeQuery("select id_subject from subject where name_subject='" + subject + "'");
             rs_idsub.next();
@@ -210,7 +207,7 @@ class ScheduleDAO {
      */
     public ArrayList<String> returnOcuppiedClassroom(String day,String hour,String subject){
         ArrayList<String> classroom = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         try {
             ResultSet rs_idsub = con.createStatement().executeQuery("select id_subject from subject where name_subject='" + subject + "'");
             rs_idsub.next();
@@ -242,7 +239,7 @@ class ScheduleDAO {
         
         ArrayList<Subject> subjects = subjectDao.getSubjects(titulation, course, quarter);        
         
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         
         try {
             for (Subject subject : subjects) {
@@ -268,16 +265,6 @@ class ScheduleDAO {
     }
     
     /**
-     * Method that close connection
-     * @throws Throwable 
-     */
-    protected void finalize() throws Throwable{
-        super.finalize();
-        ConnectionDB.closeConnection();
-
-    }
-    
-    /**
      * Method that updates a shedule
      * @param day_old
      * @param hour_old
@@ -291,7 +278,8 @@ class ScheduleDAO {
     public int updateSchedule(String day_old,String hour_old,String classroom_old,String day_new,String hour_new,String classroom_new,String quarter){
         System.out.println(day_old+hour_old+classroom_old+day_new+hour_new+classroom_new+quarter);
         int update = 0;
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
+        
         try {
             ResultSet rs_classNew = con.createStatement().executeQuery("select id_classroom from classroom where name_classroom='" + classroom_new + "'");
             rs_classNew.next();
@@ -313,11 +301,16 @@ class ScheduleDAO {
             ps_update.setString(6,hour_old);
             ps_update.setInt(7,id_classOld);
             update = ps_update.executeUpdate();     
-        } catch (SQLException ex) {
-            
-        }
+        } catch (SQLException ex) {}
         
         return update;    
     }
-
+    
+    /**
+     * Method that close connection
+     * @throws Throwable 
+     */
+    protected void finalize() throws Throwable{
+        super.finalize();
+    }
 }

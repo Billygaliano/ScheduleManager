@@ -15,6 +15,7 @@ import view.JF_ViewSchedule;
  */
 public class ControllerLogin implements ActionListener{
     public static JF_Login vistauser;
+    ConnectionDB connectionDB = ConnectionDB.getInstance();
 
     /**
      * Method change language to English 
@@ -80,11 +81,11 @@ public class ControllerLogin implements ActionListener{
      * @param section 
      */
     public void closeSession(JF_ViewSchedule section){
-        ConnectionDB.closeConnection();
         section.setAlwaysOnTop(false);
         if(JOptionPane.showConfirmDialog (null, new Object[]{"¿Desea cerrar la sesión?"},"JOPtion", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
             section.setVisible(false);
             ControllerLogin.vistauser.setVisible(true);
+            connectionDB.deleteInstance();
         }
         else{
         

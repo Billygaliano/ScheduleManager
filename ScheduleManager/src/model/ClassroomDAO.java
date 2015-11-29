@@ -13,14 +13,12 @@ import persistence.ConnectionDB;
  * @author Group2
  */
 public class ClassroomDAO {
-    ConnectionDB connection;   
+    ConnectionDB connectionDB = ConnectionDB.getInstance();   
     
     /**
      * Class constructor
      */
-    public ClassroomDAO(){
-        connection = new ConnectionDB();
-    }
+    public ClassroomDAO(){}
     
     /**
      * Method that gets Classroom by id
@@ -29,7 +27,7 @@ public class ClassroomDAO {
      */
     public Classroom getClassroomById(int idClassroom){
         Classroom classroom = new Classroom();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         
         try {
             PreparedStatement stmtClass = con.prepareStatement("SELECT name_classroom, building FROM Classroom WHERE id_classroom = ?");
@@ -52,8 +50,6 @@ public class ClassroomDAO {
      * @throws Throwable 
      */
     protected void finalize() throws Throwable{
-            super.finalize();
-            ConnectionDB.closeConnection();
-            
-        }
+        super.finalize();
+    }
 }

@@ -237,7 +237,7 @@ public class JF_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSignInActionPerformed
 
     private void enter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enter
-          if(evt.getKeyCode() == evt.VK_ENTER){ 
+        if(evt.getKeyCode() == evt.VK_ENTER){ 
             String name = jTextField1.getText();
             String pass = jPasswordField1.getText();
             ControllerLogin controllerSignIn = new ControllerLogin();
@@ -247,7 +247,7 @@ public class JF_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_enter
 
     private void enter2(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_enter2
-          if(evt.getKeyCode() == evt.VK_ENTER){ 
+        if(evt.getKeyCode() == evt.VK_ENTER){ 
             String name = jTextField1.getText();
             String pass = jPasswordField1.getText();
             ControllerLogin controllerSignIn = new ControllerLogin();

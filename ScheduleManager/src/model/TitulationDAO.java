@@ -10,14 +10,12 @@ import persistence.ConnectionDB;
  * @author Group2
  */
 public class TitulationDAO {
-    ConnectionDB connection;  
+    ConnectionDB connectionDB = ConnectionDB.getInstance();   
     
     /**
      * Construct method
      */
-    public TitulationDAO(){
-        connection = new ConnectionDB();
-    }
+    public TitulationDAO(){}
     
     /**
      * Method that returns all titulations
@@ -25,7 +23,7 @@ public class TitulationDAO {
      */
     public ArrayList<Titulation> getTitulations(){
         ArrayList<Titulation> titulations = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();
         
         try {
             PreparedStatement stmtTit = con.prepareStatement("Select id_titulation, name_tit from titulation");
@@ -53,7 +51,7 @@ public class TitulationDAO {
      */
     public ArrayList<Titulation> getTitulationsSubjects(String applicant){
         ArrayList<Titulation> titulations = new ArrayList();
-        Connection con = connection.connect();
+        Connection con = connectionDB.getConnection();                
         
         try {
             PreparedStatement stmtTit = con.prepareStatement("SELECT id_titulation, name_tit FROM titulation WHERE id_titulation IN (SELECT id_tit FROM subject WHERE id_subject IN(SELECT id_subject FROM subject_user WHERE dni = ?))");
@@ -80,7 +78,5 @@ public class TitulationDAO {
     @Override
     protected void finalize() throws Throwable{
         super.finalize();
-        ConnectionDB.closeConnection();
-
     }
 }

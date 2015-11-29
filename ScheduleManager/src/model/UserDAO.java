@@ -8,16 +8,13 @@ import persistence.ConnectionDB;
  * @author Group2
  */
 public class UserDAO {
-    ConnectionDB connection;
-    Connection con;
+    ConnectionDB connectionDB = ConnectionDB.getInstance();
+    Connection con = connectionDB.getConnection();
     
     /**
      * Class Constructor
      */
-    public UserDAO(){
-        connection = new ConnectionDB();
-        con = connection.connect();
-    }
+    public UserDAO(){}
     
     /**
      * Method that return the user session
@@ -55,7 +52,8 @@ public class UserDAO {
     public boolean returnStartSession(String dni, String pass){
         boolean iniciado = false;  
         try {           
-            iniciado = connection.startSession(dni, pass);
+            ConnectionDB connectionDB2 = ConnectionDB.getInstance();
+            iniciado = connectionDB2.startSession(dni, pass);
         } catch (SQLException ex) {
             System.out.println("Error connect database");
         }
@@ -66,13 +64,11 @@ public class UserDAO {
      * Method that close the connection
      */
     public void closeConnection(){
-        ConnectionDB.closeConnection();
+        connectionDB.deleteInstance();
     }
     
     @Override
     protected void finalize() throws Throwable{
-            super.finalize();
-            ConnectionDB.closeConnection();
-            
-        }
+        super.finalize();
+    }
 }

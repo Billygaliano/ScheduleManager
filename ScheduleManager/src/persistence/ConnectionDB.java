@@ -7,37 +7,44 @@ import java.sql.*;
  * @author Group2
  */
 public class ConnectionDB {
-    private static Connection conexion;
-    private static Statement sentenciaSQL;
-    private static ResultSet resul;
+    private static Connection connection;
+    private static Statement statementSQL;
+    private static ResultSet result;
+    private static ConnectionDB instance = null;
   
     /**
      * Class Constructor
      */
     public ConnectionDB() {
+        String url = "jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar";
+        
         try {
             String driver = "oracle.jdbc.driver.OracleDriver";
             Class.forName(driver);
+            connection = DriverManager.getConnection(url);
+            statementSQL = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         } catch (Exception e) {
-            System.out.println("Error loading the driver");
+            System.out.println("Error loading the driver or connect to data base");
         }
     }
     
-    /**
-     * Connecting method with data base
-     * @return Connection
-     */
-    public static Connection connect() {
-        String url = "jdbc:oracle:thin:INFTEL15_5/INFTEL@olimpia.lcc.uma.es:1521:edgar";
-
-        try {
-            conexion = DriverManager.getConnection(url);
-            sentenciaSQL = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        } catch (SQLException ex) {
-            System.out.println("Error connect data base");
-        }
-        
-        return conexion;
+    private synchronized static void createInstance(){
+        if(instance == null)
+            instance = new ConnectionDB();
+    }
+    
+    public static ConnectionDB getInstance(){
+        if(instance == null) createInstance();
+        return instance;
+    }
+    
+    public static void deleteInstance(){
+        instance = null;
+        closeConnection();
+    }
+    
+    public static Connection getConnection(){
+        return connection;
     }
     
     /**
@@ -45,14 +52,14 @@ public class ConnectionDB {
      * @param tabla
      * @return ResultSet
      */
-    public ResultSet getTable(String tabla) {
+    public ResultSet getTable(String table) {
         try {
-            resul = sentenciaSQL.executeQuery("SELECT * FROM " + tabla);
+            result = statementSQL.executeQuery("SELECT * FROM " + table);
         } catch (SQLException ex) {
             System.out.println("Error performing query");
         }
         
-        return resul;
+        return result;
     }
     
     /**
@@ -60,10 +67,10 @@ public class ConnectionDB {
      * @throws SQLException 
      */
     public void showRow() throws SQLException {
-        int nColumnas = resul.getMetaData().getColumnCount();
+        int nColumnas = result.getMetaData().getColumnCount();
         
         for (int i = 1; i <= nColumnas; ++i) {
-            System.out.print(resul.getString(i) + " ");
+            System.out.print(result.getString(i) + " ");
         }
         
         System.out.println();
@@ -74,8 +81,8 @@ public class ConnectionDB {
      * @throws SQLException 
      */
     public void showTable() throws SQLException {
-        while (resul.next()) {
-            System.out.println(resul.getString("DNI") + " " + resul.getString("PASS"));
+        while (result.next()) {
+            System.out.println(result.getString("DNI") + " " + result.getString("PASS"));
         }
     }
 
@@ -85,9 +92,9 @@ public class ConnectionDB {
      * @throws SQLException 
      */
     public void showTable2(String table) throws SQLException {
-        resul = getTable(table);
+        result = getTable(table);
         
-        while (resul.next()) {
+        while (result.next()) {
             showRow();
         }
     }
@@ -100,19 +107,19 @@ public class ConnectionDB {
      * @throws SQLException 
      */
     public boolean startSession(String user, String passw) throws SQLException {
-        boolean inciciado = false;
+        boolean started = false;
         
-        resul = sentenciaSQL.executeQuery("SELECT * FROM user_u WHERE DNI = '" + user + "'");
-        if (resul != null) {
-            while (resul.next()) {
-                String pass = resul.getString("PASS");
+        result = statementSQL.executeQuery("SELECT * FROM user_u WHERE DNI = '" + user + "'");
+        if (result != null) {
+            while (result.next()) {
+                String pass = result.getString("PASS");
                 if (pass.equals(passw)) {
-                    inciciado = true;
+                    started = true;
                 }
             }
         }
         
-        return inciciado;
+        return started;
     }
     
     /**
@@ -120,14 +127,14 @@ public class ConnectionDB {
      */
     public static void closeConnection() {
         try {
-            if (resul != null) {
-                resul.close();
+            if (result != null) {
+                result.close();
             }
-            if (sentenciaSQL != null) {
-                sentenciaSQL.close();
+            if (statementSQL != null) {
+                statementSQL.close();
             }
-            if (conexion != null) {
-                conexion.close();
+            if (connection != null) {
+                connection.close();
             }
             System.out.println("The connection was closed successfully");
         } catch (SQLException ex1) {
