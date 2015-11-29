@@ -1,9 +1,6 @@
 ScheduleManager
 ==========
-Application that lets you manage and display schedules available on a university degree
-
-Project UML -> https://www.draw.io/#G0Bzqtfq3T9WixNXVTdHRRVnBaUE0
-https://www.youtube.com/watch?v=N9MGgdKKJ0U
+This desktop app is intended for users of a University Faculty. You can loggin as a student, professor, director or admin. According to your kind of user, you'll be able to view, create or update your schedules.
 
 Buenas maneras de programación:
 --------------------
