@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.Connection;
@@ -14,16 +9,21 @@ import java.util.logging.Logger;
 import persistence.ConnectionDB;
 
 /**
- * 
- * @author macbookpro
+ * Class ClassroomDAO
+ * @author Group2
  */
 public class ClassroomDAO {
-    ConnectionDB connection;        
+    ConnectionDB connection;   
+    
+    /**
+     * Class constructor
+     */
     public ClassroomDAO(){
         connection = new ConnectionDB();
     }
+    
     /**
-     * Method get Classroom
+     * Method that gets Classroom by id
      * @param idClassroom
      * @return Classroom
      */
@@ -47,6 +47,10 @@ public class ClassroomDAO {
         return classroom;
     }
     
+    /**
+     * Method that closes the connection
+     * @throws Throwable 
+     */
     protected void finalize() throws Throwable{
             super.finalize();
             ConnectionDB.closeConnection();

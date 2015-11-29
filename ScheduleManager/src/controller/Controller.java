@@ -4,7 +4,6 @@ import model.Request;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import view.JF_ViewSchedule;
 import javax.swing.table.DefaultTableModel;
 import model.Classroom;
 import model.Schedule;
@@ -12,17 +11,25 @@ import model.Subject;
 import model.Titulation;
 
 /**
- *
- * @author Angie
+ * Main Controller Class
+ * @author Group2
  */
 public class Controller implements ActionListener{
-    Request modeloRequest = new Request();
-    Titulation titulationModel = new Titulation();
-    Subject subjectModel = new Subject();
-    Schedule scheduleModel = new Schedule();
-    Classroom classroomModel = new Classroom();
+    Request modeloRequest;
+    Titulation titulationModel;
+    Subject subjectModel;
+    Schedule scheduleModel;
+    Classroom classroomModel;
     
+    /**
+     * Class Construct method
+     */
     public Controller(){
+        modeloRequest = new Request();
+        titulationModel = new Titulation();
+        subjectModel = new Subject();
+        scheduleModel = new Schedule();
+        classroomModel = new Classroom();
     }         
     
     /**
@@ -306,4 +313,5 @@ public class Controller implements ActionListener{
         Classroom classroom = classroomModel.returnClassroomById(idClassroom);
         return classroom;
     }
+    
 }

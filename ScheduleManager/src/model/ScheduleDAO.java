@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.Connection;
@@ -15,18 +10,22 @@ import java.util.logging.Logger;
 import persistence.ConnectionDB;
 
 /**
- *
- * @author inftel11
+ * Class ScheduleDAO
+ * @author Group2
  */
 class ScheduleDAO {
 
     ConnectionDB connection;
 
+    /**
+     * Class Constructor
+     */
     public ScheduleDAO() {
         connection = new ConnectionDB();
     }
+    
     /**
-     * Method get list of days for a quarter
+     * Method that get list of days for a quarter
      * @param quarter
      * @return ArrayList String
      */
@@ -53,7 +52,7 @@ class ScheduleDAO {
     }
     
     /**
-     * Method get list of hours for a day and quarter 
+     * Method that get list of hours for a day and quarter 
      * @param day
      * @param quarter
      * @return ArrayList String
@@ -81,16 +80,16 @@ class ScheduleDAO {
         return hours;
     }
         
-        /**
-         * Method get list classroom of  day, hour, subject quarter 
-         * @param day
-         * @param hour
-         * @param subject
-         * @param quarter
-         * @return ArrayList String
-         */
-       public ArrayList<String> returnClassList(String day,String hour,String subject,String quarter){
-            
+    /**
+     * Method get list classrooms of day, hour, subject and quarter 
+     * @param day
+     * @param hour
+     * @param subject
+     * @param quarter
+     * @return ArrayList String
+     */
+    public ArrayList<String> returnClassList(String day,String hour,String subject,String quarter){
+    
         ArrayList<String> classroom = new ArrayList();
         ArrayList<Integer> classroom_ocup = new ArrayList();
         StringBuilder x = new StringBuilder("0");
@@ -156,7 +155,7 @@ class ScheduleDAO {
     }
     
     /**
-     * Method get Days Ocuppied
+     * Method that get Days Ocuppied
      * @param subject
      * @return ArrayList String
      */
@@ -175,12 +174,12 @@ class ScheduleDAO {
         } catch (SQLException ex) {
         }
         System.out.println(days);
+        
         return days;
-    
-    
     }
+    
     /**
-     * Method get OcuppiedHours for a  subject and day
+     * Method that get OcuppiedHours for a  subject and day
      * @param subject
      * @param day
      * @return ArrayList String 
@@ -201,8 +200,9 @@ class ScheduleDAO {
         System.out.println(hours);
         return hours;
     }
+    
     /**
-     * Method get OcuppiedClassroom for a day, hour and subject
+     * Method that get OcuppiedClassroom for a day, hour and subject
      * @param day
      * @param hour
      * @param subject
@@ -228,8 +228,9 @@ class ScheduleDAO {
         System.out.println(classroom);
         return classroom;
     }
+    
     /**
-     * Method get Shedules for titulation, course and quarter
+     * Method that get Shedules for titulation, course and quarter
      * @param titulation
      * @param course
      * @param quarter
@@ -265,17 +266,19 @@ class ScheduleDAO {
         
         return schedules;
     }
+    
     /**
-     * Method close connection
+     * Method that close connection
      * @throws Throwable 
      */
     protected void finalize() throws Throwable{
-            super.finalize();
-            ConnectionDB.closeConnection();
-            
-        }
+        super.finalize();
+        ConnectionDB.closeConnection();
+
+    }
+    
     /**
-     * Method update shedule
+     * Method that updates a shedule
      * @param day_old
      * @param hour_old
      * @param classroom_old
@@ -313,8 +316,8 @@ class ScheduleDAO {
         } catch (SQLException ex) {
             
         }
-        return update;
-    
+        
+        return update;    
     }
 
 }

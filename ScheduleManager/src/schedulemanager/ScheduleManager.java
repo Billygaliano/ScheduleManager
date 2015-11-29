@@ -1,32 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * //////////////////////////    SCHEDULE MANAGER    //////////////////////////
+ *
+ * App Description: This desktop app is intended for users of a University Faculty.
+ *          You can loggin as a student, professor, director or admin.
+ *          According to your kind of user, you'll be able to view, create or
+ *          update your schedules.
  */
+
 package schedulemanager;
 
 import view.JF_Login;
-import view.JF_ViewSchedule;
 
 /**
  *
- * @author Guillermo Galiano
+ * @author Group2
  */
 public class ScheduleManager {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-     java.awt.EventQueue.invokeLater(new Runnable() {
-            
+        java.awt.EventQueue.invokeLater(new Runnable() {
             JF_Login view= new JF_Login();
-//            JF_ViewSchedule view = new JF_ViewSchedule();
                    
             public void run() {
                 view.setVisible(true);
             }
-            
         });
     }
     

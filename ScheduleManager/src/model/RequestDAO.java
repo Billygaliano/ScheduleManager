@@ -1,21 +1,27 @@
 package model;
+
 import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistence.ConnectionDB;
+
 /**
- *
- * @author Angie
+ * Class RequestDAO
+ * @author Group2
  */
 public class RequestDAO {
     ConnectionDB connection;
+    
+    /**
+     * Class Construct 
+     */
     public RequestDAO(){
         connection = new ConnectionDB();
     }
     
     /**
-     * Method get ArrayList Request for a user
+     * Method that gets a list of Requests for a user
      * @param applicant
      * @return ArrayList Request
      */
@@ -44,7 +50,7 @@ public class RequestDAO {
     }
     
     /**
-     * Method get ArrayList Request for all user
+     * Method that gets a list of Requests for all user
      * @return ArrayList Request
      */
     public ArrayList<Request> returnListRequest1(){
@@ -71,7 +77,7 @@ public class RequestDAO {
     }
     
     /**
-     * Method set the Request
+     * Method that sets the Request
      * @param fila
      * @param status 
      */
@@ -109,14 +115,14 @@ public class RequestDAO {
         }
     }
         
-        /**
-         * Method get true if the insert it is successful
-         * @param user
-         * @param subject
-         * @param text
-         * @return boolean
-         */
-        public boolean insertRequest(String user, String subject, String text){
+    /**
+     * Method that gets true if the insert is successful
+     * @param user
+     * @param subject
+     * @param text
+     * @return boolean
+     */
+    public boolean insertRequest(String user, String subject, String text){
         boolean ok = false;
         String status = "pendiente";
         Connection con = connection.connect();
@@ -137,22 +143,23 @@ public class RequestDAO {
         
         return ok;
     }
-        /**
-         * 
-         * @throws Throwable 
-         */
-        @Override
-        protected void finalize() throws Throwable{
-            super.finalize();
-            ConnectionDB.closeConnection();
-            
-        }
-        /**
-         * Method get the message request
-         * @param idreq
-         * @return Request
-         */
-        public Request returnMessageRequest(int idreq){
+    
+    /**
+     * Method that closes the connection
+     * @throws Throwable 
+     */
+    @Override
+    protected void finalize() throws Throwable{
+        super.finalize();
+        ConnectionDB.closeConnection();
+    }
+    
+    /**
+     * Method that gets the message request
+     * @param idreq
+     * @return Request
+     */
+    public Request returnMessageRequest(int idreq){
         Request request = new Request();
         Connection con = connection.connect();
         try {

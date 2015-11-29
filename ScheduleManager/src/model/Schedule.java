@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
 /**
- *
- * @author inftel10
+ * Class Schedule
+ * @author Group2
  */
 public class Schedule {
 
@@ -21,8 +17,7 @@ public class Schedule {
     private String quarter;
 
     /**
-     * Method constructor
-     *
+     * Class constructor
      * @param classroom
      * @param subject
      * @param year
@@ -39,6 +34,9 @@ public class Schedule {
         this.quarter = quarter;
     }
 
+    /**
+     * Default Class Constructor
+     */
     public Schedule() {}
 
     @Override
@@ -87,8 +85,9 @@ public class Schedule {
         }
         return true;
     }
+    
     /**
-     * Method get Classroom
+     * Method that get Classroom
      * @return int
      */
     public int getClassroom() {
@@ -96,7 +95,7 @@ public class Schedule {
     }
     
     /**
-     * Method set classroom
+     * Method that set classroom
      * @param classroom 
      */
     public void setClassroom(int classroom) {
@@ -104,7 +103,7 @@ public class Schedule {
     }
     
     /**
-     * Method get Subject
+     * Method that get Subject
      * @return int
      */
     public int getSubject() {
@@ -112,7 +111,7 @@ public class Schedule {
     }
     
     /**
-     * Method set Subject
+     * Method that set Subject
      * @param subject 
      */
     public void setSubject(int subject) {
@@ -120,7 +119,7 @@ public class Schedule {
     }
     
     /**
-     * Method get Year
+     * Method that get Year
      * @return int
      */
     public int getYear() {
@@ -128,7 +127,7 @@ public class Schedule {
     }
     
     /**
-     * Method set Year
+     * Method that set Year
      * @param year 
      */
     public void setYear(int year) {
@@ -136,7 +135,7 @@ public class Schedule {
     }
     
     /**
-     * Method get day
+     * Method that get day
      * @return String
      */
     public String getDay() {
@@ -144,7 +143,7 @@ public class Schedule {
     }
     
     /**
-     * Method set day
+     * Method that set day
      * @param day 
      */
     public void setDay(String day) {
@@ -152,7 +151,7 @@ public class Schedule {
     }
     
     /**
-     * Method get hour
+     * Method that get hour
      * @return String
      */
     public String getHour() {
@@ -160,7 +159,7 @@ public class Schedule {
     }
     
     /**
-     * Method set hour
+     * Method that set hour
      * @param hour 
      */
     public void setHour(String hour) {
@@ -168,7 +167,7 @@ public class Schedule {
     }
     
     /**
-     * Method get quarter
+     * Method that get quarter
      * @return quarter
      */
     public String getQuarter() {
@@ -176,7 +175,7 @@ public class Schedule {
     }
     
     /**
-     * Method set quarter
+     * Method that set quarter
      * @param quarter 
      */
     public void setQuarter(String quarter) {
@@ -184,7 +183,7 @@ public class Schedule {
     }
     
     /**
-     * Method get list of days for a quarter
+     * Method that get a list of days for a quarter
      * @param quarter
      * @return 
      */
@@ -195,7 +194,7 @@ public class Schedule {
     }
     
     /**
-     * Method get list of hours for a day and quarter
+     * Method that get a list of hours for a day and quarter
      * @param day
      * @param quarter
      * @return 
@@ -207,7 +206,7 @@ public class Schedule {
     }
     
     /**
-     * Method get list of class for a day
+     * Method that get a list of classrooms for a day
      * @param day
      * @param hour
      * @param subject
@@ -221,7 +220,7 @@ public class Schedule {
     }
     
     /**
-     * 
+     * Method that set a completed schedule
      * @param titulation
      * @param course
      * @param quarter
@@ -238,7 +237,7 @@ public class Schedule {
     }
     
     /**
-     * 
+     * Method that returns a list of ocuppied days
      * @param subject
      * @return ArrayList String
      */
@@ -250,7 +249,7 @@ public class Schedule {
     }
     
     /**
-     * Method get OcuppiedHours
+     * Method that get a list of ocuppied hours
      * @param subject
      * @param day
      * @return ArrayList String
@@ -262,7 +261,7 @@ public class Schedule {
     }
     
     /**
-     * 
+     * Method that returns a list of ocuppied classrooms
      * @param day
      * @param hour
      * @param subject
@@ -275,7 +274,7 @@ public class Schedule {
     }
     
     /**
-     * 
+     * Method that returns a list of schedules by quarter, course and titulation
      * @param quarter
      * @param course
      * @param titulation
@@ -289,7 +288,7 @@ public class Schedule {
     }
     
     /**
-     * 
+     * Method that return if a schedule has been updated
      * @param day_old
      * @param hour_old
      * @param classroom_old

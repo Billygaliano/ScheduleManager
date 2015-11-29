@@ -276,7 +276,7 @@ public class UserTest {
         User instance = new User();
         String dni = null;
         String pass = null;
-        boolean result = instance.returnStartSection(dni, pass);
+        boolean result = instance.returnStartSession(dni, pass);
         boolean expResult = false;
         assertEquals(result,expResult);
     }
@@ -285,7 +285,7 @@ public class UserTest {
     public void testreturnUserSection(){
         System.out.println("returnUserSection");
         User instance = new User();
-        User expResult = instance.returnUserSection(null, null);
+        User expResult = instance.returnUserSession(null, null);
         assertTrue(expResult.equals(instance));
     }
     
@@ -294,7 +294,7 @@ public class UserTest {
         System.out.println("JUnit conexion base de datos");
         User instance = new User();
         String expResult = "Aitor";
-        instance = instance.returnUserSection("78970910L", "aitor");
+        instance = instance.returnUserSession("78970910L", "aitor");
         assertEquals(expResult,instance.getName());
     }
     

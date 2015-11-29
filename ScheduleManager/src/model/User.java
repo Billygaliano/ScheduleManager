@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * User Class
- * @author Guillermo Galiano
+ * @author Group2
  */
 public class User {
     private String dni;
@@ -18,7 +18,7 @@ public class User {
     private List<Subject> subjects;
 
     /**
-     * Method wich returns user's dni.
+     * Method that returns user's dni.
      * @return dni
      */
     public String getDni() {
@@ -26,7 +26,7 @@ public class User {
     }
 
     /**
-     * Method wich returns user's pass.
+     * Method that returns user's pass.
      * @return pass
      */
     public String getPass() {
@@ -34,7 +34,7 @@ public class User {
     }
 
     /**
-     * Method wich returns user's email.
+     * Method that returns user's email.
      * @return email
      */
     public String getEmail() {
@@ -42,7 +42,7 @@ public class User {
     }
 
     /**
-     * Method wich returns user's name.
+     * Method that returns user's name.
      * @return name
      */
     public String getName() {
@@ -50,7 +50,7 @@ public class User {
     }
 
     /**
-     * Method wich returns user's surname.
+     * Method that returns user's surname.
      * @return surname
      */
     public String getSurname() {
@@ -58,7 +58,7 @@ public class User {
     }
 
     /**
-     * Method wich returns user's role.
+     * Method that returns user's role.
      * @return role
      */
     public String getRole() {
@@ -66,7 +66,7 @@ public class User {
     }
 
     /**
-     * Method wich returns user's birthdate.
+     * Method that returns user's birthdate.
      * @return birthdate
      */
     public Date getBirthdate() {
@@ -74,7 +74,7 @@ public class User {
     }
 
     /**
-     * Method wich returns user's address.
+     * Method that returns user's address.
      * @return address
      */
     public String getAddress() {
@@ -82,7 +82,7 @@ public class User {
     }
 
     /**
-     * Method wich returns a list of subjects.
+     * Method that returns a list of subjects.
      * @return subjects
      */
     public List<Subject> getSubjects() {
@@ -90,7 +90,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's dni.
+     * Method that sets user's dni.
      * @param dni of user
      */
     public void setDni(String dni) {
@@ -98,7 +98,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's pass.
+     * Method that sets user's pass.
      * @param pass of user
      */
     public void setPass(String pass) {
@@ -106,7 +106,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's email.
+     * Method that sets user's email.
      * @param email of user
      */
     public void setEmail(String email) {
@@ -114,7 +114,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's name.
+     * Method that sets user's name.
      * @param name of user
      */
     public void setName(String name) {
@@ -122,7 +122,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's surname.
+     * Method that sets user's surname.
      * @param surname of user
      */
     public void setSurname(String surname) {
@@ -130,7 +130,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's role.
+     * Method that sets user's role.
      * @param role of user
      */
     public void setRole(String role) {
@@ -138,7 +138,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's birthdate.
+     * Method that sets user's birthdate.
      * @param birthdate of user
      */
     public void setBirthdate(Date birthdate) {
@@ -146,7 +146,7 @@ public class User {
     }
 
     /**
-     * Method wich sets user's adderss.
+     * Method that sets user's adderss.
      * @param address of user
      */
     public void setAddress(String address) {
@@ -154,7 +154,7 @@ public class User {
     }
 
     /**
-     * Method wich sets a list of subjects.
+     * Method that sets a list of subjects.
      * @param subjects is a List of Subject
      */
     public void setSubjects(List<Subject> subjects) {
@@ -177,7 +177,18 @@ public class User {
 
     }
 
-    
+    /**
+     * Class constructor
+     * @param dni
+     * @param pass
+     * @param email
+     * @param name
+     * @param surname
+     * @param role
+     * @param birthdate
+     * @param address
+     * @param subjects 
+     */
     public User(String dni, String pass, String email, String name, String surname, String role, Date birthdate, String address, List<Subject> subjects) {
         this.dni = dni;
         this.pass = pass;
@@ -190,17 +201,29 @@ public class User {
         this.subjects = subjects;
     }
     
-    public boolean returnStartSection(String dni,String pass){
+    /**
+     * Method that returns if a user has started a Session
+     * @param dni
+     * @param pass
+     * @return boolean
+     */
+    public boolean returnStartSession(String dni,String pass){
         
         UserDAO user = new UserDAO();
-        boolean ret = user.returnStartSection(dni, pass);
+        boolean ret = user.returnStartSession(dni, pass);
         
         return ret;   
     }
     
-    public User returnUserSection(String dni,String pass){
+    /**
+     * Method that returns User Session
+     * @param dni
+     * @param pass
+     * @return User
+     */
+    public User returnUserSession(String dni,String pass){
         UserDAO user = new UserDAO();
-        return user.returnUserSection(dni,pass);
+        return user.returnUserSession(dni,pass);
     }
 
 

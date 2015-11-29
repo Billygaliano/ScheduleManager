@@ -1,29 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.event.*;
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.*;
 import model.User;
-import model.UserDAO;
 import persistence.ConnectionDB;
 import view.JF_Login;
 import view.JF_ViewSchedule;
+
 /**
- *
- * @author macbookpro
+ * Login Controller Class
+ * @author Group2
  */
 public class ControllerLogin implements ActionListener{
     public static JF_Login vistauser;
 
     /**
-     * Method change the language to English 
+     * Method change language to English 
      * @param e
      * @param name
      * @param password
@@ -40,7 +34,7 @@ public class ControllerLogin implements ActionListener{
     }
     
     /**
-     * Method change the language to Spanish
+     * Method change language to Spanish
      * @param e
      * @param name
      * @param password
@@ -56,10 +50,17 @@ public class ControllerLogin implements ActionListener{
         footer.setText(bundle.getString("JF_Login.footer"));
     }
     
+    /**
+     * Method for logging a user
+     * @param dni
+     * @param pass
+     * @param jLabelWarning
+     * @param login 
+     */
     public void actionPerformedSignIn(String dni,String pass, JLabel jLabelWarning, JF_Login login) {
         User user = new User();
-        if(user.returnStartSection(dni, pass)){
-            user = user.returnUserSection(dni,pass);
+        if(user.returnStartSession(dni, pass)){
+            user = user.returnUserSession(dni,pass);
             JF_ViewSchedule api = new JF_ViewSchedule(user);
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
@@ -74,6 +75,10 @@ public class ControllerLogin implements ActionListener{
         
     }
     
+    /**
+     * Method to close a user's session
+     * @param section 
+     */
     public void closeSession(JF_ViewSchedule section){
         ConnectionDB.closeConnection();
         section.setAlwaysOnTop(false);
@@ -84,12 +89,6 @@ public class ControllerLogin implements ActionListener{
         else{
         
         }
-        //String confirmar = JOptionPane.showInputDialog("Estas seguro de salir de la secion: si o no");
-        /*if(confirmar.equalsIgnoreCase("si")){
-          ControllerLogin.vistauser.setVisible(true);  
-        }else{
-        section.setVisible(true);
-        }*/
     }
 
     @Override

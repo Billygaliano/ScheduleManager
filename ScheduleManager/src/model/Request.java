@@ -1,10 +1,10 @@
 package model;
 
 import java.util.*;
-import model.RequestDAO;
+
 /**
- *
- * @author Angie
+ * Class Request
+ * @author Group2
  */
 public class Request {
     
@@ -14,10 +14,9 @@ public class Request {
     private String state;
     private String subject;
     private List<User> users;
-
     
     /**
-     * Method wich gets request's id.
+     * Method which gets request's id.
      * @return id_request
      */
     public int getId_request() {
@@ -25,7 +24,7 @@ public class Request {
     }
     
     /**
-     * Method wich gets applicant's dni.
+     * Method which gets applicant's dni.
      * @return apliccant
      */
     public String getApplicant() {
@@ -33,7 +32,7 @@ public class Request {
     }
     
     /**
-     * Method wich gets request's message.
+     * Method which gets request's message.
      * @return message
      */
     public String getMessage() {
@@ -41,7 +40,7 @@ public class Request {
     }
     
     /**
-     * Method wich gets request's state.
+     * Method which gets request's state.
      * @return state
      */
     public String getState() {
@@ -49,7 +48,7 @@ public class Request {
     }
     
     /**
-     * Method wich gets request's subject.
+     * Method which gets request's subject.
      * @return subject
      */
     public String getSubject() {
@@ -57,7 +56,7 @@ public class Request {
     }
     
     /**
-     * Method wich returns a list of user.
+     * Method which returns a list of user.
      * @return users
      */
     public List<User> getUsers() {
@@ -65,16 +64,15 @@ public class Request {
     }
     
     /**
-     * Method wich sets request's id.
+     * Method which sets request's id.
      * @param id_request of request 
      */
     public void setId_request(int id_request) {
         this.id_request = id_request;
     }
-
      
     /**
-     * Method wich sets request's applicant.
+     * Method which sets request's applicant.
      * @param applicant of request 
      */
     public void setApplicant(String applicant) {
@@ -82,7 +80,7 @@ public class Request {
     }
     
     /**
-     * Method wich sets request's message.
+     * Method which sets request's message.
      * @param message of request 
      */
     public void setMessage(String message) {
@@ -90,7 +88,7 @@ public class Request {
     }
 
     /**
-     * Method wich sets request's state.
+     * Method which sets request's state.
      * @param state of request 
      */
     public void setState(String state) {
@@ -98,7 +96,7 @@ public class Request {
     }
     
     /**
-     * Method wich sets request's subject.
+     * Method which sets request's subject.
      * @param subject of request 
      */
     public void setSubject(String subject) {
@@ -106,12 +104,13 @@ public class Request {
     }
     
     /**
-     * Method wich sets a list of users.
+     * Method which sets a list of users.
      * @param users is a List of user.
      */
     public void setUsers(List<User> users) {
         this.users = users;
     }
+    
     /**
      * Method becomes the object to string
      * @return String
@@ -138,14 +137,16 @@ public class Request {
         this.subject = subject;
         this.users = users;
     }
+    
     /**
-     * Method builder
+     * Default Class Constructor
      */
     public Request(){}
+    
     /**
-     * Method get ArrayList Request for a user through the RequestDAO
+     * Method which gets a list of Requests for a user through the RequestDAO
      * @param applicant
-     * @return ArrayList
+     * @return ArrayList Request
      */
     public ArrayList<Request> returnListRequest(String applicant){
         RequestDAO requestDAO = new RequestDAO();
@@ -154,7 +155,7 @@ public class Request {
     }
     
     /**
-     * Method get ArrayList Request for all user through the RequestDAO
+     * Method that gets a list of Requests for all user through the RequestDAO
      * @return ArrayList Request
      */
     public ArrayList<Request> returnListRequest1(){
@@ -164,7 +165,7 @@ public class Request {
     }
     
     /**
-     * Method set the Request through the RequestDAO
+     * Method that sets the Request through the RequestDAO
      * @param fila
      * @param status 
      */
@@ -174,7 +175,7 @@ public class Request {
     }
     
     /**
-     * Method get the selected message by user through the RequestDAO
+     * Method that gets the selected message by user through the RequestDAO
      * @param row
      * @return String
      */
@@ -185,7 +186,7 @@ public class Request {
     }
     
     /**
-     * Method get if the request was setting through the RequestDAO
+     * Method that gets if the request was setting through the RequestDAO
      * @param user
      * @param subject
      * @param text

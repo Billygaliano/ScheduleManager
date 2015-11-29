@@ -1,22 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-import javax.swing.*;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import controller.ControllerLogin;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import persistence.ConnectionDB;
 
 /**
- *
- * @author inftel12
+ * Class JF_Login (window)
+ * @author Group2
  */
 public class JF_Login extends javax.swing.JFrame {
     /**
@@ -231,13 +219,13 @@ public class JF_Login extends javax.swing.JFrame {
 
 
     private void jButtonEsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEsActionPerformed
-        ControllerLogin prueba = new ControllerLogin();
-        prueba.actionPerformedEs(evt,jLabelName,jLabelPass,jButtonSignIn,jLabelFooter);
+        ControllerLogin controllerLogin = new ControllerLogin();
+        controllerLogin.actionPerformedEs(evt,jLabelName,jLabelPass,jButtonSignIn,jLabelFooter);
     }//GEN-LAST:event_jButtonEsActionPerformed
 
     private void jButtonEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnActionPerformed
-        ControllerLogin prueba = new ControllerLogin();
-        prueba.actionPerformed(evt,jLabelName,jLabelPass,jButtonSignIn,jLabelFooter);
+        ControllerLogin controllerLogin = new ControllerLogin();
+        controllerLogin.actionPerformed(evt,jLabelName,jLabelPass,jButtonSignIn,jLabelFooter);
     }//GEN-LAST:event_jButtonEnActionPerformed
 
     private void jButtonSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignInActionPerformed

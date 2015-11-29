@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.*;
@@ -11,15 +6,23 @@ import java.util.logging.*;
 import persistence.ConnectionDB;
 
 /**
- *
- * @author inftel12
+ * TitulationDAO Class
+ * @author Group2
  */
 public class TitulationDAO {
-    ConnectionDB connection;        
+    ConnectionDB connection;  
+    
+    /**
+     * Construct method
+     */
     public TitulationDAO(){
         connection = new ConnectionDB();
     }
     
+    /**
+     * Method that returns all titulations
+     * @return ArrayList Titulation
+     */
     public ArrayList<Titulation> getTitulations(){
         ArrayList<Titulation> titulations = new ArrayList();
         Connection con = connection.connect();
@@ -43,6 +46,11 @@ public class TitulationDAO {
         return titulations;
     }
     
+    /**
+     * Method that returns the titulations related to a user
+     * @param applicant
+     * @return ArrayList Titulation
+     */
     public ArrayList<Titulation> getTitulationsSubjects(String applicant){
         ArrayList<Titulation> titulations = new ArrayList();
         Connection con = connection.connect();
@@ -65,9 +73,14 @@ public class TitulationDAO {
         return titulations;
     }
     
+    /**
+     * Method that ends the connecion
+     * @throws Throwable 
+     */
+    @Override
     protected void finalize() throws Throwable{
-            super.finalize();
-            ConnectionDB.closeConnection();
-            
-        }
+        super.finalize();
+        ConnectionDB.closeConnection();
+
+    }
 }

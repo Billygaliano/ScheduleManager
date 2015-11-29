@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * Subject Class
- * @author Guillermo Galiano
+ * @author Group2
  */
 public class Subject {
     private int id_subject;
@@ -15,11 +15,14 @@ public class Subject {
     private List<User> users;
     private List<Schedule> schedules;
 
+    /**
+     * Default Class Constructor
+     */
     public Subject() {
     }
 
     /**
-     * Method wich retuns subject's id.
+     * Method which gets subject's id.
      * @return id_subject
      */
     public int getId_subject() {
@@ -27,7 +30,7 @@ public class Subject {
     }
 
     /**
-     * Method wich returns titulation's id.
+     * Method which returns titulation's id.
      * @return id_titulation
      */
     public int getId_titulation() {
@@ -35,7 +38,7 @@ public class Subject {
     }
 
     /**
-     * Method wich returns subject's name.
+     * Method which returns subject's name.
      * @return name
      */
     public String getName() {
@@ -43,7 +46,7 @@ public class Subject {
     }
 
     /**
-     * Method wich returns subject's course.
+     * Method which returns subject's course.
      * @return course
      */
     public String getCourse() {
@@ -59,7 +62,7 @@ public class Subject {
     }
 
     /**
-     * Method wich returns a list of users.
+     * Method which returns a list of users.
      * @return users
      */
     public List<User> getUsers() {
@@ -67,7 +70,7 @@ public class Subject {
     }
 
     /**
-     * Method wich returns a list of schedules.
+     * Method which returns a list of schedules.
      * @return  schedules
      */
     public List<Schedule> getSchedules() {
@@ -75,7 +78,7 @@ public class Subject {
     }
 
     /**
-     * Method wich sets subject's id.
+     * Method which sets subject's id.
      * @param id_subject of Subject
      */
     public void setId_subject(int id_subject) {
@@ -83,7 +86,7 @@ public class Subject {
     }
 
     /**
-     * Method wich sets titulation's id.
+     * Method which sets titulation's id.
      * @param id_titulation of Titulation
      */
     public void setId_titulation(int id_titulation) {
@@ -91,7 +94,7 @@ public class Subject {
     }
 
     /**
-     * Method wich sets subject's name.
+     * Method which sets subject's name.
      * @param name of Subject
      */
     public void setName(String name) {
@@ -99,7 +102,7 @@ public class Subject {
     }
 
     /**
-     * Method wich sets subject's course.
+     * Method which sets subject's course.
      * @param course of Subject
      */
     public void setCourse(String course) {
@@ -115,7 +118,7 @@ public class Subject {
     }
         
     /**
-     * Method wich sets a list of users.
+     * Method which sets a list of users.
      * @param users of Subject
      */
     public void setUsers(List<User> users) {
@@ -123,7 +126,7 @@ public class Subject {
     }
     
     /**
-     * Method wich sets a list of schedules.
+     * Method which sets a list of schedules.
      * @param schedules of Subject.
      */
     public void setSchedules(List<Schedule> schedules) {
@@ -131,7 +134,7 @@ public class Subject {
     }
 
     /**
-     * Method wich returns a subject object in String format.
+     * Method which returns a subject object in String format.
      * @return String
      */
     @Override
@@ -140,7 +143,7 @@ public class Subject {
     }
 
     /**
-     * Class constructor.
+     * Class Constructor.
      * @param id_subject
      * @param id_titulation
      * @param name
@@ -163,34 +166,64 @@ public class Subject {
      * Method which compares two Subjects
      * return false if both id's are not equal
      * @param sub
-     * @return 
-     */
-    
+     * @return boolean
+     */    
     public boolean equals(Subject sub){
         boolean a;
         a = (this.id_subject != sub.getId_subject()) ? false :  true;
         return a;
     }
     
+    /**
+     * Method that returns a list of subjects by titulation, course and quarter
+     * @param titulation
+     * @param course
+     * @param quarter
+     * @return ArrayList Subject
+     */
     public ArrayList<Subject> returnSubjectList(String titulation, String course, String quarter){
         SubjectDAO subjectDao = new SubjectDAO();
         return subjectDao.getSubjects(titulation, course, quarter);
     }
     
+    /**
+     * Method which returns a list of courses by titulation's user
+     * @param applicant
+     * @param id_titulation
+     * @return ArrayList String
+     */
     public ArrayList<String> returnCoursesTitulationUser(String applicant, int id_titulation){
         SubjectDAO subjectDao = new SubjectDAO();
         return subjectDao.getCoursesTitulationUser(applicant, id_titulation);
     }
     
+    /**
+     * Method which returns a list of quarters by titulation, course.
+     * @param applicant
+     * @param id_titulation
+     * @param course
+     * @return ArrayList String
+     */
     public ArrayList<String> returnQuartersTitulationUser(String applicant, int id_titulation, String course){
         SubjectDAO subjectDao = new SubjectDAO();
         return subjectDao.getQuartersTitulationUser(applicant, id_titulation, course);
     }
+    
+    /**
+     * Method that returns a list of years by user.
+     * @param applicant
+     * @return ArrayList String
+     */
     public ArrayList<String> returnYearsSubjectUser(String applicant){
         SubjectDAO subjectDao = new SubjectDAO();
         return subjectDao.getYearsSubjectUser(applicant);
     }
     
+    /**
+     * Method that returns a subject by its id.
+     * @param id_subject
+     * @return String
+     */
     public String returnSubjectById(int id_subject){
         SubjectDAO subjectDao = new SubjectDAO();
         return subjectDao.getSubjectById(id_subject);

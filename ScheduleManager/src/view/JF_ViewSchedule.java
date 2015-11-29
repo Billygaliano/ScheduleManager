@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import controller.Controller;
 import controller.ControllerLogin;
-
 import java.awt.event.KeyEvent;
 import java.util.*;
 import javax.swing.*;
@@ -20,10 +14,8 @@ import model.Titulation;
 import model.User;
 import model.Schedule;
 import model.Classroom;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
- 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -38,14 +30,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author inftel12
+ * Class JF_ViewSchedule (window)
+ * @author Group2
  */
 public class JF_ViewSchedule extends javax.swing.JFrame {
 
     /**
      * Creates new form JF_ViewSchedule
-     * 
      */
     String titulo[] ={"Titulación", "Curso","Cuatrimestre","Asignatura","Día","Hora","Aula"};
     DefaultTableModel tableJSchedule = new DefaultTableModel(null,titulo);

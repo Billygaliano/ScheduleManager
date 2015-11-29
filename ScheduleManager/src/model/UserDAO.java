@@ -1,59 +1,70 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.*;
-import javax.swing.JLabel;
 import persistence.ConnectionDB;
-import view.JF_Login;
-import view.JF_ViewSchedule;
-import schedulemanager.ScheduleManager;
 
 /**
- *
- * @author macbookpro
+ * Class UserDAO
+ * @author Group2
  */
 public class UserDAO {
     ConnectionDB connection;
     Connection con;
+    
+    /**
+     * Class Constructor
+     */
     public UserDAO(){
         connection = new ConnectionDB();
         con = connection.connect();
     }
-    public User returnUserSection(String dni, String pass){
-        User section = new User();
+    
+    /**
+     * Method that return the user session
+     * @param dni
+     * @param pass
+     * @return User
+     */
+    public User returnUserSession(String dni, String pass){
+        User session = new User();
         try {
             PreparedStatement stmt= con.prepareStatement("Select * FROM user_u WHERE DNI = '" + dni + "'");
             ResultSet resultado=stmt.executeQuery();
             while (resultado.next()){
-                section.setDni(dni);
-                section.setPass(pass);
-                section.setEmail(resultado.getString("EMAIL"));
-                section.setName(resultado.getString("NAME_USER"));
-                section.setSurname(resultado.getString("SURNAME"));
-                section.setRole(resultado.getString("USER_ROLE"));
-                section.setAddress(resultado.getString("ADDRESS"));
+                session.setDni(dni);
+                session.setPass(pass);
+                session.setEmail(resultado.getString("EMAIL"));
+                session.setName(resultado.getString("NAME_USER"));
+                session.setSurname(resultado.getString("SURNAME"));
+                session.setRole(resultado.getString("USER_ROLE"));
+                session.setAddress(resultado.getString("ADDRESS"));
                 
             }
         }catch (SQLException ex){
             System.out.println("Error performing query");
         }
-        return section;
+        return session;
     }
     
-    public boolean returnStartSection(String dni, String pass){
+    /**
+     * Method that returns if a user has started a Session
+     * @param dni
+     * @param pass
+     * @return boolean
+     */
+    public boolean returnStartSession(String dni, String pass){
         boolean iniciado = false;  
         try {           
-            iniciado = connection.startSection(dni, pass);
+            iniciado = connection.startSession(dni, pass);
         } catch (SQLException ex) {
             System.out.println("Error connect database");
         }
         return iniciado;
     }
     
+    /**
+     * Method that close the connection
+     */
     public void closeConnection(){
         ConnectionDB.closeConnection();
     }

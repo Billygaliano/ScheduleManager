@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.util.List;
 
 /**
- *
- * @author macbookpro
+ * Class Classroom
+ * @author Group2
  */
 public class Classroom {
     private int id_classroom;
@@ -20,7 +15,7 @@ public class Classroom {
     private List<Schedule> schedules;
     
     /**
-     * Method constructor
+     * Class constructor method
      * @param id_classroom
      * @param name
      * @param type
@@ -37,10 +32,13 @@ public class Classroom {
         this.schedules = schedules;
     }
 
+    /**
+     * Default Class Constructor
+     */
     public Classroom() {}
     
     /**
-     * Method wich returns a Classroom object in String format.
+     * Method that returns a Classroom object in String format.
      * @return String
      */
     @Override
@@ -50,7 +48,7 @@ public class Classroom {
     
     
     /**
-     * Method wich gets classroom's id.
+     * Method that gets classroom's id.
      * @return id_classroom
      */
     public int getId_classroom() {
@@ -58,7 +56,7 @@ public class Classroom {
     }
     
    /**
-    * Method set id_classroom
+    * Method that sets id_classroom
     * @param id_classroom 
     */
     public void setId_classroom(int id_classroom) {
@@ -66,7 +64,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich gets Classroom's name.
+     * Method that gets Classroom's name.
      * @return name
      */
     public String getName() {
@@ -74,7 +72,7 @@ public class Classroom {
     }
     
     /**
-     * Method set Name
+     * Method that sets Name
      * @param name 
      */
     public void setName(String name) {
@@ -82,7 +80,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich gets Classroom's type.
+     * Method that gets Classroom's type.
      * @return type
      */
     public String getType() {
@@ -90,7 +88,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich sets Classroom's type.
+     * Method that sets Classroom's type.
      * @param type 
      */
     public void setType(String type) {
@@ -98,7 +96,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich gets Classroom's capacity.
+     * Method that gets Classroom's capacity.
      * @return capacity
      */
     public int getCapacity() {
@@ -106,7 +104,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich sets Classroom's capacity.
+     * Method that sets Classroom's capacity.
      * @param capacity 
      */
     public void setCapacity(int capacity) {
@@ -114,7 +112,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich gets Classroom's building.
+     * Method that gets Classroom's building.
      * @return building
      */
     public String getBuilding() {
@@ -122,7 +120,7 @@ public class Classroom {
     }
     
     /**
-     * Method wich sets Classroom's building.
+     * Method that sets Classroom's building.
      * @param building 
      */
     public void setBuilding(String building) {
@@ -130,7 +128,7 @@ public class Classroom {
     }
     
     /**
-     * Method which gets a list of schedules.
+     * Method that gets a list of schedules.
      * @return schedules
      */
     public List<Schedule> getSchedules() {
@@ -138,7 +136,7 @@ public class Classroom {
     }
     
     /**
-     * Method which sets a list of schedules.
+     * Method that sets a list of schedules.
      * @param schedules 
      */
     public void setSchedules(List<Schedule> schedules) {
@@ -146,7 +144,7 @@ public class Classroom {
     }
 
     /**
-     * 
+     * Method that compares a classroom with another one.
      * @param obj
      * @return boolean
      */
@@ -164,11 +162,9 @@ public class Classroom {
         }
         return true;
     }
-    
-    
    
     /**
-     * Method get Classroom for a idClassroom
+     * Method that gets a classroom by idClassroom
      * @param idClassroom
      * @return Classroom
      */

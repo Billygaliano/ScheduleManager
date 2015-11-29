@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.Connection;
@@ -15,15 +10,26 @@ import java.util.logging.Logger;
 import persistence.ConnectionDB;
 
 /**
- *
- * @author inftel12
+ * Class SubjectDAO
+ * @author Group2
  */
 public class SubjectDAO {
-    ConnectionDB connection;        
+    ConnectionDB connection;  
+    
+    /**
+     * Class Constructor
+     */
     public SubjectDAO(){
         connection = new ConnectionDB();
     }
     
+    /**
+     * Method that returns a list of subjects that by titulation, course and quarter
+     * @param titulation
+     * @param course
+     * @param quarter
+     * @return Arraylist Subject
+     */
     public ArrayList<Subject> getSubjects(String titulation, String course, String quarter){
         ArrayList<Subject> subjects = new ArrayList();
         Connection con = connection.connect();
@@ -51,6 +57,12 @@ public class SubjectDAO {
         return subjects;
     }
     
+    /**
+     * Method that returs a list of courses by titulation and user
+     * @param applicant
+     * @param id_titulation
+     * @return ArrayList String
+     */
     public ArrayList<String> getCoursesTitulationUser(String applicant, int id_titulation){
         ArrayList<String> courses = new ArrayList();
         Connection con = connection.connect();
@@ -72,6 +84,13 @@ public class SubjectDAO {
         return courses;
     }
     
+    /**
+     * Method that returns a list of quarters by user, titulation and course
+     * @param applicant
+     * @param id_titulation
+     * @param course
+     * @return ArrayList String
+     */
     public ArrayList<String> getQuartersTitulationUser(String applicant, int id_titulation, String course){
         ArrayList<String> quarters = new ArrayList();
         Connection con = connection.connect();
@@ -94,6 +113,11 @@ public class SubjectDAO {
         return quarters;
     }
     
+    /**
+     * Method that returns a list of years by user.
+     * @param applicant
+     * @return ArrayList String
+     */
     public ArrayList<String> getYearsSubjectUser(String applicant){
     
         ArrayList<String> years = new ArrayList();
@@ -111,6 +135,11 @@ public class SubjectDAO {
         return years;
     }
     
+    /**
+     * Method which returns a subject by its id.
+     * @param id_subject
+     * @return String
+     */
     public String getSubjectById(int id_subject){
         Connection con = connection.connect();
         String nameSubject = null;
@@ -129,9 +158,12 @@ public class SubjectDAO {
         return nameSubject;
     }
     
+    /**
+     * Method that close connection
+     * @throws Throwable 
+     */
     protected void finalize() throws Throwable{
-            super.finalize();
-            ConnectionDB.closeConnection();
-            
-        }
+        super.finalize();
+        ConnectionDB.closeConnection();
+    }
 }
